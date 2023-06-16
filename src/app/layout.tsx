@@ -1,5 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google'
+import DesktopMenu from '@/components/Menu/MenuDesktop/menu'
+import Text from '@/components/TexteSwitch/text'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +17,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <DesktopMenu Text={Text}/>
+        {children}
+        </body>
     </html>
   )
 }

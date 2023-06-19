@@ -1,26 +1,25 @@
 // Import necessary libraries
-import React from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from '../homeSlider/homeslider.module.css';
-import image from '../../../../public/img/producthero image/Ryukwomen.jpg'
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import styles from "../homeSlider/homeslider.module.css";
+import image from "../../../../public/img/producthero image/Ryukwomen.jpg";
 // Here is your Slide component
-export default function Slide(){
-
+export default function Slide() {
   return (
     <div className={styles.slideContainer}>
-      <Image src={image} alt={'/Women embroidery'} width={500} height={500} />
+      <Image src={image} alt={"/Women embroidery"} width={500} height={500} />
       <div>
-      <h2>Réveillez votre garde-robe avec notre sweat brodé!</h2>
-      <Link href={``} passHref>
-        <button className={styles.button}>
-          Acheter maintenant
-        </button>
-      </Link>
-      
+        <h2>Réveillez votre garde-robe avec notre sweat brodé!</h2>
+        <p>
+          Nous croyons fermement que chaque vêtement brodé est une œuvre d'art,
+          et nous sommes fiers de faire revivre cette forme d'art traditionnelle
+          d'une manière moderne et trendy.
+        </p>
+        <Link href={``} passHref>
+          <button className={styles.button}>Acheter maintenant</button>
+        </Link>
       </div>
-     
     </div>
   );
-};
-
+}

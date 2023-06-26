@@ -17,7 +17,6 @@ export default function Home() {
     <main className={styles.main}>
      <Slide/>
      <HomePersonnalisation/>
-     <ProductCard product={product}/>
      <Caroussel products={products}/>
     </main>
   )

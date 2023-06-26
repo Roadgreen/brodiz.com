@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import DesktopMenu from '@/components/Menu/MenuDesktop/menu'
 import Text from '@/components/TexteSwitch/text'
+import Footer from '@/components/footer/footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <DesktopMenu Text={Text}/>
         {children}
+        <Footer Text={Text}/>
         </body>
     </html>
   )

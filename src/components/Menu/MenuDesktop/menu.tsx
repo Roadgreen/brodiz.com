@@ -19,17 +19,17 @@ export default function DesktopMenu(Text:any){
 
     return (
         <div className={`${oswald.className} ${style.containerMenu}`}>
-            <ul className={style.ul}><li><Link href={'/'}>{text.a}</Link></li>
-            <li><Link href={'/'}>{text.b}</Link></li>
-            <li><Link href={'/'}>{text.c}</Link></li>
+            <ul className={style.ul}><Link href={'/'}>{text.a}</Link>
+            <Link href={'/'}>{text.b}</Link>
+            <Link href={'/'}>{text.c}</Link>
             </ul>
             <div> 
             <Image className={style.img} alt={`logo représentant l'entreprise Brodiz.com`} src={logo} fill/> 
             </div>
             <ul className={style.ul}>
-            <li><Link href={'/'}>{text.d}</Link></li>
-            <li><Link href={'/'}>{text.e}</Link></li>
-            <li><Link href={'/'}>{text.f}</Link></li>
+            <Link href={'/'}>{text.d}</Link>
+            <Link href={'/'}>{text.e}</Link>
+            <Link href={'/'}>{text.f}</Link>
             </ul>
             {isMenuOpen ? (
   <>

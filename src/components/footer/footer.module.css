@@ -1,0 +1,56 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+}
+
+.container div form input {
+    width: 200px;
+    height: 30px;
+}
+
+.container div form button {
+    width: 80px;
+    height: 35px;
+    color: white;
+    border: 3px solid white;
+    margin-left: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    background-color: black;
+}
+
+.container div form button:hover{
+    background-color: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+}
+.container div:nth-child(2){
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+.container div:nth-child(2) div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+.container div:nth-child(2) div a{
+    text-decoration: none;
+    color: white;
+
+}
+.container div:nth-child(2) div a:hover{
+    text-decoration:underline;
+    transition: all 0.5s ease-in-out;
+}

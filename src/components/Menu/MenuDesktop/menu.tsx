@@ -29,7 +29,7 @@ export default function DesktopMenu(Text:any){
             <ul className={style.ul}>
             <Link href={'/'}>{text.d}</Link>
             <Link href={'/'}>{text.e}</Link>
-            <Link href={'/'}>{text.f}</Link>
+            <Link href={'/panier'}>{text.f}</Link>
             </ul>
             {isMenuOpen ? (
   <>

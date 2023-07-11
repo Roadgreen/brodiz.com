@@ -1,0 +1,29 @@
+.Container {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid gray;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: 60%;
+    height: 100%;
+}
+.Container h2{
+    margin-left: 20px;
+}
+.Articles{
+    display: flex;
+    flex-direction: row;
+    height: 150px;
+    justify-content: space-around;
+    border-bottom: 1px solid gray;
+    height: 170px;
+    
+}
+.Articles div:nth-child(3){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

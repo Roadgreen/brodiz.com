@@ -23,6 +23,9 @@
             i:`Conditions générales`,
         
 
+        },
+        Panier: {
+            
         }
     }
 

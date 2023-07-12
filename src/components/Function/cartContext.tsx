@@ -37,12 +37,12 @@ alt:string;
   }[],
 }
 type CartContext = {
-   addToCart: (products: products) => void; removeFromCart: (products: products) => void; updatedCart: (products: products) => void; 
+  addToCart: (products: products) => void; removeFromCart: (products: products) => void; updatedCart: (products: products) => void; cartItem: any; totalPrice: (products: any) => number;
 }
 
-const product = [products, products, products];
+const product = [ products];
 
-const CartContext = createContext<CartContext | null>(null);
+export const CartContext = createContext<CartContext | null>(null);
 
 export default function CartContextProvider({children}:any) {
   const [cartItem, setCartItem] = useState<any>(product);
@@ -58,6 +58,20 @@ const removeFromCart = (products:products) => {
   const ind = cartItem.findIndex(hisId);
   const newCart = cartItem.splice(ind,1);
   setCartItem(newCart);
+  console.log(cartItem)
+}
+
+const totalPrice =  (products:any) => {
+  let totalPrice = 0;
+
+  for (let i = 0; i < products.length; i++) {
+    const product = products[i];
+    const { quantity, price } = product;
+
+    totalPrice += quantity * price;
+  }
+
+  return totalPrice;
 }
 const updatedCart = (products:products) => {
   const id = products.id;
@@ -67,6 +81,6 @@ const updatedCart = (products:products) => {
   setCartItem(newCart);
 }
   return <CartContext.Provider value={{
-    addToCart,removeFromCart,updatedCart
+    addToCart,removeFromCart,updatedCart,cartItem,totalPrice
   }}>{children}</CartContext.Provider>;
 }

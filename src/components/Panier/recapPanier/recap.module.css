@@ -1,0 +1,55 @@
+.Container{
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    justify-content:space-around;
+    align-items: center;
+    margin-left: 10px;
+    
+    border: 1px solid gray;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.Container div{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.308);
+}
+.Container button{
+    height: 35px;
+    width: 60%;
+    color: aliceblue;
+    border: 0px solid;
+    background-color: black;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.9s ease-in-out;
+
+}
+.Container button:hover{
+    height: 35px;
+    width: 60%;
+    color: rgb(0, 0, 0);
+    border: 0px solid;
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 10px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.9s ease-in-out;
+    -webkit-transition: 0.9s ease-in-out;
+    -moz-transition: 0.9s ease-in-out;
+    -ms-transition: 0.9s ease-in-out;
+    -o-transition: 0.9s ease-in-out;
+}

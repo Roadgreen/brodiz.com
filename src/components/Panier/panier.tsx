@@ -1,9 +1,11 @@
 import Image from "next/image"
+import {useContext} from 'react'
 import styles from './panier.module.css'
-
+import {CartContext} from '../Function/cartContext'
+import { RiDeleteBin5Line } from 'react-icons/ri';
 
 interface product {
-    products: {
+    
         id:string,
       image: string;
       name: string;
@@ -13,17 +15,13 @@ quantity: number;
 color: string;
 size: string;
 alt:string;
-    }[],
-quantity: (id: string, quantity: number) => void
-  }
+}
+
  
-export default function Cart({products,quantity}:product) {
-    const product = products;
-  return (
-    <div className={styles.Container}>
-        <h2>Panier</h2>
-        <div>
-{product.map((x) =>
+export default function Cart() {
+
+const Cart = useContext(CartContext);
+    const checkMap = Cart?.cartItem.map((x:product) =>
     <div key={x.id} className={styles.Articles}><Image alt={x.alt} src={x.image} height={150} width={150}/>
     <div>
         <h4>{x.name}</h4>
@@ -32,7 +30,7 @@ export default function Cart({products,quantity}:product) {
     <div>
     <label>Quantité:</label>
 
-<select onChange={e => quantity(x.id,Number(e.target.value))} name="quantity" id="quantity">
+<select onChange={e => handleChange(e.target.value,x.id)} name="quantity" id="quantity">
     <option value={x.quantity}>{x.quantity}</option>
     <option value={1}>1</option>
     <option value={2}>2</option>
@@ -55,8 +53,28 @@ export default function Cart({products,quantity}:product) {
     </div>
     </div>
     <div><p>{x.price}€ </p></div>
+    <div onClick={e=>handleSup(x)}>
+        <RiDeleteBin5Line/>
     </div>
-    )}
+    </div>
+    ) 
+
+    const handleChange = (x:any,y:any) => {
+        const product = Cart?.cartItem;
+        const hisId = (f:any) => f.id === y;
+        const ind = Cart?.cartItem.findIndex(hisId);
+        product[ind].quantity = x;
+        Cart?.updatedCart(Cart.cartItem[ind]);
+    }
+    const handleSup = (x:any) => {
+        Cart?.removeFromCart(x)
+        console.log(Cart?.cartItem);
+    }
+  return (
+    <div className={styles.Container}>
+        <h2>Panier</h2>
+        <div>
+{Cart?.cartItem.length !== 0  ? checkMap : console.log('')}
         </div>
     </div>
   )

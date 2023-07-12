@@ -17,8 +17,8 @@
     display: flex;
     flex-direction: row;
     height: 150px;
+    align-items: center;
     justify-content: space-around;
-    border-bottom: 1px solid gray;
     height: 170px;
     
 }
@@ -26,4 +26,25 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.Articles div:nth-child(4){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+}
+.Articles div:nth-child(4):hover{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    justify-content: center;
+}
+
+@media screen and (max-width: 768px) {
+    .Container{
+width: 80%;
+display: flex;
+flex-direction: column;
+margin-bottom: 10px;
+    }
 }

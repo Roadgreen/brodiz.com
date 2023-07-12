@@ -1,6 +1,6 @@
 import Image from "next/image"
 import styles from './panier.module.css'
-import { FunctionTypeNode } from "typescript";
+
 
 interface product {
     products: {

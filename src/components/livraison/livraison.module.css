@@ -18,3 +18,85 @@
 .Container Form input::placeholder{
     padding-left: 10px;
 }
+.Button{
+    cursor: pointer;
+    border: 0px solid gray;
+    background-color: black;
+    color: white; 
+    width: 80%; height: 35px; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;
+    transition:all  0.5s ease-in-out;
+}
+.Button:hover{
+    cursor: pointer;
+    border: 0px solid gray;
+    background-color: rgba(0, 0, 0, 0.251);
+    color: rgb(0, 0, 0);
+    width: 80%;
+    height: 35px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    transition:all  0.5s ease-in-out;
+    -webkit-transition:all  0.5s ease-in-out;
+    -moz-transition:all  0.5s ease-in-out;
+    -ms-transition:all  0.5s ease-in-out;
+    -o-transition:all  0.5s ease-in-out;
+}
+@media (max-width: 768px) {
+    .Container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .SecondContainer{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+    }
+    .Container Form input{
+        margin-right: 10px;
+        margin-bottom: 10px;
+        height: 35px;
+        border: 0.5px solid gray;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        -o-border-radius: 5px;
+    }
+    .Container Form input::placeholder{
+        padding-left: 10px;
+    }
+    .Button{
+        cursor: pointer;
+        border: 0px solid gray;
+        background-color: black;
+        color: white; 
+        width: 200px; height: 35px; border-radius: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -ms-border-radius: 10px; -o-border-radius: 10px;
+        transition:all  0.5s ease-in-out;
+    }
+    .Button:hover{
+        cursor: pointer;
+        border: 0px solid gray;
+        background-color: rgba(0, 0, 0, 0.251);
+        color: rgb(0, 0, 0);
+        width: 200px;
+        height: 35px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+        transition:all  0.5s ease-in-out;
+        -webkit-transition:all  0.5s ease-in-out;
+        -moz-transition:all  0.5s ease-in-out;
+        -ms-transition:all  0.5s ease-in-out;
+        -o-transition:all  0.5s ease-in-out;
+    }
+    
+}

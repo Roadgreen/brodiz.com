@@ -16,12 +16,12 @@ export default function Recap() {
       <h4>Récapitulatif</h4>
 <div>
 <p>Sous-total:  {Cart?.price}€ </p>
-      <p>Frais d'expédition: €</p>
+      <p>Frais d'expédition: {Cart?.livPrice}€</p>
 </div>
-<p>Total: €</p>
+<p>Total: {Cart?.tot}€</p>
 {Cart?.price === 0 ?  
 <button className={styles.buttonOff} disabled>Paiement</button> 
-: <Link className={styles.link} href={'/'}><button className={styles.button} >Paiement</button></Link> }
+: <Link className={styles.link} href={'/livraison'}><button className={styles.button} >Paiement</button></Link> }
       
     </div>
   )

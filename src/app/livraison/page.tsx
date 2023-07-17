@@ -5,7 +5,6 @@ import { useContext} from 'react';
 import CartContextProvider from '@/components/Function/cartContext'
 import LivraisonPart from '@/components/livraison/livraison';
 import CartLivraison from '@/components/livraison/CartLivraison/cartLivraison';
-
 export default function Livraison() {
    
 

@@ -1,0 +1,161 @@
+.Container{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formContainer{
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 500px;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center   ;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.button{
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+    margin: 20px;
+    border: 0px solid ;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+}
+.button:hover{
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+    border: 0px solid ;
+    background-color: rgba(151, 151, 151, 0.505);
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.newsChecked{
+    display: flex;
+    flex-direction: column;
+align-items: center;
+justify-content:center;
+height: 100px;
+width: 100px;
+}
+.newsChecked input{
+    height: 30px;
+    text-align: center;
+}
+.newsChecked label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 10px;
+}
+  
+.InputContainer {
+    display: flex;
+justify-content: center;
+align-items: center;
+    border: 0.5px solid gray;
+    height: 30px;
+    width: 200px;
+    z-index: 0;
+    overflow: visible;
+    margin-top: 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+}
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContainer form input{
+    height: 30px;
+    background-color: rgba(240, 248, 255, 0);
+    border: 0px solid gray;
+    margin-left: 10px;
+}
+.InputContainer input{
+    outline: none;
+    overflow: visible;
+}
+.InputContainer input:focus{
+    z-index:1;
+    outline: none;
+    height: 60px;
+    width: 170px;
+    border: 0px solid rgba(128, 128, 128, 0);
+    transition: all 0.5s ease-in-out ;
+    -webkit-transition: all 0.5s ease-in-out ;
+    -moz-transition: all 0.5s ease-in-out ;
+    -ms-transition: all 0.5s ease-in-out ;
+    -o-transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:focus::placeholder{
+   position: absolute;
+   z-index: 10;
+   width: 50px;
+   height: 50px;
+   background-color: rgba(255, 255, 255, 0);
+   visibility: visible;
+   transform: translateY(-15px) scale(1);
+   -webkit-transform: translateY(-15px) scale(1);
+   -moz-transform: translateY(-15px) scale(1);
+   -ms-transform: translateY(-15px) scale(1);
+   -o-transform: translateY(-15px) scale(1);
+   transition: all 0.5s ease-in-out ;
+}
+.InputContainer span{
+    transform: translatex(-155px) scale(1);
+    -webkit-transform: translatex(-155px) scale(1);
+    -moz-transform: translatex(-155px) scale(1);
+    -ms-transform: translatex(-155px) scale(1);
+    -o-transform: translatex(-155px) scale(1);
+    transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:focus + .spanFoc{
+    background-color: rgb(255, 255, 255);
+    transform: translatex(-155px) translateY(-17px) scale(1);
+    -webkit-transform: translatex(-155px) translateY(-17px) scale(1);
+    -moz-transform: translatex(-155px) translateY(-17px) scale(1);
+    -ms-transform: translatex(-155px) translateY(-17px) scale(1);
+    -o-transform: translatex(-155px) translateY(-17px) scale(1);
+    transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:valid + .spanFoc {
+    background-color: rgb(255, 255, 255);
+    transform: translatex(-155px) translateY(-17px) scale(1);
+    -webkit-transform: translatex(-155px) translateY(-17px) scale(1);
+    -moz-transform: translatex(-155px) translateY(-17px) scale(1);
+    -ms-transform: translatex(-155px) translateY(-17px) scale(1);
+    -o-transform: translatex(-155px) translateY(-17px) scale(1);
+    transition: all 0.5s ease-in-out ;
+}

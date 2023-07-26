@@ -1,15 +1,32 @@
-import React from 'react'
-import { useContext,useState} from 'react';
+import { useContext,useState,useEffect} from 'react';
 import { CartContext } from '../Function/cartContext';
 import styles from './livraison.module.css'
 import { useRouter } from 'next/navigation'
+import { NextResponse } from "next/server";
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(
+    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  );
 
 export default function LivraisonPart() {
+    useEffect(() => {
+        // Check to see if this is a redirect back from Checkout
+        const query = new URLSearchParams(window.location.search);
+        if (query.get('success')) {
+          console.log('Order placed! You will receive an email confirmation.');
+        }
+    
+        if (query.get('canceled')) {
+          console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
+        }
+      }, []);
     const router = useRouter()
     const Cart = useContext(CartContext);
     const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''})
     const [addOk,setAddOk] = useState(false);
 
+    
 const handleChange = (e:string,n:any)=>{
 
 setAdress(adress => ({
@@ -18,7 +35,7 @@ setAdress(adress => ({
 }))
 
 }
-const handleClick = ()=>{
+const handleClick = async ()=>{
     console.log(adress);
 
     if(adress.adresse !== '' && adress.post !== '' && adress.ville !== '' && adress.pays !== ''){
@@ -26,9 +43,24 @@ const handleClick = ()=>{
        console.log(adress);
        console.log(check);
        if(check){
-        console.log('suite')
-        router.push('/paiement')
-       }
+      const params:any = {
+        method: "POST",
+      mode: "no-cors",
+      headers: {"Content-Type": "application/json",},
+      redirect: "follow",
+      body: JSON.stringify({
+        price: 'price_1NWM28FEy7LAuyEsdN3pM9C3',
+        quantity: 1,
+      })
+      }
+
+     const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);
+
+     const data = await response.json(); // Parse the JSON data from the response
+        const checkoutURL = data.URL;
+        console.log(checkoutURL);
+        router.push(`${checkoutURL}`);
+    }
     }else {
         console.log('not ok adress')
         setAddOk(true);

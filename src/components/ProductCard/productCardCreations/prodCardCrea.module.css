@@ -1,0 +1,24 @@
+.card {
+    width: 200px;
+    margin: 10px;
+    border: 1px solid black;
+  }
+  
+  .card-header {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .card-body {
+    background-color: #fff;
+  }
+  
+  .card-footer {
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .card-text {
+    margin-top: 10px;
+  }
+  

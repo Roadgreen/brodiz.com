@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import DesktopMenu from '@/components/Menu/MenuDesktop/menu'
 import Text from '@/components/TexteSwitch/text'
 import Footer from '@/components/footer/footer'
+import { ProductContextProvider } from './Context/productStore'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,10 +18,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+      <html lang="en">
       <body className={inter.className}>
         <DesktopMenu Text={Text}/>
+        <ProductContextProvider>
+
         {children}
+        </ProductContextProvider>
+
         <Footer Text={Text}/>
         </body>
     </html>

@@ -12,33 +12,49 @@ function ConnectHub() {
     const email = User.userEmail;
     const password = User.userPswd;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
+  
     function isValidEmail(email: string) {
       return emailRegex.test(email);
     }
-
-    // Test point: Check if email is valid
-    if (isValidEmail(email)) {
-      // Test point: Check userFind value
-      if (User?.userFind === 'Wait') {
+  
+    if (!isValidEmail(email)) {
+      if (email === 'Admin@Admin.com') {
+        const finded = User?.FindUser({ email: email, collection: 'Admin' });
+        // Test point: Admin user found
+      }
+      return; // Exit early if the email is invalid or it is the Admin user.
+    }
+  
+    let code, id,user; // Declare the variables here to avoid redeclaration
+  
+    switch (User?.userFind) {
+      case 'Wait':
         const finded: any = await User?.FindUser({ email, collection: 'Client' });
-        const { code, status } = finded;
-
-        if (code === 404) {
-          // Test point: User not found, open password panel
-        } else if (code === 202) {
-          // Test point: Code 202 handling
-        } else if (code === 1) {
-          // Test point: Code 1 handling
+        break;
+  
+      case 'connect':
+        const connect: any = await User?.Login({ email, password, collection: 'Client' });
+        ({ code, id , user} = await connect); // Assign the values here, don't redeclare
+        switch (code) {
+          case 404:
+            // Test point: Code 404 handling
+            break;
+  
+          case 202:
+            // Test point: Code 202 handling
+            console.log(id);
+            await User?.setUserData(user);
+            console.log(await User?.userData)
+            router.push(`/account/${id}`);
+            break;
+  
+          default:
+            // Handle other codes here, if needed.
+            break;
         }
-      } else if (User?.userFind === 'connect') {
-        const connect: any = User?.Login({ email, password, collection: 'Client' });
-        if (connect.code === 404) {
-          // Test point: Code 404 handling
-        } else if (connect.code === 202) {
-          // Test point: Code 202 handling
-        }
-      } else if (User?.userFind === 'register') {
+        break;
+  
+      case 'register':
         const news = User?.isNews;
         const date = new Date();
         const register: any = User?.CreateAccount({
@@ -48,26 +64,35 @@ function ConnectHub() {
           newsletter: news,
           date: date.toString(),
         });
-        const { code, status, id } = await register;
-        if (code === 202) {
-          // Test point: Successfully registered, navigate to account page
-          router.push(`/account/${id}`);
-        } else if (code === 404) {
-          // Test point: Failed to add user, code 404 handling
+        ({ code, id } = await register); // Assign the values here, don't redeclare
+        switch (code) {
+          case 202:
+            // Test point: Successfully registered, navigate to the account page
+            router.push(`/account/${id}`);
+            break;
+  
+          case 404:
+            // Test point: Failed to add user, code 404 handling
+            break;
+  
+          default:
+            // Handle other codes here, if needed.
+            break;
         }
-      }
-    } else if (email === 'Admin@Admin.com') {
-      const finded = User?.FindUser({ email: email, collection: 'Admin' });
-      // Test point: Admin user found
+        break;
+  
+      default:
+        // Handle other userFind values here, if needed.
+        break;
     }
   };
-
+  
   return (
     <div className={styles.Container}>
       <h1>Mon compte</h1>
       <div className={styles.formContainer}>
         <form>
-          <p>Indiquez votre email pour l'inscription ou vous connecter</p>
+          {User?.userFind === 'register'? <p>Bienvenue chez Brodiz, créez un compte pour continuer</p> : <p>Indiquez votre email pour l'inscription ou vous connecter</p>}
           <div className={styles.InputContainer}>
             <input
               onChange={(e: any) => {
@@ -90,25 +115,11 @@ function ConnectHub() {
                 <>
                   <p>S'inscrire à la newsletter :</p>
                   <div className={styles.newsChecked}>
-                    <label>Oui</label>
-                    <input
-                      name="news"
-                      value={1}
-                      onChange={(e: any) => {
-                        User?.setIsNews(e.target.value);
-                      }}
-                      checked
-                      type="radio"
-                    />
-                    <label>Non</label>
-                    <input
-                      value={2}
-                      onChange={(e: any) => {
-                        User?.setIsNews(e.target.value);
-                      }}
-                      name="news"
-                      type="radio"
-                    />
+                   
+                    <label className={styles.switch}>
+  <input type="checkbox"/>
+  <span className={styles.slider}></span>
+</label>
                   </div>
                 </>
               ) : (

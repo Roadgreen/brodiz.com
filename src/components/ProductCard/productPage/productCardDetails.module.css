@@ -1,0 +1,45 @@
+.Container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.productContainer{
+    background-color: aqua;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    height: 100%;
+}
+
+.imgsContainer{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    height: 400px;
+    background-color: bisque;
+}
+.photosContainer{
+    display: flex;
+    flex-direction: column;
+    width: 65px;
+    justify-content: center;
+    align-items: center;
+    background-color: azure;
+}
+.bigImgContainer{
+    position: relative;
+
+}
+.descriptionContainer{
+    display: flex;
+    flex-direction: column;
+    background-color: blue;
+    width: 400px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}

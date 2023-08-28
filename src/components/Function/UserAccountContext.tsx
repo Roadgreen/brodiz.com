@@ -1,20 +1,23 @@
-import { useContext, createContext, useState, Dispatch, SetStateAction } from "react";
+import React,{ useContext, createContext, useState, Dispatch, SetStateAction } from "react";
 
 type UserContext = {
   CreateAccount: (User: User) => void;
   Login: (User: UserConnect) => void;
   FindUser: (User: UserSearch) => void;
+  UserConnected:(id:{id:string}) => void;
   isConnected: any;
   isBuyers: any;
   isNews: any;
   userFind: any;
   userEmail: string;
   userPswd:string;
-  userData: object;
+  userData: any;
   setUserEmail: Dispatch<SetStateAction<string>>;
   setUserPswd: Dispatch<SetStateAction<string>>;
   setIsNews: Dispatch<SetStateAction<number>>;
+  setUserData: Dispatch<SetStateAction<any>>;
 };
+
 interface User {
   email: string;
   password: string;
@@ -31,6 +34,9 @@ interface UserSearch {
   email: string;
   collection:string;
 }
+interface UserData {
+  email: string;
+}
 
 export const UserContext = createContext<UserContext>({} as UserContext);
 
@@ -41,7 +47,7 @@ export default function UserContextProvider({ children }: any) {
   const [isNews, setIsNews] = useState(2);
   const [userEmail, setUserEmail] = useState("");
   const [userPswd,setUserPswd] = useState("");
-  const [userData,setUserData] = useState({})
+  const [userData,setUserData] = useState<any>({});
   
   const CreateAccount = async (User: User) => {
     const { email, password, newsletter, date,collection } = User;
@@ -66,39 +72,53 @@ export default function UserContextProvider({ children }: any) {
     );
       const data = await response.json();
       console.log(data);
+      if(data.code === 202){
+        await localStorage.setItem("token",data.token);
+      }
       return data;
     
   };
 
-  const Login = async (User: UserConnect) => {
-    const { email, password } = User;
+  const Login = async (User: UserConnect):Promise<{code:number,id:string,user:object} | undefined | void> => {
+    try{
+      const { email, password,collection } = User;
 
-    var myInit = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-        
-      }),
-    };
+      var myInit = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          collection
+        }),
+      };
+  
+      const response = await fetch(
+        process.env.FETCHLOGIN || "http://localhost:8080/users/login",
+        myInit
+      );
+      const resData = await response.json()
+      
+     if(resData.code === 202){
+      const token = resData.token;
+      const user = await resData.user;
+      const email = await user.email.toString();
+      console.log(user);
+      
+  await localStorage.setItem("token",token);
 
-    const response = await fetch(
-      process.env.FETCHLOGIN || "http://localhost:8080/users/login",
-      myInit
-    );
-    const resData = await response.json()
-   if(resData.code === 202){
-    const token = resData.token;
-await localStorage.setItem("token",token);
-const user = resData.user;
-return {code: 202,user}
-   } else if(resData.code === 404){
-    return {code: 404}
-   }
-  };
+    return {code: 202,id: user._id,user};
+     } else if(resData.code === 404){
+      return {code: 404,id: '',user:{}}
+     }
+    } catch(err){
+      console.log(err);
+      return {code: 404, id:'null',user:{}}
+    }
+    }
+  
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {
   try {
@@ -136,14 +156,32 @@ return {code: 202,user}
     return {code: 1 ,status: 'err'};
   }
 };
+const UserConnected = async (id: {id:string}) : Promise<{code:number} | {user:Object}> => {
+ try{console.log(id);
+ var myInit = {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
+ const Token = await localStorage.getItem("token");
+ const response = await fetch(
+  process.env.FETCHLOGIN || `http://localhost:8080/users/${id.id}/${Token}`,
+  myInit
+);
+const data = await response.json();
 
-
+return data
+}catch(err){
+return {code: 404}
+}}
   return (
     <UserContext.Provider
       value={{
         CreateAccount,
         Login,
         FindUser,
+        UserConnected,
         isConnected,
         isBuyers,
         isNews,
@@ -154,6 +192,8 @@ return {code: 202,user}
         setUserEmail,
         setUserPswd,
         setIsNews,
+        setUserData,
+
       }}
     >
       {children}

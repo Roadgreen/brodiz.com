@@ -6,7 +6,7 @@ import { useContext,useState } from "react";
 import CartContextProvider from "@/components/Function/cartContext";
 
 export default function Livraison() {
-    const [menu,setMenu] = useState(1);
+    const [menu,setMenu] = useState(0);
 
   return (
       <CartContextProvider>

@@ -6,7 +6,6 @@
     align-items: center;
 }
 .productContainer{
-    background-color: aqua;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -18,9 +17,9 @@
 .imgsContainer{
     display: flex;
     flex-direction: row;
-    width: 400px;
-    height: 400px;
-    background-color: bisque;
+    width: 500px;
+    height: 500px;
+   justify-content: center;
 }
 .photosContainer{
     display: flex;
@@ -28,18 +27,227 @@
     width: 65px;
     justify-content: center;
     align-items: center;
-    background-color: azure;
+}
+.sidePhotosContainer{
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+}
+.sidePhotosContainer:hover {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 .bigImgContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     position: relative;
+    width: 450px;
+    height: 450px;
+   
+}
+.bigImg{
+    object-fit: cover;
 
 }
 .descriptionContainer{
     display: flex;
     flex-direction: column;
-    background-color: blue;
-    width: 400px;
+    width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
+}
+.description{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+
+}
+.colors{
+    display: flex;
+    flex-direction: row;
+justify-content: center;
+align-items: center;
+width: 80%;
+height: 80px;
+
+
+}
+
+.color{
+    width: 10px;
+    height: 10px;
+    margin:10px;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+  }
+
+.buttonBuy {
+    width: 100px;
+    margin: 20px;
+
+    height: 30px;
+    border-radius: 20px;
+    border: 0px;
+    background-color: aliceblue;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.5s all ;
+}
+
+.buttonBuy:hover {
+    cursor: pointer;
+    background-color: rgba(137, 137, 137, 0.625);
+    width: 100px;
+    margin: 20px;
+    height: 30px;
+    border-radius: 20px;
+    border: 1px white solid;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: 0.5s all ;
+    -webkit-transition: 0.5s all ;
+    -moz-transition: 0.5s all ;
+    -ms-transition: 0.5s all ;
+    -o-transition: 0.5s all ;
+}
+
+@media (max-width: 860px){
+    .Container{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+    }
+    .productContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        height: 100%;
+    }
+    
+    .imgsContainer{
+        display: flex;
+        flex-direction: row;
+        width: 500px;
+        height: 500px;
+       justify-content: center;
+    }
+    .photosContainer{
+        display: flex;
+        flex-direction: column;
+        width: 65px;
+        justify-content: center;
+        align-items: center;
+    }
+    .sidePhotosContainer{
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+    }
+    .sidePhotosContainer:hover {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+    .bigImgContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+        width: 450px;
+        height: 450px;
+       
+    }
+    .bigImg{
+        object-fit: cover;
+    
+    }
+    .descriptionContainer{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    .description{
+        display: flex;
+        justify-content: center;
+        margin: 30px;
+    
+    }
+    .colors{
+        display: flex;
+        flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80px;
+    
+    
+    }
+    
+    .color{
+        width: 10px;
+        height: 10px;
+        margin:10px;
+        border-radius: 20px;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+      }
+    
+    .buttonBuy {
+        width: 100px;
+        margin: 20px;
+    
+        height: 30px;
+        border-radius: 20px;
+        border: 0px solid white;
+        background-color: aliceblue;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+        transition: 0.5s all ;
+    }
+    
+    .buttonBuy:hover {
+        cursor: pointer;
+        background-color: rgba(137, 137, 137, 0.625);
+        width: 100px;
+        margin: 20px;
+        height: 30px;
+        border-radius: 20px;
+        border: 1px white solid;
+        -webkit-border-radius: 20px;
+        -moz-border-radius: 20px;
+        -ms-border-radius: 20px;
+        -o-border-radius: 20px;
+        transition: 0.5s all ;
+        -webkit-transition: 0.5s all ;
+        -moz-transition: 0.5s all ;
+        -ms-transition: 0.5s all ;
+        -o-transition: 0.5s all ;
+    }
 }

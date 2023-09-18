@@ -1,7 +1,7 @@
 import styles from "./prodCardCrea.module.css";
 import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
-import { CartContext } from "../../Function/cartContext";
+import { CartContext } from "../../../app/Context/cartContext";
 import { useRouter } from "next/navigation";
 import { ProductContext, useGlobalContext } from "@/app/Context/productStore";
 import { AiOutlineHeart } from "react-icons/ai";

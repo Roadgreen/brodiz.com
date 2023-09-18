@@ -1,6 +1,6 @@
 import styles from './recap.module.css'
 import {useContext,useEffect} from 'react'
-import {CartContext} from '../../Function/cartContext'
+import {CartContext} from '../../../app/Context/cartContext'
 import Link from 'next/link';
 import 'dotenv/config'
 

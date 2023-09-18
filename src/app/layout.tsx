@@ -4,6 +4,7 @@ import DesktopMenu from '@/components/Menu/MenuDesktop/menu'
 import Text from '@/components/TexteSwitch/text'
 import Footer from '@/components/footer/footer'
 import { ProductContextProvider } from './Context/productStore'
+import CartContextProvider from './Context/cartContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -22,8 +23,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <DesktopMenu Text={Text}/>
         <ProductContextProvider>
-
+        <CartContextProvider>
         {children}
+        </CartContextProvider>
         </ProductContextProvider>
 
         <Footer Text={Text}/>

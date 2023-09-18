@@ -1,5 +1,6 @@
+"use client";
 import { features } from "process";
-import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState,useEffect } from "react";
 
 
 const prod = {
@@ -54,17 +55,23 @@ export const CartContext = createContext<CartContext | null>(null);
 
 export default function CartContextProvider({children}:any) {
   const [cartItem, setCartItem] = useState<any>(product);
+  const [storedCart,setStoredCart] = useState([]);
   const [adress,setAdress] = useState({})
   const [price, setPrice] = useState<any>(0);
   const [livPrice,setLivPrice] = useState<number>(0);
   const [tot,setTot] = useState<number>(0);
+  useEffect(()=>{
+    const storage:any = localStorage.getItem('cart');
+    setStoredCart(JSON.parse(storage) || []);
+  },[storedCart,setStoredCart])
   const addToCart = (products: products) => {
     const newItem = [...cartItem,products];
-
+     localStorage.setItem('cart',`${newItem}`)
     setCartItem(newItem);
   };
 const removeFromCart = (products:products) => {
-  const id = products.id;
+  const id = products.id; //TODO continuer de tester et de mettre le localstorage a jour lors des changements de panier. vérifier que tous fonctionne 
+  
   const updatedCart = cartItem.filter((item: products) => item.id !== id);
   setCartItem(updatedCart);
 

@@ -1,7 +1,7 @@
 import Image from "next/image"
 import {useContext} from 'react'
 import styles from './panier.module.css'
-import {CartContext} from '../Function/cartContext'
+import {CartContext} from '../../app/Context/cartContext'
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
 interface product {

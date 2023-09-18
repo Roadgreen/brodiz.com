@@ -1,8 +1,8 @@
 'use client'
 import styles from './page.module.css'
-import {CartContext} from '../../components/Function/cartContext'
+import {CartContext} from '../Context/cartContext'
 import { useContext} from 'react';
-import CartContextProvider from '@/components/Function/cartContext'
+import CartContextProvider from '@/app/Context/cartContext'
 import LivraisonPart from '@/components/livraison/livraison';
 import CartLivraison from '@/components/livraison/CartLivraison/cartLivraison';
 export default function Livraison() {

@@ -4,7 +4,7 @@ import Cart from '@/components/Panier/panier'
 import Recap from '@/components/Panier/recapPanier/recap'
 import styles from './page.module.css'
 import {useState,useContext} from 'react'
-import CartContextProvider from '@/components/Function/cartContext'
+import CartContextProvider from '@/app/Context/cartContext'
 
 export default function Panier() {
 

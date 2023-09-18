@@ -1,9 +1,9 @@
 "use client";
 import styles from "./page.module.css";
 import ProdCardCrea from "@/components/ProductCard/productCardCreations/prodCardCrea";
-import { CartContext } from "../../components/Function/cartContext";
+import { CartContext } from "../Context/cartContext";
 import { useContext,useState } from "react";
-import CartContextProvider from "@/components/Function/cartContext";
+import CartContextProvider from "@/app/Context/cartContext";
 
 export default function Livraison() {
     const [menu,setMenu] = useState(0);

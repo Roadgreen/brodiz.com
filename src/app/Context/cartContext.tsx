@@ -70,9 +70,9 @@ export default function CartContextProvider({children}:any) {
     setCartItem(newItem);
   };
 const removeFromCart = (products:products) => {
-  const id = products.id; //TODO continuer de tester et de mettre le localstorage a jour lors des changements de panier. vérifier que tous fonctionne 
-  
+  const id = products.id; 
   const updatedCart = cartItem.filter((item: products) => item.id !== id);
+  localStorage.setItem('cart',`${updatedCart}`)
   setCartItem(updatedCart);
 
   console.log(cartItem)

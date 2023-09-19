@@ -8,7 +8,8 @@ interface product{
   img: Array<string>,
   price:string,
   description: string,
-  color: string
+  color: string,
+  size:string,
 
 }
 
@@ -18,6 +19,7 @@ export default function ProductCardDetails({product}:{product:product}){
     console.log(product);
   }, [product]);
   const colors = product.color? JSON.parse(product.color) : [];
+  const size = product.size? JSON.parse(product.size) : [];
   const imgChange = (x:Number) => {
    switch(x){
     case 0: 
@@ -57,6 +59,15 @@ console.log(product,'product');
         <h1>{product.Name}</h1>
         <h3>{product.price}€</h3>
         <p className={styles.description}>{product.description}</p>
+        <div>
+          <select name="size" id="size">
+            {size.map((x:any,i:number) => {
+              return(
+                <option key={i} value={size[x]}>{size[x]}</option>
+              )
+            })} //TODO bien vérifier que le mapping de la taille fonctionne. reste la selection. 
+          </select>
+        </div>
         <div className={styles.colors}>
         {colors.map((x: any, i: number) => {
               return (

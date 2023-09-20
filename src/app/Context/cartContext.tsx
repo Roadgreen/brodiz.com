@@ -15,15 +15,16 @@ const prod = {
   alt: "hoodies skull ryuk",
 };
 interface products {
-  id: string;
-  image: string;
-  name: string;
-  price: number;
-  category: string;
-  quantity: number;
-  color: string;
-  size: string;
-  alt: string;
+  id: string,
+  name: string,
+  img: Array<string>,
+  price:string,
+  description: string,
+  color: string,
+  size:string,
+  category: string,
+  tag: string,
+  quantity: number,
 }
 interface adresse {
   adresse: string;
@@ -51,7 +52,10 @@ type CartContext = {
 
 const product = [ prod];
 
-export const CartContext = createContext<CartContext | null>(null);
+export const CartContext = createContext<CartContext>(
+  {} as CartContext
+);
+
 
 export default function CartContextProvider({children}:any) {
   const [cartItem, setCartItem] = useState<any>(product);
@@ -60,15 +64,34 @@ export default function CartContextProvider({children}:any) {
   const [price, setPrice] = useState<any>(0);
   const [livPrice,setLivPrice] = useState<number>(0);
   const [tot,setTot] = useState<number>(0);
+
   useEffect(()=>{
     const storage:any = localStorage.getItem('cart');
     setStoredCart(JSON.parse(storage) || []);
-  },[storedCart,setStoredCart])
-  const addToCart = (products: products) => {
-    const newItem = [...cartItem,products];
-     localStorage.setItem('cart',`${newItem}`)
-    setCartItem(newItem);
+  },[setStoredCart])
+
+  const addToCart = (productToAdd: products) => {
+    const existingProduct = cartItem.find((item: products) =>
+    item.id === productToAdd.id && item.color === productToAdd.color && item.size === productToAdd.size
+  );
+  if(existingProduct){
+    const updatedCart = cartItem.map((item: products) =>
+    item.id === productToAdd.id && item.color === productToAdd.color && item.size === productToAdd.size
+      ? { ...item, quantity: item.quantity + productToAdd.quantity }
+      : item
+  );
+  localStorage.setItem('cart', JSON.stringify(updatedCart));
+  setCartItem(updatedCart);
+  }else{
+    const updatedCart = [...cartItem, productToAdd];
+    localStorage.setItem('cart', JSON.stringify(updatedCart));
+    setCartItem(updatedCart);
+  }
+    
+    
+   
   };
+  
 const removeFromCart = (products:products) => {
   const id = products.id; 
   const updatedCart = cartItem.filter((item: products) => item.id !== id);
@@ -150,3 +173,4 @@ const updatedCart = (products:products) => {
     addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,
   }}>{children}</CartContext.Provider>;
 }
+export const useGlobalContext = () => useContext(CartContext);

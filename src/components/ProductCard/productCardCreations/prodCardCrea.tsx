@@ -3,14 +3,13 @@ import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "../../../app/Context/cartContext";
 import { useRouter } from "next/navigation";
-import { ProductContext, useGlobalContext } from "@/app/Context/productStore";
+import { useGlobalContext } from "@/app/Context/productStore";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true); 
-  const Cart = useContext(CartContext);
   const { productSearch, productArray, setProductArray, setSelectedProduct } =
     useGlobalContext();
 
@@ -34,7 +33,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
     } else {
       setIsLoading(false);
     }
-  }, []);
+  }, [productSearch,productArray,setProductArray]);
   console.log(productArray);
   // If still loading, show loading message or spinner
   if (isLoading) {

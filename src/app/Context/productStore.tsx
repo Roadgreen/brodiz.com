@@ -17,8 +17,8 @@ type ProductContext = {
     img: Array<string>,
     price:string,
     description: string,
-    color: string
-  
+    color: string,
+    size: string
   };
   setSelectedProduct: Dispatch<SetStateAction<Object>>;
 };

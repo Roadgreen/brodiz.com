@@ -14,7 +14,7 @@ const prod = {
   size: "L",
   alt: "hoodies skull ryuk",
 };
-interface products {
+interface product {
   id: string,
   name: string,
   img: Array<string>,
@@ -33,21 +33,20 @@ interface adresse {
   pays: string;
 }
 
-interface product {
-  products: {
-      id:string,
-    image: string;
-    name: string;
-    price: number;
-category: string;
-quantity: number;
-color: string;
-size: string;
-alt:string;
-  }[],
-}
+interface products {
+    id: string,
+  name: string,
+  img: Array<string>,
+  price:string,
+  description: string,
+  color: string,
+  size:string,
+  category: string,
+  tag: string,
+  quantity: number,
+}[]
 type CartContext = {
-  addToCart: (products: products) => void; removeFromCart: (products: products) => void; updatedCart: (products: products) => void; cartItem: any; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;
+  addToCart: (products: product) => void; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;
 }
 
 const product = [ prod];
@@ -58,7 +57,7 @@ export const CartContext = createContext<CartContext>(
 
 
 export default function CartContextProvider({children}:any) {
-  const [cartItem, setCartItem] = useState<any>(product);
+  const [cartItem, setCartItem] = useState<product[]>([]); //TODO problème de format ici entre product et products. 
   const [storedCart,setStoredCart] = useState([]);
   const [adress,setAdress] = useState({})
   const [price, setPrice] = useState<any>(0);
@@ -70,12 +69,14 @@ export default function CartContextProvider({children}:any) {
     setStoredCart(JSON.parse(storage) || []);
   },[setStoredCart])
 
-  const addToCart = (productToAdd: products) => {
-    const existingProduct = cartItem.find((item: products) =>
-    item.id === productToAdd.id && item.color === productToAdd.color && item.size === productToAdd.size
+  const addToCart = (productToAdd: product) => {
+    const existingProduct = cartItem.find((item: product) =>
+    item.id === productToAdd.id && //TODO ici problème de type à résoudre pour pouvoir utiliser la fonction. 
+    item.color === productToAdd.color &&
+    item.size === productToAdd.size
   );
   if(existingProduct){
-    const updatedCart = cartItem.map((item: products) =>
+    const updatedCart = cartItem.map((item: product) =>
     item.id === productToAdd.id && item.color === productToAdd.color && item.size === productToAdd.size
       ? { ...item, quantity: item.quantity + productToAdd.quantity }
       : item
@@ -92,9 +93,9 @@ export default function CartContextProvider({children}:any) {
    
   };
   
-const removeFromCart = (products:products) => {
+const removeFromCart = (products:product) => {
   const id = products.id; 
-  const updatedCart = cartItem.filter((item: products) => item.id !== id);
+  const updatedCart = cartItem.filter((item: product) => item.id !== id);
   localStorage.setItem('cart',`${updatedCart}`)
   setCartItem(updatedCart);
 
@@ -162,9 +163,9 @@ const totalPrice =  (products:any) => {
 AllPrice()
  setPrice(totalPrice);
 }
-const updatedCart = (products:products) => {
+const updatedCart = (products:product) => {
   const id = products.id;
-  const hisId = (x:products) => x.id === id;
+  const hisId = (x:product) => x.id === id;
   const ind = cartItem.findIndex(hisId);
   const newCart = cartItem.splice(ind,1,products);
   setCartItem(newCart);

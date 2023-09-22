@@ -177,7 +177,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
               handleClickAddToCart();
             }}
           >
-            Acheter
+            Ajouter au panier
           </button>
         </div>
       </div>

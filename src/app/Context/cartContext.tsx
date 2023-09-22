@@ -46,7 +46,7 @@ interface products {
   quantity: number,
 }[]
 type CartContext = {
-  addToCart: (products: product) => void; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;
+  addToCart: (products: product) => void; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;
 }
 
 const product = [ prod];
@@ -57,7 +57,8 @@ export const CartContext = createContext<CartContext>(
 
 
 export default function CartContextProvider({children}:any) {
-  const [cartItem, setCartItem] = useState<product[]>([]); //TODO problème de format ici entre product et products. 
+  const [cartItem, setCartItem] = useState<product[]>([]);
+  const [addedToCart,setAddedToCart] = useState<boolean>(false);
   const [storedCart,setStoredCart] = useState([]);
   const [adress,setAdress] = useState({})
   const [price, setPrice] = useState<any>(0);
@@ -70,31 +71,29 @@ export default function CartContextProvider({children}:any) {
   },[setStoredCart])
 
   const addToCart = (productToAdd: product) => {
-    const existingProduct = cartItem.find((item: product) =>
-    item.id === productToAdd.id && //TODO ici problème de type à résoudre pour pouvoir utiliser la fonction. 
-    item.color === productToAdd.color &&
-    item.size === productToAdd.size
-  );
-  if(existingProduct){
-    const updatedCart = cartItem.map((item: product) =>
-    item.id === productToAdd.id && item.color === productToAdd.color && item.size === productToAdd.size
-      ? { ...item, quantity: item.quantity + productToAdd.quantity }
-      : item
-  );
-  localStorage.setItem('cart', JSON.stringify(updatedCart));
-  setCartItem(updatedCart);
-  }else{
-    const updatedCart = [...cartItem, productToAdd];
-    localStorage.setItem('cart', JSON.stringify(updatedCart));
-    setCartItem(updatedCart);
-  }
-    
-    
-   
+    const existingProductIndex = cartItem.findIndex((item: product) =>
+      item.id === productToAdd.id &&
+      item.color === productToAdd.color &&
+      item.size === productToAdd.size
+    );
+    if (existingProductIndex !== -1) {
+      const updatedCart = [...cartItem];
+      const existingProduct = updatedCart.splice(existingProductIndex, 1)[0];
+      existingProduct.quantity += productToAdd.quantity;
+      updatedCart.push(existingProduct);
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCartItem(updatedCart);
+      setAddedToCart(true);
+    } else {
+      const updatedCart = [...cartItem, productToAdd];
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+      setCartItem(updatedCart);
+      setAddedToCart(true);
+    }
   };
-  
+
 const removeFromCart = (products:product) => {
-  const id = products.id; 
+  const id = products.id;
   const updatedCart = cartItem.filter((item: product) => item.id !== id);
   localStorage.setItem('cart',`${updatedCart}`)
   setCartItem(updatedCart);
@@ -171,7 +170,7 @@ const updatedCart = (products:product) => {
   setCartItem(newCart);
 }
   return <CartContext.Provider value={{
-    addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,
+    addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart
   }}>{children}</CartContext.Provider>;
 }
 export const useGlobalContext = () => useContext(CartContext);

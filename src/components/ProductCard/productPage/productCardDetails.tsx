@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import styles from "./productCardDetails.module.css";
 import Image from "next/image";
-import { useGlobalContext } from "@/app/Context/cartContext";
+import { useGlobalContextCart } from "@/app/Context/cartContext";
 interface product {
   id: string;
   name: string;
@@ -11,13 +11,13 @@ interface product {
   description: string;
   color: string;
   size: string;
-  category: string;
+  category: Array<string>;
   tag: string;
   quantity: number;
 }
 
 export default function ProductCardDetails({ product }: { product: product }) {
-  const { addToCart } = useGlobalContext();
+  const { addToCart,addedToCart,setAddedToCart } = useGlobalContextCart();
   const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);
   const [alertSelection, setAlertSelection] = useState<boolean>(false);
   const [sizeSelection, setSizeSelection] = useState<string>();
@@ -74,6 +74,8 @@ export default function ProductCardDetails({ product }: { product: product }) {
       updatedProduct.quantity = 1;
       // Appelle addToCart du contexte global avec le produit mis à jour
       addToCart(updatedProduct);
+      setAlertSelection(false);
+      setAddedToCart(true);
     } else {
       // Affiche un message d'erreur ou effectue une action en cas d'erreur
       setAlertSelection(true);

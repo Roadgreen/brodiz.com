@@ -1,6 +1,7 @@
-import { useGlobalContext } from "@/app/Context/cartContext"
+import { useGlobalContextCart } from "@/app/Context/cartContext"
 import styles from './panierProductPage.module.css'
 import Image from "next/image"
+import Link from "next/link";
 interface product {
     id: string,
     name: string,
@@ -15,27 +16,39 @@ interface product {
   }
 
 export default function PanierProductPage(){
-const { cartItem }: { cartItem: product[] } = useGlobalContext();
+const { cartItem }: { cartItem: product[] } = useGlobalContextCart();
 const dernierArticle = cartItem[cartItem.length - 1];
+
 
     return(
 <div className={styles.container}>
-    <div className={styles.containerLastArticle}>
-    <div>
-        <h3>Votre Panier</h3>
-        <Image src={dernierArticle.img[0][0]} alt={dernierArticle.img[0][1]} fill />
+<h3>Votre Panier</h3>
+<div className={styles.button}>
+        <Link style={{textDecoration:'none'}} className={styles.buttonL} href={'/panier'}><p>Afficher mon panier</p></Link>
+        <Link  style={{textDecoration:'none'}} className={styles.buttonL} href={'/panier'}><p>Paiement</p></Link>
     </div>
-    <div>
-        <p>{dernierArticle.name}</p>
-        <p>{dernierArticle.price}</p>
-        <p>{dernierArticle.size}</p>
-        <p>Quantité: {dernierArticle.quantity}</p>
+<div className={styles.containerArticle}>
+    {
+cartItem.map((x:any,i:number)=>{
+    return( <div key={i} className={styles.containerLastArticle}>
+   
+
+        <div className={styles.imgContainer}>
+            <Image src={x.img[0][0]} alt={x.img[0][1]} fill />
+        </div>
+        <div className={styles.prodDesc}>
+            <p>{x.name}</p>
+            <p>{x.price}€</p>
+            <p>{x.size}</p>
+            <p>Quantité: {x.quantity}</p>
+        </div>
+        </div>)
+})
+    }
+   
+   
     </div>
-    </div>
-    <div>
-        <div><p>Afficher mon panier</p></div>
-        <div><p>Paiement</p></div>
-    </div>
+   
 </div>
     )
 }

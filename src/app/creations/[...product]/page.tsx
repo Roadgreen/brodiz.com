@@ -3,8 +3,9 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { useGlobalContext } from "@/app/Context/productStore";
+import { useGlobalContextCart } from "@/app/Context/cartContext";
 import ProductCardDetails from "@/components/ProductCard/productPage/productCardDetails";
-
+import PanierProductPage from "@/components/Panier/panierProductPage/panierProductPage";
 export default function ProductPage({
   params,
 }: {
@@ -14,6 +15,7 @@ export default function ProductPage({
   console.log(params);
   const { selectedProduct, setSelectedProduct, productArray, productSearch } =
     useGlobalContext();
+    const {addedToCart} = useGlobalContextCart();
     useEffect(() => {
       console.log(selectedProduct, Object.keys(selectedProduct));
       async function searchProduct() {
@@ -38,6 +40,7 @@ export default function ProductPage({
       {selectedProduct.img ? 
   <ProductCardDetails product={selectedProduct} /> : <></>
       }
+      {addedToCart ? <PanierProductPage/> : ''}
     
     </div>
   );

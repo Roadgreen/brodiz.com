@@ -1,6 +1,6 @@
 "use client";
 import { features } from "process";
-import { useContext, createContext, useState,useEffect } from "react";
+import { useContext, createContext, useState,useEffect,SetStateAction,Dispatch } from "react";
 
 
 const prod = {
@@ -22,9 +22,10 @@ interface product {
   description: string,
   color: string,
   size:string,
-  category: string,
+  category: Array<string>,
   tag: string,
   quantity: number,
+  
 }
 interface adresse {
   adresse: string;
@@ -41,12 +42,12 @@ interface products {
   description: string,
   color: string,
   size:string,
-  category: string,
+  category: Array<string>,
   tag: string,
   quantity: number,
 }[]
 type CartContext = {
-  addToCart: (products: product) => void; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;
+  addToCart: (products: product) => void; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
 }
 
 const product = [ prod];
@@ -65,10 +66,21 @@ export default function CartContextProvider({children}:any) {
   const [livPrice,setLivPrice] = useState<number>(0);
   const [tot,setTot] = useState<number>(0);
 
-  useEffect(()=>{
-    const storage:any = localStorage.getItem('cart');
-    setStoredCart(JSON.parse(storage) || []);
-  },[setStoredCart])
+  useEffect(() => {
+    const storage: any = localStorage.getItem('cart');
+    if (storage) {
+      try {
+        const parsedStorage = JSON.parse(storage);
+        setStoredCart(parsedStorage || []);
+        if (cartItem.length === 0) {
+          setCartItem(parsedStorage || []);
+        }
+      } catch (error) {
+        // Gérer une chaîne JSON invalide ou vide ici
+        console.error('Erreur lors de la récupération du panier depuis le stockage local :', error);
+      }
+    }
+  }, [setStoredCart]);
 
   const addToCart = (productToAdd: product) => {
     const existingProductIndex = cartItem.findIndex((item: product) =>
@@ -95,7 +107,7 @@ export default function CartContextProvider({children}:any) {
 const removeFromCart = (products:product) => {
   const id = products.id;
   const updatedCart = cartItem.filter((item: product) => item.id !== id);
-  localStorage.setItem('cart',`${updatedCart}`)
+  localStorage.setItem('cart',JSON.stringify(updatedCart))
   setCartItem(updatedCart);
 
   console.log(cartItem)
@@ -170,7 +182,7 @@ const updatedCart = (products:product) => {
   setCartItem(newCart);
 }
   return <CartContext.Provider value={{
-    addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart
+    addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart
   }}>{children}</CartContext.Provider>;
 }
-export const useGlobalContext = () => useContext(CartContext);
+export const useGlobalContextCart = () => useContext(CartContext);

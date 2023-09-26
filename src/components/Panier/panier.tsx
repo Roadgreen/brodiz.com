@@ -1,31 +1,32 @@
 import Image from "next/image"
 import {useContext} from 'react'
 import styles from './panier.module.css'
-import {CartContext} from '../../app/Context/cartContext'
+import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { RiDeleteBin5Line } from 'react-icons/ri';
 
 interface product {
-    
-        id:string,
-      image: string;
-      name: string;
-      price: number;
-category: string;
-quantity: number;
-color: string;
-size: string;
-alt:string;
-}
+    id: string,
+    name: string,
+    img: Array<string>,
+    price:string,
+    description: string,
+    color: string,
+    size:string,
+    category: Array<string>,
+    tag: string,
+    quantity: number,
+  }
 
  
 export default function Cart() {
-
-const Cart = useContext(CartContext);
-    const checkMap = Cart?.cartItem.map((x:product) =>
-    <div key={x.id} className={styles.Articles}><Image alt={x.alt} src={x.image} height={150} width={150}/>
+    const {cartItem,updatedCart,removeFromCart} = useGlobalContextCart();
+console.log(cartItem.length)
+    const checkMap = (Cart:product[]) => (Cart.map((x:product) =>{
+    return(
+    <div key={x.id} className={styles.Articles}><Image alt={x.img[0][1]} src={x.img[0][0]} height={150} width={150}/>
     <div>
         <h4>{x.name}</h4>
-        <p>{x.category}</p>
+        <p>{x.category[0]}</p>
     <p>{x.color}</p>
     <div>
     <label>Quantité:</label>
@@ -57,24 +58,24 @@ const Cart = useContext(CartContext);
         <RiDeleteBin5Line/>
     </div>
     </div>
-    ) 
+    )}))
 
     const handleChange = (x:any,y:any) => {
-        const product = Cart?.cartItem;
+        const product = cartItem;
         const hisId = (f:any) => f.id === y;
-        const ind = Cart?.cartItem.findIndex(hisId);
+        const ind = cartItem.findIndex(hisId);
         product[ind].quantity = x;
-        Cart?.updatedCart(Cart.cartItem[ind]);
+        updatedCart(cartItem[ind]);
     }
     const handleSup = (x:any) => {
-        Cart?.removeFromCart(x)
-        console.log(Cart?.cartItem);
+        removeFromCart(x)
+        console.log(cartItem);
     }
   return (
     <div className={styles.Container}>
         <h2>Panier</h2>
         <div>
-{Cart?.cartItem.length !== 0  ? checkMap : console.log('')}
+{cartItem.length > 0  ? checkMap(cartItem) : ''}
         </div>
     </div>
   )

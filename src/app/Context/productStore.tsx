@@ -13,7 +13,7 @@ type ProductContext = {
   productArray: Array<Array<Object>>;
   setProductArray: Dispatch<SetStateAction<Array<Array<Object>>>>;
   selectedProduct: {
-    Name: string,
+    name: string,
     img: Array<string>,
     price:string,
     description: string,

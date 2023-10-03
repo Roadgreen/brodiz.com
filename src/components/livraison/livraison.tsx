@@ -1,15 +1,21 @@
 import { useContext,useState,useEffect} from 'react';
-import { CartContext } from '../../app/Context/cartContext';
+import { useGlobalContextCart } from '@/app/Context/cartContext';
 import styles from './livraison.module.css'
 import { useRouter } from 'next/navigation'
 import { NextResponse } from "next/server";
 import { loadStripe } from '@stripe/stripe-js';
+import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
+
 
 const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   );
 
 export default function LivraisonPart() {
+  const {AdressCheck} = useGlobalContextCart();
+  const {UserConnected} = useGlobalContextUser();
+  
+
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);
@@ -22,7 +28,6 @@ export default function LivraisonPart() {
         }
       }, []);
     const router = useRouter()
-    const Cart = useContext(CartContext);
     const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''})
     const [addOk,setAddOk] = useState(false);
 
@@ -39,7 +44,7 @@ const handleClick = async ()=>{
     console.log(adress);
 
     if(adress.adresse !== '' && adress.post !== '' && adress.ville !== '' && adress.pays !== ''){
-       const check:any =  Cart?.AdressCheck(adress);
+       const check:any =  AdressCheck(adress);
        console.log(adress);
        console.log(check);
        if(check){

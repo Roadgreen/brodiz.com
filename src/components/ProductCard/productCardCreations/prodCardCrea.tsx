@@ -12,6 +12,7 @@ interface product {
   name: string,
   img: Array<string>,
   price:string,
+  price_ID: string,
   description: string,
   color: Array<Object>,
   size:Array<string>,

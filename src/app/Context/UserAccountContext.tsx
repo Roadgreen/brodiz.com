@@ -1,10 +1,12 @@
+"use client"
+import { promises } from "dns";
 import React,{ useContext, createContext, useState, Dispatch, SetStateAction } from "react";
 
 type UserContext = {
   CreateAccount: (User: User) => void;
   Login: (User: UserConnect) => void;
   FindUser: (User: UserSearch) => void;
-  UserConnected:(id:{id:string}) => void;
+  UserConnected:(id:string) => Promise<{code:number} | {user:Object,code:number}>;
   isConnected: any;
   isBuyers: any;
   isNews: any;
@@ -104,11 +106,11 @@ export default function UserContextProvider({ children }: any) {
      if(resData.code === 202){
       const token = resData.token;
       const user = await resData.user;
+      const id = await resData.id;
       const email = await user.email.toString();
       console.log(user);
       
   await localStorage.setItem("token",token);
-
     return {code: 202,id: user._id,user};
      } else if(resData.code === 404){
       return {code: 404,id: '',user:{}}
@@ -156,7 +158,7 @@ export default function UserContextProvider({ children }: any) {
     return {code: 1 ,status: 'err'};
   }
 };
-const UserConnected = async (id: {id:string}) : Promise<{code:number} | {user:Object}> => {
+const UserConnected = async (id:string) : Promise<{code:number} | {user:Object}> => {
  try{console.log(id);
  var myInit = {
   method: "GET",
@@ -166,11 +168,11 @@ const UserConnected = async (id: {id:string}) : Promise<{code:number} | {user:Ob
 };
  const Token = await localStorage.getItem("token");
  const response = await fetch(
-  process.env.FETCHLOGIN || `http://localhost:8080/users/${id.id}/${Token}`,
+  process.env.FETCHLOGIN || `http://localhost:8080/users/${id}/${Token}`,
   myInit
 );
 const data = await response.json();
-
+console.log(data);
 return data
 }catch(err){
 return {code: 404}
@@ -200,3 +202,4 @@ return {code: 404}
     </UserContext.Provider>
   );
 }
+export const useGlobalContextUser = () => useContext(UserContext);

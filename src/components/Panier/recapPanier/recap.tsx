@@ -1,10 +1,10 @@
 import styles from './recap.module.css'
 import {useContext,useEffect} from 'react'
-import {CartContext} from '../../../app/Context/cartContext'
-import Link from 'next/link';
+import { useGlobalContextCart } from '@/app/Context/cartContext';import Link from 'next/link';
 import 'dotenv/config'
 
 export default function Recap() {
+  const {tot,livPrice,price,cartItem,totalPrice} = useGlobalContextCart();
   useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
@@ -16,9 +16,9 @@ export default function Recap() {
       console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
     }
   }, []);
-  const Cart = useContext(CartContext);
- Cart?.totalPrice(Cart.cartItem)
+ totalPrice(cartItem)
  
+
   
  
 
@@ -26,17 +26,17 @@ export default function Recap() {
     <div className={styles.Container}>
       <h4>Récapitulatif</h4>
 <div>
-<p>Sous-total:  {Cart?.price}€ </p>
-      <p>Frais d`&aposexpédition: {Cart?.livPrice}€</p>
+<p>Sous-total:  {price}€ </p>
+      <p>Frais d'expédition: {livPrice}€</p>
 </div>
-<p>Total: {Cart?.tot}€</p>
-{Cart?.price === 0 ?  
+<p>Total: {tot}€</p>
+{price === 0 ?  
 <button className={styles.buttonOff} disabled>Paiement</button> 
 : 
 <div className={styles.link} >
-  <button  className={styles.button}>
+  <Link href={'/livraison'} className={styles.button}>
     Checkout
-  </button>
+  </Link>
 
 
 

@@ -8,6 +8,7 @@ interface product {
   name: string;
   img: Array<string>;
   price: string;
+  price_ID: string;
   description: string;
   color:  Array<object>;
   size: Array<string>;
@@ -25,7 +26,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
   const [colorSelection, setColorSelection] = useState<Object[]>();
   const colors = product.color || [];
-  const size = product.size;
+  const size = product.size || [];
   useEffect(() => {
     // Initialize sizeChangeCss and colorChangeCss arrays with default classes
     const defaultSizeChangeCss = size.map(() => styles.sizeOption);

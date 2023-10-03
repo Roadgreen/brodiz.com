@@ -1,19 +1,19 @@
 import { useContext,useEffect,useState } from 'react';
-import { UserContext } from '@/app/Context/UserAccountContext';
 import { useRouter } from 'next/navigation';
 import Commandes from '../commandes/commandes';
 import styles from './connected.module.css'
+import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 
  function Connected(id:{id:string}){
     const [user,setUser] = useState<any>({}); 
     const [menu,setMenu] = useState(1);
     const router = useRouter();
-    const User = useContext(UserContext);
-   
+const {UserConnected} = useGlobalContextUser();
     useEffect(() => {
         const fetchData = async () => {
             const userCon:any = async () => { 
-                const userCon:any = await User.UserConnected(id);
+              const newId = id.id;
+                const userCon:any = await UserConnected(newId);
                 console.log(userCon);
                 return userCon;
             }
@@ -32,7 +32,7 @@ import styles from './connected.module.css'
           }
         };
         fetchData();
-      }, [id,User,router]);
+      }, [id,UserConnected,router]);
 
      
     return (

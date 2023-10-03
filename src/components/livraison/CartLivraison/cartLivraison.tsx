@@ -1,22 +1,26 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useContext} from 'react';
 import styles from './cartLivraison.module.css'
-import { CartContext } from '../../../app/Context/cartContext';
-
+import { useGlobalContextCart } from '@/app/Context/cartContext';
 export default function CartLivraison() {
-    const Cart = useContext(CartContext);
-console.log(Cart?.cartItem)
+  const {tot,livPrice,price,cartItem,totalPrice} = useGlobalContextCart();
+console.log(tot,livPrice,price,cartItem);
+totalPrice(cartItem)
+ 
+
+console.log(tot,livPrice,price,cartItem);
+
   return (
     <div className={styles.Container}>
       <div>
       <h3>Dans votre panier</h3>
-    {Cart?.cartItem.map((x:any)=>{
-        return (<p>x{x.quantity} {x.name} {x.price}€</p>)
+    {cartItem.map((x:any,i:number)=>{
+        return (<p key={i}>x{x.quantity} {x.name} {x.price}€</p>)
     })}
     
-    <p>Sous-total: {Cart?.price}€</p>
-    <p>Frais d'expédition estimés: {Cart?.livPrice}€</p>
-    <p>Total: {Cart?.tot}€</p>
+    <p>Sous-total: {price}€</p>
+    <p>Frais d'expédition estimés: {livPrice}€</p>
+    <p>Total: {tot}€</p>
       </div>
   
 </div>

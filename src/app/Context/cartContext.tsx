@@ -19,6 +19,7 @@ interface product {
   name: string,
   img: Array<string>,
   price:string,
+  price_ID: string,
   description: string,
   color: Array<Object>,
   size:Array<string>,
@@ -85,9 +86,10 @@ export default function CartContextProvider({children}:any) {
   const addToCart = (productToAdd: product) => {
     const existingProductIndex = cartItem.findIndex((item: product) =>
       item.id === productToAdd.id &&
-      item.color === productToAdd.color &&
-      item.size === productToAdd.size
+      item.color[0] === productToAdd.color[0] &&
+      item.size[0] === productToAdd.size[0]
     );
+    console.log(existingProductIndex,productToAdd,cartItem);
     if (existingProductIndex !== -1) {
       const updatedCart = [...cartItem];
       const existingProduct = updatedCart.splice(existingProductIndex, 1)[0];
@@ -96,20 +98,31 @@ export default function CartContextProvider({children}:any) {
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCartItem(updatedCart);
       setAddedToCart(true);
+      totalPrice(updatedCart);
     } else {
       const updatedCart = [...cartItem, productToAdd];
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCartItem(updatedCart);
       setAddedToCart(true);
+      totalPrice(updatedCart);
     }
   };
 
 const removeFromCart = (products:product) => {
+  
   const id = products.id;
-  const updatedCart = cartItem.filter((item: product) => item.id !== id);
+const size = products.size;
+function filterProduct(product:product){
+  if(product.id === products.id && product.size === products.size){
+    return false
+  } else {
+    return true
+  }
+}
+  const updatedCart = cartItem.filter(filterProduct);
   localStorage.setItem('cart',JSON.stringify(updatedCart))
   setCartItem(updatedCart);
-
+  totalPrice(updatedCart);
   console.log(cartItem)
 }
 function removeAccents(str:string) {
@@ -171,15 +184,19 @@ const totalPrice =  (products:any) => {
     }
   }
   livraison()
+  setPrice(totalPrice);
 AllPrice()
- setPrice(totalPrice);
+ 
 }
 const updatedCart = (products:product) => {
   const id = products.id;
   const hisId = (x:product) => x.id === id;
   const ind = cartItem.findIndex(hisId);
-  const newCart = cartItem.splice(ind,1,products);
-  setCartItem(newCart);
+  const updatedCart = cartItem.splice(ind,1,products);
+  localStorage.setItem('cart',JSON.stringify(updatedCart))
+  setCartItem(updatedCart);
+  totalPrice(updatedCart);
+  
 }
   return <CartContext.Provider value={{
     addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart

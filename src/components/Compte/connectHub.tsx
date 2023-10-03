@@ -2,15 +2,16 @@ import { useContext } from 'react';
 import { UserContext } from '@/app/Context/UserAccountContext';
 import { useRouter } from 'next/navigation';
 import styles from './connectHub.module.css';
+import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 
 function ConnectHub() {
   const router = useRouter();
-  const User = useContext(UserContext);
+  const {userEmail,userData,userPswd,FindUser,userFind,Login,setUserData,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const email = User.userEmail;
-    const password = User.userPswd;
+    const email = userEmail;
+    const password = userPswd;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   
     function isValidEmail(email: string) {
@@ -19,7 +20,7 @@ function ConnectHub() {
   
     if (!isValidEmail(email)) {
       if (email === 'Admin@Admin.com') {
-        const finded = User?.FindUser({ email: email, collection: 'Admin' });
+        const finded = FindUser({ email: email, collection: 'Admin' });
         // Test point: Admin user found
       }
       return; // Exit early if the email is invalid or it is the Admin user.
@@ -27,13 +28,13 @@ function ConnectHub() {
   
     let code, id,user; // Declare the variables here to avoid redeclaration
   
-    switch (User?.userFind) {
+    switch (userFind) {
       case 'Wait':
-        const finded: any = await User?.FindUser({ email, collection: 'Client' });
+        const finded: any = await FindUser({ email, collection: 'Client' });
         break;
   
       case 'connect':
-        const connect: any = await User?.Login({ email, password, collection: 'Client' });
+        const connect: any = await Login({ email, password, collection: 'Client' });
         ({ code, id , user} = await connect); // Assign the values here, don't redeclare
         switch (code) {
           case 404:
@@ -43,8 +44,9 @@ function ConnectHub() {
           case 202:
             // Test point: Code 202 handling
             console.log(id);
-            await User?.setUserData(user);
-            console.log(await User?.userData)
+            await setUserData(user);
+            await localStorage.setItem("userId",id);
+            console.log(await userData)
             router.push(`/account/${id}`);
             break;
   
@@ -55,9 +57,9 @@ function ConnectHub() {
         break;
   
       case 'register':
-        const news = User?.isNews;
+        const news = isNews;
         const date = new Date();
-        const register: any = User?.CreateAccount({
+        const register: any = CreateAccount({
           email,
           password,
           collection: 'Client',
@@ -92,18 +94,18 @@ function ConnectHub() {
       <h1>Mon compte</h1>
       <div className={styles.formContainer}>
         <form>
-          {User?.userFind === 'register'? <p>Bienvenue chez Brodiz, créez un compte pour continuer</p> : <p>Indiquez votre email pour l'inscription ou vous connecter</p>}
+          {userFind === 'register'? <p>Bienvenue chez Brodiz, créez un compte pour continuer</p> : <p>Indiquez votre email pour l'inscription ou vous connecter</p>}
           <div className={styles.InputContainer}>
             <input
               onChange={(e: any) => {
-                User?.setUserEmail(e.target.value);
+                setUserEmail(e.target.value);
               }}
               pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$"
               required
             />
             <span className={styles.spanFoc}>Email</span>
           </div>
-          {User?.userFind === 'Wait' ? (
+          {userFind === 'Wait' ? (
             <></>
           ) : (
             <>
@@ -111,7 +113,7 @@ function ConnectHub() {
                 <input pattern="[a-zA-Z]+" required />
                 <span className={styles.spanFoc}>Mdp</span>
               </div>
-              {User?.userFind === 'register' ? (
+              {userFind === 'register' ? (
                 <>
                   <p>S'inscrire à la newsletter :</p>
                   <div className={styles.newsChecked}>

@@ -16,11 +16,10 @@
 .Articles{
     display: flex;
     flex-direction: row;
-    height: 150px;
     align-items: center;
     justify-content: space-around;
     height: 170px;
-    
+    margin-bottom: 15px;
 }
 .Articles div:nth-child(3){
     display: flex;

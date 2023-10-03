@@ -7,20 +7,25 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
-
+interface product {
+  id: string,
+  name: string,
+  img: Array<string>,
+  price:string,
+  description: string,
+  color: Array<Object>,
+  size:Array<string>,
+  category: Array<string>,
+  tag: string,
+  quantity: number,
+  
+}
 type ProductContext = {
-  productSearch: (doc: object, collection: string, db: string) => Promise<[{}]>;
-  productArray: Array<Array<Object>>;
-  setProductArray: Dispatch<SetStateAction<Array<Array<Object>>>>;
-  selectedProduct: {
-    name: string,
-    img: Array<string>,
-    price:string,
-    description: string,
-    color: string,
-    size: string
-  };
-  setSelectedProduct: Dispatch<SetStateAction<Object>>;
+  productSearch: (doc: object, collection: string, db: string) => Promise<product[]>;
+  productArray: Array<Array<product>>;
+  setProductArray: Dispatch<SetStateAction<product[][]>>;
+  selectedProduct: product;
+  setSelectedProduct: Dispatch<SetStateAction<product>>;
 };
 
 export const ProductContext = createContext<ProductContext>(
@@ -28,14 +33,35 @@ export const ProductContext = createContext<ProductContext>(
 );
 
 export const ProductContextProvider = ({ children }: any) => {
-  const [productArray, setProductArray] = useState([[{}]]);
-  const [selectedProduct, setSelectedProduct] = useState({});
+  const [productArray, setProductArray] = useState<product[][]>([[{  id: "",
+  name: "",
+  img: [],
+  price: "",
+  description: "",
+  color: [],
+  size: [],
+  category: [],
+  tag: "",
+  quantity: 0,
+}]]);
+
+  const [selectedProduct, setSelectedProduct] = useState<product>({  id: "",
+  name: "",
+  img: [],
+  price: "",
+  description: "",
+  color: [],
+  size: [],
+  category: [],
+  tag: "",
+  quantity: 0,
+});
 
   const productSearch = async (
     doc: object,
     collection: string,
     db: string
-  ): Promise<[{}]> => {
+  ): Promise<product[]> => {
     try {
       console.log("try productsearch");
       var myInit = {
@@ -57,10 +83,10 @@ export const ProductContextProvider = ({ children }: any) => {
       } else if (data.code === 404) {
         console.log("err lors de la recherche de produit");
       }
-      return [{}];
+      return [];
     } catch (err) {
       console.log(err);
-      return [{}];
+      return [];
     }
   };
   return (

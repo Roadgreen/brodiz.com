@@ -9,8 +9,8 @@ interface product {
   img: Array<string>;
   price: string;
   description: string;
-  color: string;
-  size: string;
+  color:  Array<object>;
+  size: Array<string>;
   category: Array<string>;
   tag: string;
   quantity: number;
@@ -23,9 +23,9 @@ export default function ProductCardDetails({ product }: { product: product }) {
   const [sizeSelection, setSizeSelection] = useState<string>();
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
-  const [colorSelection, setColorSelection] = useState<string>();
-  const colors = product.color ? JSON.parse(product.color) : [];
-  const size = product.size ? JSON.parse(product.size) : [];
+  const [colorSelection, setColorSelection] = useState<Object[]>();
+  const colors = product.color || [];
+  const size = product.size;
   useEffect(() => {
     // Initialize sizeChangeCss and colorChangeCss arrays with default classes
     const defaultSizeChangeCss = size.map(() => styles.sizeOption);
@@ -48,7 +48,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
   };
   const handleClick = (info: string) => {
     if (info.length > 2) {
-      setColorSelection(info);
+      setColorSelection([{"name":info}]);
       // Update the colorChangeCss array to add the "selected" class for the clicked color and remove it from others
       const newColorChangeCss = colors.map((x: any, i: number) =>
         x.name === info ? styles.colorOptionSelected : styles.color
@@ -58,7 +58,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
       setSizeSelection(info);
       // Update the sizeChangeCss array to add the "selected" class for the clicked size and remove it from others
       const newSizeChangeCss = size.map((x: any) =>
-        x.size === info ? styles.sizeOptionSelected : styles.sizeOption
+        x === info ? styles.sizeOptionSelected : styles.sizeOption
       );
       setSizeChangeCss(newSizeChangeCss);
     }
@@ -70,7 +70,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
       const updatedProduct = { ...product };
       // Met à jour les sélections de couleur et de taille dans le produit
       updatedProduct.color = colorSelection;
-      updatedProduct.size = sizeSelection;
+      updatedProduct.size = [sizeSelection];
       updatedProduct.quantity = 1;
       // Appelle addToCart du contexte global avec le produit mis à jour
       addToCart(updatedProduct);
@@ -143,10 +143,10 @@ export default function ProductCardDetails({ product }: { product: product }) {
                 return (
                   <div
                     className={sizeChangeCss[i]}
-                    onClick={() => handleClick(x.size)}
+                    onClick={() => handleClick(x)}
                     key={i}
                   >
-                    {x.size}
+                    {x}
                   </div>
                 );
               })}

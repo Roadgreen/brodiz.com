@@ -7,6 +7,19 @@ import { useGlobalContext } from "@/app/Context/productStore";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 
+interface product {
+  id: string,
+  name: string,
+  img: Array<string>,
+  price:string,
+  description: string,
+  color: Array<Object>,
+  size:Array<string>,
+  category: Array<string>,
+  tag: string,
+  quantity: number,
+  
+}
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true); 
@@ -16,14 +29,14 @@ export default function ProdCardCrea({ id }: { id: number }) {
   useEffect(() => {
     if (productArray.length !== 4) {
       const fetchProductData = async () => {
-        const prod1: Array<Object> = await productSearch(
+        const prod1: Array<product> = await productSearch(
           {},
           "Hoodies",
           "Product"
         );
-        const prod2: Array<Object> = await productSearch({}, "Baby", "Product");
-        const prod3: Array<Object> = await productSearch({}, "Bain", "Product");
-        const prod4: Array<Object> = await productSearch({}, "Pull", "Product");
+        const prod2: Array<product> = await productSearch({}, "Baby", "Product");
+        const prod3: Array<product> = await productSearch({}, "Bain", "Product");
+        const prod4: Array<product> = await productSearch({}, "Pull", "Product");
 
       
         setProductArray([prod1, prod2, prod3, prod4]);
@@ -65,7 +78,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
 
   const cardProductMapping: any = () => {
     return productArray[id].map((x: any, i: number) => {
-      const colors = x.color ? JSON.parse(x.color) : [];
+      const colors = x.color;
       return (
         <div
           className={styles.cardContainer}

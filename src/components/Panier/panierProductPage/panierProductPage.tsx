@@ -9,10 +9,11 @@ interface product {
     price:string,
     description: string,
     color: string,
-    size:string,
-    category: string,
+    size:Array<string>,
+    category: Array<string>,
     tag: string,
     quantity: number,
+    
   }
 
 export default function PanierProductPage(){

@@ -15,10 +15,57 @@
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+.SecondContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .Container Form input::placeholder{
     padding-left: 10px;
 }
+.ContainerLivCon{
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    border: 1px solid gray;
+    border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -ms-border-radius: 10px 10px 10px 10px;
+    -o-border-radius: 10px 10px 10px 10px;
+}
+.ContainerLivCon div{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 10px;
+}
+.buttonOn{
+    color: rgb(255, 255, 255);
+    background-color: rgb(4, 4, 4);
+    border: 1px solid grey;
+    margin: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.buttonOn:hover{
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    transition: all 0.5s ease-in-out;
+}
 .Button{
+    margin: 20px;
     cursor: pointer;
     border: 0px solid gray;
     background-color: black;
@@ -27,6 +74,7 @@
     transition:all  0.5s ease-in-out;
 }
 .Button:hover{
+    margin: 20px;
     cursor: pointer;
     border: 0px solid gray;
     background-color: rgba(0, 0, 0, 0.251);
@@ -43,6 +91,12 @@
     -moz-transition:all  0.5s ease-in-out;
     -ms-transition:all  0.5s ease-in-out;
     -o-transition:all  0.5s ease-in-out;
+}
+.Wrongad{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 @media (max-width: 768px) {
     .Container{

@@ -57,8 +57,8 @@ export  async function POST(request:Request,response:Response){
                     res
                 ],
                 mode: 'payment',
-                success_url: 'http://localhost:3000/?success=true',
-                cancel_url: `http://localhost:3000/?canceled=true`,
+                success_url: 'http://localhost:3000/confirmation?success=true',
+                cancel_url: `http://localhost:3000/confirmation?canceled=true`,
                 automatic_tax:{enabled:false}
             });
             console.log('On est dans le try')
@@ -69,7 +69,7 @@ export  async function POST(request:Request,response:Response){
         "Access-Control-Request-Method": ["POST", "GET", "OPTIONS"],
             }
 
-            return await  NextResponse.json({URL:session.url},Head)
+            return await  NextResponse.json({URL:session.url,Shipping:session.shipping_cost?.shipping_rate},Head)
                     } catch (err:any){
             console.log('err du fichier route.tsx',err.message)
         return new Response(err,{status:500})

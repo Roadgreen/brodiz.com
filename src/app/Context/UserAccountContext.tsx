@@ -6,7 +6,7 @@ type UserContext = {
   CreateAccount: (User: User) => void;
   Login: (User: UserConnect) => void;
   FindUser: (User: UserSearch) => void;
-  UserConnected:(id:string) => Promise<{code:number} | {user:Object,code:number}>;
+  UserConnected:(id:string) => Promise<{user:Object, status: string,code:number}>;
   isConnected: any;
   isBuyers: any;
   isNews: any;
@@ -120,7 +120,6 @@ export default function UserContextProvider({ children }: any) {
       return {code: 404, id:'null',user:{}}
     }
     }
-  
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {
   try {
@@ -158,7 +157,7 @@ export default function UserContextProvider({ children }: any) {
     return {code: 1 ,status: 'err'};
   }
 };
-const UserConnected = async (id:string) : Promise<{code:number} | {user:Object}> => {
+const UserConnected = async (id:string) : Promise<{ code:number, status:string, user:Object}> => {
  try{console.log(id);
  var myInit = {
   method: "GET",
@@ -175,7 +174,7 @@ const data = await response.json();
 console.log(data);
 return data
 }catch(err){
-return {code: 404}
+return {code: 404,status: 'Utilisateur non trouvé',user:{}}
 }}
   return (
     <UserContext.Provider

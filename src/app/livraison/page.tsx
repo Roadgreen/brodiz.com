@@ -3,10 +3,24 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useGlobalContextUser } from '../Context/UserAccountContext';
 import LivraisonPart from '@/components/livraison/livraison';
 import CartLivraison from '@/components/livraison/CartLivraison/cartLivraison';
+import styles from './page.module.css'
 
+
+interface User {
+  email: string,
+  username: string,
+  password:string,
+  collection: string,
+  date: string,
+  newsletter: number,
+  adress:Array<Object>,
+  name: string,
+  surname: string
+  } 
 export default function Livraison() {
   const { UserConnected } = useGlobalContextUser();
   const [userConnected, setUserConnected] = useState(false);
+  const [user,setUser] = useState({});
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");
@@ -16,6 +30,7 @@ export default function Livraison() {
       UserConnected(userId)
         .then((result) => {
           if (result.code === 200) {
+            setUser(result.user);
             // L'utilisateur est connecté
             setUserConnected(true);
           } else if(result.code === 404) {
@@ -35,20 +50,22 @@ export default function Livraison() {
   }, [UserConnected]);
 
   return (
-    <div>
-      <h1>Livraison</h1>
+    <>
+    <h1 className={styles.h1}>Livraison</h1>
+     <div className={styles.Container}>
+      
       {userConnected ? (
         // Si l'utilisateur est connecté, affichez les composants LivraisonPart et CartLivraison
-        <>
-          <p>Bonjour</p>
-        </>
+        <LivraisonPart User={user} />
       ) : (
         // Si l'utilisateur n'est pas connecté, vous pouvez afficher un message ou rediriger vers la page de connexion
-        <LivraisonPart />
+        <LivraisonPart User={''} />
           
       )}
       <CartLivraison />
     </div>
+    </>
+   
   );
 }
 

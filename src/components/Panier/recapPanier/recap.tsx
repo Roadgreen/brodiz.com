@@ -6,6 +6,7 @@ import 'dotenv/config'
 export default function Recap() {
   const {tot,livPrice,price,cartItem,totalPrice} = useGlobalContextCart();
   useEffect(() => {
+    console.log(cartItem)
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
     if (query.get('success')) {

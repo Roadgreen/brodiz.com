@@ -30,13 +30,16 @@ const stripePromise = loadStripe(
   );
 
 export default function LivraisonPart(User:{User:User}) {
-  const {AdressCheck,livPrice,tot,price} = useGlobalContextCart();
+  const {AdressCheck,livPrice,tot,price,cartItem} = useGlobalContextCart();
+
   const {commandAdd} = useGlobalContextCom();
   const [connected,setConnected] = useState(false);
   const [sameAdress,SetSameAdress] = useState(true);
 
     useEffect(() => {
       console.log(User.User.email);
+      console.log(cartItem);
+
         // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
@@ -49,16 +52,16 @@ export default function LivraisonPart(User:{User:User}) {
         if(User){
 setConnected(true);
         }
-      }, []);
+      }, [cartItem]);
     const router = useRouter()
     const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''})
-    const [command,setCommand] = useState({UserEmail:'',
-      UserName: '',
-      UserLastname: '',
-      UserId: '', 
-      Product: [{}],
-      LivraisonPrice:0,
-      TotalPrice: 0,Adress:{adresse:'',post:'',ville:'',pays:'',}})
+    const [command,setCommand] = useState({useremail:'',
+      username: '',
+      userlastname: '',
+      userid: '', 
+      product: [{}],
+      livraisonprice:0,
+      totalprice: 0,adress:{adresse:'',post:'',ville:'',pays:'',}})
     const [addOk,setAddOk] = useState(false);
 
 
@@ -115,8 +118,12 @@ const handleClick = async ()=>{
         const checkoutURL = data.URL;
         console.log(checkoutURL);
         if(checkoutURL.includes('sucess')){
-          const command = {}
-          commandAdd() //TODO finir la commandadd. Il faut linker le form au cammand add pour obtenir toutes les infos. 
+          if(User){
+            //command a traiter 
+            const command = {UserEmail: User.User.email,UserName: User.User.name,UserLastName: User.User.surname,adress:User.User.adress }
+
+          }
+          //commandAdd() //TODO finir la commandadd. Il faut linker le form au cammand add pour obtenir toutes les infos. 
         }
         router.push(`${checkoutURL}`);
     

@@ -3,11 +3,14 @@ import styles from '.page.module.css'
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation'
 import { useEffect,useState } from 'react'
+import { useGlobalContextCart } from '../Context/cartContext';
 
 export default function Confirmation(){
     const [sucess,setSucess] = useState(false);
+    const {cartItem} = useGlobalContextCart();
     const [user,setUser] = useState(true)
     useEffect(()=>{
+        console.log(cartItem)
         if(window.localStorage.getItem('userId')){
             setUser(true);
         } else {
@@ -21,7 +24,7 @@ export default function Confirmation(){
         if (query.get('canceled')) {
             setSucess(false);
         }
-    },[])
+    },[cartItem])
     return (<>
     {sucess && user? (<div>
         <div><h1>Merci!</h1></div>

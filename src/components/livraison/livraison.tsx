@@ -8,19 +8,19 @@ import { loadStripe } from '@stripe/stripe-js';
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 
 interface User {
+  id:string,
   email: string,
   username: string,
   password:string,
   collection: string,
   date: string,
   newsletter: number,
-  adress:Array<{
-    number:string,
-  street:string,
-  city:string,
-  cityCode: string,
-  country: string
-  }>,
+  adress:{
+    adresse: string,
+  post:string,
+  ville:string,
+  pays: string,
+  },
   name: string,
   surname: string
   }
@@ -55,10 +55,11 @@ setConnected(true);
       }, [cartItem]);
     const router = useRouter()
     const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''})
+    const [userNotConnectInfo,setUserNotConnectInfo] = useState({prenom:'',nom:'',email:'',tel:''})
     const [command,setCommand] = useState({useremail:'',
       username: '',
       userlastname: '',
-      userid: '', 
+      userid: '',
       product: [{}],
       livraisonprice:0,
       totalprice: 0,adress:{adresse:'',post:'',ville:'',pays:'',}})
@@ -74,6 +75,16 @@ setAdress(adress => ({
 }))
 
 }
+
+const handleChangeUserInf = (e:string,n:any)=>{
+
+  setUserNotConnectInfo(userNotConnectInfo => ({
+      ...userNotConnectInfo,
+      [n]: e,
+  }))
+  
+  }
+
 const handleClick = async ()=>{
     console.log(adress);
 
@@ -116,14 +127,19 @@ const handleClick = async ()=>{
 
      const data = await response.json(); // Parse the JSON data from the response
         const checkoutURL = data.URL;
+        const checkoutliv = data.shipping_cost;
+        const checkouttot = data.amount_total;
         console.log(checkoutURL);
         if(checkoutURL.includes('sucess')){
           if(User){
             //command a traiter 
-            const command = {UserEmail: User.User.email,UserName: User.User.name,UserLastName: User.User.surname,adress:User.User.adress }
-
+            const command = {userid:User.User.id,useremail: User.User.email,username: User.User.name,userlastname: User.User.surname,adress:User.User.adress,product:cartItem,livprice: checkoutliv, totalprice: checkouttot  }
+            commandAdd(command)
+          } else {
+            const command = {userid:'',useremail: userNotConnectInfo.email,username: '',userlastname: userNotConnectInfo.nom,adress: adress,product:cartItem,livprice: checkoutliv, totalprice: checkouttot  }
+            commandAdd(command)
           }
-          //commandAdd() //TODO finir la commandadd. Il faut linker le form au cammand add pour obtenir toutes les infos. 
+         
         }
         router.push(`${checkoutURL}`);
     
@@ -142,15 +158,15 @@ const handleClick = async ()=>{
   {User && User.User && User.User.adress &&  sameAdress ? <div className={styles.ContainerLivCon}>
     <button className={styles.buttonOn} onClick={()=>{SetSameAdress(false)}}>Changer mon adresse</button>
     <div>
-    <p>{User.User.adress[0].number}</p>
-    <p>{User.User.adress[0].street}</p>
-    <p>{User.User.adress[0].city}</p>
-    <p>{User.User.adress[0].cityCode}</p>
+    <p>{User.User.adress.adresse}</p>
+    <p>{User.User.adress.ville}</p>
+    <p>{User.User.adress.post}</p>
+    <p>{User.User.adress.pays}</p>
     </div>
   </div> :   <form className={styles.Form}>
         <div>
-        <input placeholder='Prénom' ></input>
-        <input placeholder='Nom'></input>
+        <input placeholder='Prénom' onChange={e => handleChangeUserInf(e.target.value,'prenom')}></input>
+        <input placeholder='Nom' onChange={e => handleChangeUserInf(e.target.value,'nom')}></input>
         </div>
         <div>
         <input placeholder='Adresse postale' onChange={e => handleChangeAdd(e.target.value,'adresse')}></input>
@@ -161,8 +177,8 @@ const handleClick = async ()=>{
         <input placeholder='Pays' onChange={e => handleChangeAdd(e.target.value,'pays')}></input>
         </div>  
         <div>
-        <input placeholder='Email'></input>
-        <input placeholder='Numéro de téléphone(optionnel)'></input>
+        <input placeholder='Email' onChange={e => handleChangeUserInf(e.target.value,'email')}></input>
+        <input placeholder='Numéro de téléphone(optionnel)' onChange={e => handleChangeUserInf(e.target.value,'tel')}></input>
         </div>
     </form>}
    {addOk? <div className={styles.Wrongad}><p>Veuillez vérifier votre adresse!</p></div> : <></>}

@@ -6,18 +6,17 @@ commandAdd:(Command:Command) => Promise<"ok" | "non ok">,
 }
 interface Command {
   
-    id: string,
-    UserEmail: string,
-    UserId:string,
+    useremail: string,
+    userid:string,
     adress: {
-      number: string,
-      street: string,
-      city: string,
-      cityCode:string
+      adresse: string,
+      post: string,
+      ville: string,
+      pays:string
     },
-    Product: Array<Object>,
-    LivPrice: number,
-    TotalPrice: number,
+    product: Array<Object>,
+    livprice: number,
+    totalprice: number,
 }
 
 export const CommandeContext = createContext<CommandeContext>(
@@ -37,7 +36,7 @@ export const CommandeContext = createContext<CommandeContext>(
     
   const sendCommand = await  fetch(
         process.env.FETCHCOMMANDSEARCH ||
-          "http://localhost:8080/product/productSearch",
+          "http://localhost:8080/command/commandadd",
         myInit
       );
 

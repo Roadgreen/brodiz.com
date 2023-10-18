@@ -1,14 +1,19 @@
 "use client"
 import styles from '.page.module.css'
 import Link from 'next/link';
+import Stripe from 'stripe'
 import { useSearchParams } from 'next/navigation'
 import { useEffect,useState } from 'react'
 import { useGlobalContextCart } from '../Context/cartContext';
+import { useGlobalContextCom } from '@/app/Context/commandeContext';
+
 
 export default function Confirmation(){
     const [sucess,setSucess] = useState(false);
     const {cartItem} = useGlobalContextCart();
     const [user,setUser] = useState(true)
+    const {commandAdd} = useGlobalContextCom();
+
     useEffect(()=>{
         console.log(cartItem)
         if(window.localStorage.getItem('userId')){
@@ -19,6 +24,23 @@ export default function Confirmation(){
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
           setSucess(true);
+          const id = query.get('session_id');
+          const stripeRetrieve = async (id:any) =>{
+            const params:any = {
+                method: "POST",
+              mode: "no-cors",
+              headers: {"Content-Type": "application/json",},
+              redirect: "follow",
+              body: JSON.stringify({
+               id
+              })
+              }
+            const response:Response | void = await fetch('/api/stripe/retrieve-stripe-session',params);
+             const data = await response.json();
+             const command = {userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data , totalprice: 0  }
+          commandAdd(command);
+          }
+       
         }
     
         if (query.get('canceled')) {

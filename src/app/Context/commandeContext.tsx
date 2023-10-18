@@ -1,3 +1,5 @@
+"use client"
+
 import { useContext,createContext,useState } from "react";
 
 
@@ -33,17 +35,21 @@ export const CommandeContext = createContext<CommandeContext>(
         body: JSON.stringify(Command),
       };
 
-    
+    console.log('on est dans commandeAdd function');
   const sendCommand = await  fetch(
         process.env.FETCHCOMMANDSEARCH ||
-          "http://localhost:8080/command/commandadd",
+          "http://localhost:8080/command/commandAdd",
         myInit
       );
 
       const data = await sendCommand.json();
       if(data.code === 202){
+        
+        console.log('data.code is 202')
 return 'ok'
       } else if(data.code === 404){
+        console.log('data.code is 404')
+
 return 'non ok'
       }
       return 'ok'

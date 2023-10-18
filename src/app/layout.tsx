@@ -5,6 +5,7 @@ import Text from '@/components/TexteSwitch/text'
 import Footer from '@/components/footer/footer'
 import { ProductContextProvider } from './Context/productStore'
 import CartContextProvider from './Context/cartContext'
+import { CommandeContextProvider } from './Context/commandeContext'
 import UserContextProvider from './Context/UserAccountContext'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -26,7 +27,9 @@ export default function RootLayout({
         <ProductContextProvider>
         <CartContextProvider>
           <UserContextProvider>
+            <CommandeContextProvider>
         {children}
+        </CommandeContextProvider>
         </UserContextProvider>
         </CartContextProvider>
         </ProductContextProvider>

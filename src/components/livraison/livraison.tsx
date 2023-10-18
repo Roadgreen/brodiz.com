@@ -103,6 +103,14 @@ const handleClick = async ()=>{
         quantity: 1,
       })
       }
+      if(User){
+        //command a traiter 
+        const command = {userid:User.User.id,useremail: User.User.email,username: User.User.name,userlastname: User.User.surname,adress:User.User.adress,product:cartItem,livprice: 0, totalprice: tot  }
+        commandAdd(command)
+      } else {
+        const command = {userid:'',useremail: userNotConnectInfo.email,username: '',userlastname: userNotConnectInfo.nom,adress: adress,product:cartItem,livprice: 0, totalprice: tot  }
+        commandAdd(command)
+      }
 
      const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);
 
@@ -120,28 +128,14 @@ const handleClick = async ()=>{
       body: JSON.stringify({
         price: 'price_1NWM28FEy7LAuyEsdN3pM9C3',
         quantity: 1,
+        
       })
       }
 
      const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);
 
-     const data = await response.json(); // Parse the JSON data from the response
-        const checkoutURL = data.URL;
-        const checkoutliv = data.shipping_cost;
-        const checkouttot = data.amount_total;
-        console.log(checkoutURL);
-        if(checkoutURL.includes('sucess')){
-          if(User){
-            //command a traiter 
-            const command = {userid:User.User.id,useremail: User.User.email,username: User.User.name,userlastname: User.User.surname,adress:User.User.adress,product:cartItem,livprice: checkoutliv, totalprice: checkouttot  }
-            commandAdd(command)
-          } else {
-            const command = {userid:'',useremail: userNotConnectInfo.email,username: '',userlastname: userNotConnectInfo.nom,adress: adress,product:cartItem,livprice: checkoutliv, totalprice: checkouttot  }
-            commandAdd(command)
-          }
-         
-        }
-        router.push(`${checkoutURL}`);
+    
+       
     
     }else {
         console.log('not ok adress')

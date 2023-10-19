@@ -27,6 +27,7 @@ export const CommandeContext = createContext<CommandeContext>(
 
   export const CommandeContextProvider = ({ children }: any) => {
   const commandAdd = async (Command:Command) => {
+    console.log(Command);
     var myInit = {
         method: "POST",
         headers: {

@@ -23,6 +23,7 @@ export default function Confirmation(){
         }
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
+            console.log('on est dans le sucess')
           setSucess(true);
           const id = query.get('session_id');
           const stripeRetrieve = async (id:any) =>{
@@ -40,6 +41,7 @@ export default function Confirmation(){
              const command = {userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data , totalprice: 0  }
           commandAdd(command);
           }
+          stripeRetrieve(id);
        
         }
     

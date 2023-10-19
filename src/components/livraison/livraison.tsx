@@ -24,12 +24,15 @@ interface User {
   name: string,
   surname: string
   }
+  interface LivraisonPartProps {
+    User?: User | null
+  }
 
 const stripePromise = loadStripe(
     process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
   );
 
-export default function LivraisonPart(User:{User:User}) {
+export default function LivraisonPart({User}:LivraisonPartProps) {
   const {AdressCheck,livPrice,tot,price,cartItem} = useGlobalContextCart();
 
   const {commandAdd} = useGlobalContextCom();
@@ -37,7 +40,7 @@ export default function LivraisonPart(User:{User:User}) {
   const [sameAdress,SetSameAdress] = useState(true);
 
     useEffect(() => {
-      console.log(User.User.email);
+      console.log(User);
       console.log(cartItem);
 
         // Check to see if this is a redirect back from Checkout
@@ -106,10 +109,11 @@ const handleClick = async ()=>{
       if(User){
         //command a traiter 
         const command = {userid:User.User.id,useremail: User.User.email,username: User.User.name,userlastname: User.User.surname,adress:User.User.adress,product:cartItem,livprice: 0, totalprice: tot  }
-        commandAdd(command)
+       await commandAdd(command)
       } else {
+        console.log(adress);
         const command = {userid:'',useremail: userNotConnectInfo.email,username: '',userlastname: userNotConnectInfo.nom,adress: adress,product:cartItem,livprice: 0, totalprice: tot  }
-        commandAdd(command)
+      await  commandAdd(command)
       }
 
      const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);

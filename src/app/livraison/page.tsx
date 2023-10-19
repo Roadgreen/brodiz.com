@@ -60,7 +60,7 @@ export default function Livraison() {
         <LivraisonPart User={user} />
       ) : (
         // Si l'utilisateur n'est pas connecté, vous pouvez afficher un message ou rediriger vers la page de connexion
-        <LivraisonPart User={''} />
+        <LivraisonPart />
           
       )}
       <CartLivraison />

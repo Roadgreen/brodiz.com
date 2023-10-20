@@ -1,15 +1,13 @@
 "use client";
 import styles from "./page.module.css";
 import ProdCardCrea from "@/components/ProductCard/productCardCreations/prodCardCrea";
-import { CartContext } from "../Context/cartContext";
 import { useContext,useState } from "react";
-import CartContextProvider from "@/app/Context/cartContext";
 
 export default function Livraison() {
     const [menu,setMenu] = useState(0);
 
   return (
-      <CartContextProvider>
+   
         <div className={styles.Container}>
             <div className={styles.buttonContainer}>
             <span onClick={()=>{setMenu(0)}} className={menu === 0 ? styles.activeButton : styles.button}>Sweatshirt à capuche</span>
@@ -23,6 +21,5 @@ export default function Livraison() {
          {menu === 3 ?  <ProdCardCrea id={menu}/> : <></>}
 
         </div>
-      </CartContextProvider>
   );
 }

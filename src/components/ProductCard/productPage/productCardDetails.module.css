@@ -320,7 +320,7 @@
   .buttonBuy:hover {
     cursor: pointer;
     background-color: rgba(137, 137, 137, 0.625);
-    width: 100px;
+    width: 200px;
     margin: 20px;
     height: 30px;
     border-radius: 20px;

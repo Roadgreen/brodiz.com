@@ -6,6 +6,7 @@ import { useGlobalContext } from "@/app/Context/productStore";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import ProductCardDetails from "@/components/ProductCard/productPage/productCardDetails";
 import PanierProductPage from "@/components/Panier/panierProductPage/panierProductPage";
+
 export default function ProductPage({
   params,
 }: {

@@ -18,7 +18,7 @@ interface product {
 }
 
 export default function ProductCardDetails({ product }: { product: product }) {
-  const { addToCart,addedToCart,setAddedToCart } = useGlobalContextCart();
+  const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
   const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);
   const [alertSelection, setAlertSelection] = useState<boolean>(false);
   const [sizeSelection, setSizeSelection] = useState<string>();
@@ -28,6 +28,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
   const colors = product.color || [];
   const size = product.size || [];
   useEffect(() => {
+    console.log(cartItem)
     // Initialize sizeChangeCss and colorChangeCss arrays with default classes
     const defaultSizeChangeCss = size.map(() => styles.sizeOption);
     const defaultColorChangeCss = colors.map(() => styles.color);
@@ -65,6 +66,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
     }
   };
   const handleClickAddToCart = () => {
+    console.log(cartItem);
     // Vérifie que colorSelection et sizeSelection ne sont pas undefined
     if (colorSelection && sizeSelection) {
       // Copie le produit actuel

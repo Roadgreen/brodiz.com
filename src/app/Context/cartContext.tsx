@@ -73,33 +73,34 @@ export default function CartContextProvider({children}:any) {
       try {
         const parsedStorage = JSON.parse(storage);
         setStoredCart(parsedStorage || []);
-        if (cartItem.length === 0) {
           setCartItem(parsedStorage || []);
-        }
+        
       } catch (error) {
         // Gérer une chaîne JSON invalide ou vide ici
         console.error('Erreur lors de la récupération du panier depuis le stockage local :', error);
       }
     }
-  }, [setStoredCart]);
+  }, []);
 
   const addToCart = (productToAdd: product) => {
-    const existingProductIndex = cartItem.findIndex((item: product) =>
-      item.id === productToAdd.id &&
-      item.color[0] === productToAdd.color[0] &&
-      item.size[0] === productToAdd.size[0]
-    );
-    console.log(existingProductIndex,productToAdd,cartItem);
-    if (existingProductIndex !== -1) {
-      const updatedCart = [...cartItem];
-      const existingProduct = updatedCart.splice(existingProductIndex, 1)[0];
-      existingProduct.quantity += productToAdd.quantity;
-      updatedCart.push(existingProduct);
+    console.log(productToAdd)
+    const productToAddKey = `${productToAdd.id}-${productToAdd.color[0]}-${productToAdd.size[0]}`;
+    const existingProductIndex = cartItem.findIndex((item: product) =>{
+    const itemKey = `${item.id}-${item.color[0]}-${item.size[0]}`;
+    return itemKey === productToAddKey;
+    });
+  console.log(existingProductIndex);
+  if (existingProductIndex !== -1) {
+    // Le produit existe déjà dans le panier, mettez à jour la quantité du produit existant
+    const updatedCart = [...cartItem];
+    updatedCart[existingProductIndex].quantity += productToAdd.quantity;
+  
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCartItem(updatedCart);
       setAddedToCart(true);
       totalPrice(updatedCart);
     } else {
+      // Le produit n'existe pas dans le panier, l'ajouter simplement
       const updatedCart = [...cartItem, productToAdd];
       localStorage.setItem('cart', JSON.stringify(updatedCart));
       setCartItem(updatedCart);
@@ -107,7 +108,7 @@ export default function CartContextProvider({children}:any) {
       totalPrice(updatedCart);
     }
   };
-
+  
 const removeFromCart = (products:product) => {
   
   const id = products.id;

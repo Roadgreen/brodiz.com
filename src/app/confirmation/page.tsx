@@ -39,7 +39,7 @@ export default function Confirmation(){
             const response:Response | void = await fetch('/api/stripe/retrieve-stripe-session',params);
              const data = await response.json();
              const command = {userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data , totalprice: 0  }
-          commandAdd(command);
+
           }
           stripeRetrieve(id);
        

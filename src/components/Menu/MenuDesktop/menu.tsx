@@ -20,15 +20,15 @@ export default function DesktopMenu(Text:any){
     return (
         <div className={`${oswald.className} ${style.containerMenu}`}>
             <ul className={style.ul}><Link href={'/'}>{text.a}</Link>
-            <Link href={'/'}>{text.b}</Link>
-            <Link href={'/'}>{text.c}</Link>
+            <Link href={'/creations'}>{text.b}</Link>
+            <Link href={'/customisations'}>{text.c}</Link>
             </ul>
             <div> 
             <Image className={style.img} alt={`logo représentant l'entreprise Brodiz.com`} src={logo} fill/> 
             </div>
             <ul className={style.ul}>
-            <Link href={'/'}>{text.d}</Link>
-            <Link href={'/'}>{text.e}</Link>
+            <Link href={'/blog'}>{text.d}</Link>
+            <Link href={'/account'}>{text.e}</Link>
             <Link href={'/panier'}>{text.f}</Link>
             </ul>
             {isMenuOpen ? (
@@ -37,11 +37,11 @@ export default function DesktopMenu(Text:any){
     <div className={`${style.mobileMenu} ${style.open}`}>
     <ul>
 <li><Link href={'/'}>{text.a}</Link></li>
-<li><Link href={'/'}>{text.b}</Link></li>
-<li><Link href={'/'}>{text.c}</Link></li>
-<li><Link href={'/'}>{text.d}</Link></li>
-<li><Link href={'/'}>{text.e}</Link></li>
-<li><Link href={'/'}>{text.f}</Link></li>
+<li><Link href={'/creations'}>{text.b}</Link></li>
+<li><Link href={'/customisations'}>{text.c}</Link></li>
+<li><Link href={'/blog'}>{text.d}</Link></li>
+<li><Link href={'/account'}>{text.e}</Link></li>
+<li><Link href={'/panier'}>{text.f}</Link></li>
 </ul>
     </div>
   </>

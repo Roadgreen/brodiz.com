@@ -4,6 +4,7 @@ import Slide from '@/components/slider/homeSlider/homeslider'
 import HomePersonnalisation from '@/components/homePersonnalisation/homePersonnalisation'
 import ProductCard from '@/components/ProductCard/productCardHome/productcard'
 import Caroussel from '@/components/carroussel/homecarroussel/homecarroussel'
+import SlidePromotion from '@/components/Home/slidePromotion/slidePromotion'
 
 const product = {
   image: '/img/producthero image/Ryukwomen.jpg',
@@ -16,6 +17,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
      <Slide/>
+<SlidePromotion/>
      <HomePersonnalisation/>
      <Caroussel products={products}/>
     </main>

@@ -1,6 +1,7 @@
 import { useContext,useEffect,useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Commandes from '../commandes/commandes';
+import Profil from '../profil/profil';
 import styles from './connected.module.css'
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 
@@ -21,18 +22,19 @@ const {UserConnected} = useGlobalContextUser();
             const userData = await userCon();
             console.log('dans le try du connected',userCon);
             if (userData.code === 200) {
-                setUser(userData.user)
+              console.log(userData);
+              return await setUser(userData.user)
 
                 console.log('on est dans le if du connected', userData)
             } else if(userData.code === 404){
-                router.push('/account')
+              return  router.push('/account')
             }
           } catch (error) {
             // Handle errors if any
           }
         };
         fetchData();
-      }, [id,UserConnected,router]);
+      }, [id,UserConnected,router,setUser]);
 
      
     return (
@@ -44,6 +46,8 @@ const {UserConnected} = useGlobalContextUser();
     <span className={`${menu === 3 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{setMenu(3)}}>Ma liste de favorie</span>
 </div>
 {menu === 1? <Commandes user={user}/> : <></>}
+{menu === 2? <Profil user={user}/> : <></>}
+
 
     </div>
     )

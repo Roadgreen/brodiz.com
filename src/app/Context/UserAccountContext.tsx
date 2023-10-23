@@ -27,6 +27,15 @@ interface User {
   date: string;
   collection: string;
 }
+interface UserChange {
+    email: string,
+    date: string,
+    newsletter: number,
+    adress:Array<Object>,
+    name: string,
+    surname: string
+    
+}
 interface UserConnect {
   email:string;
   password:string,
@@ -119,6 +128,30 @@ export default function UserContextProvider({ children }: any) {
       console.log(err);
       return {code: 404, id:'null',user:{}}
     }
+    }
+
+    const UserChanges = async (User:UserChange) : Promise<{User:UserChange}> => {
+      try {
+        const data = User;
+        var myInit = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        };
+    
+        const response = await fetch(
+          process.env.FETCHLOGIN || "http://localhost:8080/users/userchange",
+          myInit
+        );
+        const resData = await response.json()
+        if(resData.code === 202){
+          return {User};
+        }
+      }catch{(err:any)=>{
+console.log(err);
+      }}
     }
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {

@@ -10,7 +10,6 @@ interface User {
   id: string,
   email: string,
   username: string,
-  password:string,
   collection: string,
   date: string,
   newsletter: number,
@@ -18,6 +17,9 @@ interface User {
   name: string,
   surname: string
   } 
+  interface LivraisonPartProps {
+    User?: User | null
+  }
 export default function Livraison() {
   const { UserConnected } = useGlobalContextUser();
   const [userConnected, setUserConnected] = useState(false);

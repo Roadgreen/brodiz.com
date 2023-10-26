@@ -11,16 +11,10 @@ interface User {
   id:string,
   email: string,
   username: string,
-  password:string,
   collection: string,
   date: string,
   newsletter: number,
-  adress:{
-    adresse: string,
-  post:string,
-  ville:string,
-  pays: string,
-  },
+  adress: [{adresse:string,post:string,ville:string,pays:string}],
   name: string,
   surname: string
   }
@@ -34,6 +28,7 @@ const stripePromise = loadStripe(
 
 export default function LivraisonPart({User}:LivraisonPartProps) {
   const {AdressCheck,livPrice,tot,price,cartItem} = useGlobalContextCart();
+  const {FindUser} = useGlobalContextUser();
 
   const {commandAdd} = useGlobalContextCom();
   const [connected,setConnected] = useState(false);
@@ -91,29 +86,32 @@ const handleChangeUserInf = (e:string,n:any)=>{
 const handleClick = async ()=>{
     console.log(adress);
 
+const itemsForCheckout = cartItem.map(item=>({
+quantity: item.quantity,
+price: item.price_ID
+}))
+console.log(itemsForCheckout, 'ici le cartItem');
     if(adress.adresse !== '' && adress.post !== '' && adress.ville !== '' && adress.pays !== ''){
        const check:any =  AdressCheck(adress);
        console.log(adress);
        console.log(check);
-       if(check){
+       console.log(command);
+       if(check){ 
       const params:any = {
         method: "POST",
       mode: "no-cors",
       headers: {"Content-Type": "application/json",},
       redirect: "follow",
-      body: JSON.stringify({
-        price: 'price_1NWM28FEy7LAuyEsdN3pM9C3',
-        quantity: 1,
-      })
+      body: JSON.stringify(itemsForCheckout)
       }
       if(User){
         //command a traiter 
-        const command = {userid:User.User.id,useremail: User.User.email,username: User.User.name,userlastname: User.User.surname,adress:User.User.adress,product:cartItem,livprice: 0, totalprice: tot  }
+        const command = {userid:User.id,useremail: User.email,username: User.name,userlastname: User.surname,adress:User.adress[0],product:cartItem,livprice: 0, totalprice: tot  }
        await commandAdd(command)
       } else {
         console.log(adress);
-        const command = {userid:'',useremail: userNotConnectInfo.email,username: '',userlastname: userNotConnectInfo.nom,adress: adress,product:cartItem,livprice: 0, totalprice: tot  }
-      await  commandAdd(command)
+        const command = {userid:'',useremail: userNotConnectInfo.email,username: '',userlastname: userNotConnectInfo.nom,adress:adress,product:cartItem,livprice: 0, totalprice: tot  }
+      await  commandAdd(command) 
       }
 
      const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);
@@ -129,11 +127,7 @@ const handleClick = async ()=>{
       mode: "no-cors",
       headers: {"Content-Type": "application/json",},
       redirect: "follow",
-      body: JSON.stringify({
-        price: 'price_1NWM28FEy7LAuyEsdN3pM9C3',
-        quantity: 1,
-        
-      })
+      body: JSON.stringify(itemsForCheckout)
       }
 
      const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);

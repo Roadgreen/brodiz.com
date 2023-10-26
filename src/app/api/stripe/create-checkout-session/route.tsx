@@ -54,9 +54,8 @@ export  async function POST(request:Request,response:Response){
                       },
                     },
                   ],
-                line_items: [
-                    res
-                ],
+                line_items: 
+                    res,
                 mode: 'payment',
                 success_url: `http://localhost:3000/confirmation?success=true&session_id={CHECKOUT_SESSION_ID}`,
                 cancel_url: `http://localhost:3000/confirmation?canceled=true`,

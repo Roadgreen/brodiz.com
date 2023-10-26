@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect,useState } from 'react'
 import { useGlobalContextCart } from '../Context/cartContext';
 import { useGlobalContextCom } from '@/app/Context/commandeContext';
+import { useGlobalContextUser } from '../Context/UserAccountContext';
 
 
 export default function Confirmation(){
@@ -13,14 +14,24 @@ export default function Confirmation(){
     const {cartItem} = useGlobalContextCart();
     const [user,setUser] = useState(true)
     const {commandAdd} = useGlobalContextCom();
+    const {UserConnected} = useGlobalContextUser();
 
     useEffect(()=>{
-        console.log(cartItem)
-        if(window.localStorage.getItem('userId')){
-            setUser(true);
-        } else {
-            setUser(false);
+        const checkUser = async () =>{
+            const id = window.localStorage.getItem('userId') ?? '';
+            try{
+                const result = await UserConnected(id);
+                if(result.code=== 200){
+                setUser(true);
+                } else{
+                    setUser(false);
+                }
+            }catch(err){
+                console.log(err);
+            }
         }
+        checkUser();
+       
         const query = new URLSearchParams(window.location.search);
         if (query.get('success')) {
             console.log('on est dans le sucess')

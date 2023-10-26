@@ -1,0 +1,75 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.containerProfil{
+display: flex;
+flex-direction: row;
+width: 50%;
+height: 100%;
+}
+.Form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:row;
+    flex-flow: column wrap;
+    width: 100%;
+    margin: 20px;
+    height: 100%;
+}
+.Form div input{
+    margin: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.473);
+    border-radius: 20px;
+    height: 25px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+
+.Form div input::placeholder{
+   padding: 10px;
+   color: rgb(0, 0, 0);
+}
+.Form button{
+    width: 200px;
+    height: 25px;
+    border: 1px solid rgba(128, 128, 128, 0.368);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+
+}
+.Form button:hover{
+    width: 200px;
+    height: 25px;
+    cursor: pointer;
+    color: aliceblue;
+    background-color: black;
+    border: 1px solid rgba(128, 128, 128, 0.368);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.changeContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}

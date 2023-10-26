@@ -7,6 +7,7 @@ type UserContext = {
   Login: (User: UserConnect) => void;
   FindUser: (User: UserSearch) => void;
   UserConnected:(id:string) => Promise<{user:Object, status: string,code:number}>;
+  UserChanges:(User: UserChange) => Promise<{User: UserChange}>;
   isConnected: any;
   isBuyers: any;
   isNews: any;
@@ -29,11 +30,9 @@ interface User {
 }
 interface UserChange {
     email: string,
-    date: string,
-    newsletter: number,
     adress:Array<Object>,
     name: string,
-    surname: string
+    lastname: string
     
 }
 interface UserConnect {
@@ -130,7 +129,7 @@ export default function UserContextProvider({ children }: any) {
     }
     }
 
-    const UserChanges = async (User:UserChange) : Promise<{User:UserChange}> => {
+    const UserChanges = async (User: UserChange): Promise<{ User: UserChange }> => {
       try {
         const data = User;
         var myInit = {
@@ -145,14 +144,18 @@ export default function UserContextProvider({ children }: any) {
           process.env.FETCHLOGIN || "http://localhost:8080/users/userchange",
           myInit
         );
-        const resData = await response.json()
-        if(resData.code === 202){
-          return {User};
+        const resData = await response.json();
+        if (resData.code === 202) {
+          return { User };
+        } else {
+          throw new Error("Response code is not 202");
         }
-      }catch{(err:any)=>{
-console.log(err);
-      }}
-    }
+      } catch (err) {
+        console.log(err);
+        throw err; // Re-throw the error to indicate a failure
+      }
+    };
+    
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {
   try {
@@ -216,6 +219,7 @@ return {code: 404,status: 'Utilisateur non trouvé',user:{}}
         Login,
         FindUser,
         UserConnected,
+        UserChanges,
         isConnected,
         isBuyers,
         isNews,

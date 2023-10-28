@@ -1,0 +1,29 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+.ContainerAdd{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 70%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(128, 128, 128, 0.429);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.ContainerAdd div{
+    display: flex;
+    flex-direction: column;
+}
+.ContainerAdd input{
+    margin: 5px;
+}

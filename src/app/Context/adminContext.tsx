@@ -10,7 +10,7 @@ import React, {
 
 
 type AdminContext = {
-    uploadImage: (file: File) => void;
+    uploadImage: (file: File) => Promise<any>;
 };
 
 export const AdminContext = createContext<AdminContext>(
@@ -19,18 +19,24 @@ export const AdminContext = createContext<AdminContext>(
 
 export const AdminContextProvider = ({ children }: any) => {
 const uploadImage = async (file:any) =>{
+  console.log(file,'log du files');
 if(!file) return
 try{
     const data = new FormData()
     data.set('file',file);
-    const res = await fetch('api/upload/upload',{
-        method: 'Post',
-        body: data
-    })
-    
-    const result = res.json();
+    console.log(data,'log du data');
 
-        return  result;
+    const res = await fetch('/api/upload',{
+        method: 'POST',
+        headers: {
+          "Content-Type": "image/jpeg",
+        },
+        body: data
+    });
+    
+    console.log(res);
+
+        return  res;
     
 }catch(err){
     console.log(err);

@@ -22,21 +22,18 @@ const uploadImage = async (file:any) =>{
   console.log(file,'log du files');
 if(!file) return
 try{
-    const data = new FormData()
-    data.set('file',file);
-    console.log(data,'log du data');
 
+  const data = new FormData()
+  data.append('file', file);
     const res = await fetch('/api/upload',{
         method: 'POST',
-        headers: {
-          "Content-Type": "image/jpeg",
-        },
         body: data
-    });
-    
-    console.log(res);
+    })
 
-        return  res;
+    
+  const returnData = await res.json();
+
+        return returnData.path;
     
 }catch(err){
     console.log(err);

@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import styles from './addProduct.module.css'
 import { useGlobalContextAdmin } from '@/app/Context/adminContext';
 
+interface ColorObject {
+  color: string;
+  name: string;
+}
 interface FormData {
-   id:string,name:string,img:Array<[string]>,notes:string,price: number,price_ID:string,model:string,category:Array<string>,tag:string,size:Array<string>,color:Array<Object>,description:string
+   id:string,name:string,img:Array<[string]>,notes:string,price: number,price_ID:string,model:string,category:Array<string>,tag:string,size:Array<string>,color:ColorObject[],description:string
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL'];
+  const [colors,setColors] = useState({color:'',name:''});
   const {uploadImage} = useGlobalContextAdmin();
 const [formData,setFormData] = useState<FormData>({
   id:'',name:'',img: [],notes:'',price: 0,price_ID:'',model:'',category:[],tag:'',size:[],color: [],description:''
@@ -17,11 +22,17 @@ const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 if(e.target.files !== null){
   const file = e.target.files[0];
   if(file){
-    const result = await uploadImage(file);
-    if(result.status){
-      console.log(result.path);
-      setFormData({...formData,img: [...formData.img,[result.path]]})
+  
+    try{
+      const result = await uploadImage(file);
+      if(result){
+        console.log(result.path);
+        setFormData({...formData,img: [...formData.img,[result.path]]})
+      }
+    }catch(err){
+      console.log(err);
     }
+ 
   }
 }
 }
@@ -36,14 +47,24 @@ const handleSizeChange = (e:React.ChangeEvent<HTMLInputElement>) => {
     size: updatedSizeArray,
   });
 };
+const handleColorChange = async () =>{
+const updatedColor = [...formData.color,colors];
+
+  setFormData({
+    ...formData,
+    color: updatedColor,
+  });
+  
+  console.log(await formData.color);
+}
 
 
   return (
     <div className={styles.container}>
         <h1>Ajouter un produit</h1>
         <form className={styles.ContainerAdd}>
-          <div> <input type='text' placeholder='productId'/>
-            <input type='text' placeholder='productName'/>
+          <div> <input type='text'onChange={(e)=>{setFormData({...formData,id:e.target.value})}} placeholder='productId'/>
+            <input type='text' onChange={(e)=>{setFormData({...formData,name:e.target.value})}} placeholder='productName'/>
             <input type='file' onChange={handleFileUpload} placeholder='img1'/>
             <input type='text' placeholder='img1Alt'/>
             <input type='file'onChange={handleFileUpload} placeholder='img2'/>
@@ -54,12 +75,12 @@ const handleSizeChange = (e:React.ChangeEvent<HTMLInputElement>) => {
             <input type='text' placeholder='img4Alt'/>
             <input type='file'onChange={handleFileUpload} placeholder='img5'/>
             <input type='text' placeholder='img5Alt'/></div>
-           <div><input type='text' placeholder='productNotes'/>
-            <input type='number' placeholder='productPrice'/>
-            <input type='text' placeholder='productPriceId'/>
-            <input type='text' placeholder='productModel'/>
-            <input type='text' placeholder='productCategory'/>
-            <input type='text' placeholder='productTag'/>
+           <div><input type='text' onChange={(e)=>{setFormData({...formData,notes:e.target.value})}} placeholder='productNotes'/>
+            <input type='number'onChange={(e)=>{setFormData({...formData,price:e.target.valueAsNumber})}} placeholder='productPrice'/>
+            <input type='text' onChange={(e)=>{setFormData({...formData,price_ID:e.target.value})}} placeholder='productPriceId'/>
+            <input type='text' onChange={(e)=>{setFormData({...formData,model:e.target.value})}} placeholder='productModel'/>
+            <input type='text' placeholder='productCategory'/>//TODO reste a traiter les categorie.
+            <input type='text' onChange={(e)=>{setFormData({...formData,id:e.target.value})}} placeholder='productTag'/>
            <h3>Size</h3>
            {availableSizes.map((size) => (
             <label key={size}>
@@ -72,7 +93,22 @@ const handleSizeChange = (e:React.ChangeEvent<HTMLInputElement>) => {
               {size}
             </label>
           ))}
-            <input type='text' placeholder='productColor'/>
+          <h3>Colors</h3>
+          {formData.color.map((item,index)=>{
+            return(
+              <div key={index}>
+              <p>{item.color}</p>
+                        <p>{item.name}</p>
+                        </div>
+            )
+        
+          })}
+          <div>
+          <input type='text' onChange={(e)=>{setColors({...colors,color:e.target.value})}} placeholder='colorCss'/>
+          <input type='text' onChange={(e)=>{setColors({...colors,name:e.target.value})}} placeholder='colorName'/>
+          <div onClick={handleColorChange}>Ajouter</div>
+          </div>
+           
             <input type='text' placeholder='productDescription'/></div>
             
 <button>Envoyer le produit</button>

@@ -1,20 +1,30 @@
-import {join} from  'path'
-import { writeFile } from "fs/promises";
-import { NextResponse } from 'next/server';
+import { NextRequest,NextResponse } from 'next/server';
+import { join } from 'path';
+import { writeFile } from 'fs/promises';
 
-export async function POST(request: Request,Response:NextResponse){
-    console.log(request);//TODO Problème avec la requette erreur 500 trouver le problème peut etre du au fichier formdata
-    const data = await request.formData();
-    console.log('dans le post api',data);
-    const file:File|null = data.get('file') as unknown as File
-    if(!file){
-        return NextResponse.json({success: false});
+export async function POST(req: NextRequest, res: NextResponse) {
+  try {
+    if (req.method === 'POST') {
+      const data = await req.formData();
+      const file = data.get('file') as File;
+
+      if (!file) {
+      return false
+      }
+
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      // Vous pouvez ajuster le chemin où l'image sera stockée dans le dossier "public"
+      const imagePath = join('public', 'img', 'uploads', file.name);
+
+    const upload =  await writeFile(imagePath, buffer);
+    console.log(upload);
+
+      return NextResponse.json({success: true,path: imagePath});
+    } else {
     }
-const bytes = await file.arrayBuffer()
-const buffer = Buffer.from(bytes);
-
-const path = join('/public/img/product', file.name);
-await writeFile(path,buffer);
-return NextResponse.json({sucess:true,path});
-
+  } catch (error) {
+    console.error(error);
+  }
 }

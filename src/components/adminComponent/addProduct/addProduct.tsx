@@ -7,14 +7,16 @@ interface ColorObject {
   name: string;
 }
 interface FormData {
-   id:string,name:string,img:Array<[string]>,notes:string,price: number,price_ID:string,model:string,category:Array<string>,tag:string,size:Array<string>,color:ColorObject[],description:string
+   id:string,name:string,img:Array<[string]>,notes:string,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL'];
+  const availableCategory = ['Hoodies','Manga','Famille']
+  const [tags,setTags] = useState(['']);
   const [colors,setColors] = useState({color:'',name:''});
   const {uploadImage} = useGlobalContextAdmin();
 const [formData,setFormData] = useState<FormData>({
-  id:'',name:'',img: [],notes:'',price: 0,price_ID:'',model:'',category:[],tag:'',size:[],color: [],description:''
+  id:'',name:'',img: [],notes:'',price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:''
 })
 const [imgData,setImgData] = useState([]);
 
@@ -45,6 +47,17 @@ const handleSizeChange = (e:React.ChangeEvent<HTMLInputElement>) => {
   setFormData({
     ...formData,
     size: updatedSizeArray,
+  });
+};
+const handleCatChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+  const category = e.target.value;
+  const updatedCatArray = formData.size.includes(category)
+    ? formData.category.filter((s) => s !== category)
+    : [...formData.category, category];
+
+  setFormData({
+    ...formData,
+    category: updatedCatArray,
   });
 };
 const handleColorChange = async () =>{
@@ -79,8 +92,15 @@ const updatedColor = [...formData.color,colors];
             <input type='number'onChange={(e)=>{setFormData({...formData,price:e.target.valueAsNumber})}} placeholder='productPrice'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,price_ID:e.target.value})}} placeholder='productPriceId'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,model:e.target.value})}} placeholder='productModel'/>
-            <input type='text' placeholder='productCategory'/>//TODO reste a traiter les categorie.
-            <input type='text' onChange={(e)=>{setFormData({...formData,id:e.target.value})}} placeholder='productTag'/>
+          <h3>Tag</h3>
+          <div className={styles.list}>
+          {formData.tag.map((e)=>(
+            <h4 key={e}>{e}</h4>
+          ))}
+          </div>
+       
+          <input type='text' onChange={(e)=>{setTags([e.target.value])}} />
+            <button onClick={(e)=>{e.preventDefault(), setFormData({...formData,tag:[ ...formData.tag , tags[0]]})}}>Ajouter</button>
            <h3>Size</h3>
            {availableSizes.map((size) => (
             <label key={size}>
@@ -93,7 +113,20 @@ const updatedColor = [...formData.color,colors];
               {size}
             </label>
           ))}
+          <h4>Categorie</h4>
+          {availableCategory.map((cat) => (
+            <label key={cat}>
+              <input
+                type="checkbox"
+                value={cat}
+                checked={formData.category.includes(cat)}
+                onChange={handleCatChange}
+              />
+              {cat}
+            </label>
+          ))}
           <h3>Colors</h3>
+          <div className={styles.list}>
           {formData.color.map((item,index)=>{
             return(
               <div key={index}>
@@ -103,13 +136,14 @@ const updatedColor = [...formData.color,colors];
             )
         
           })}
+          </div>
           <div>
           <input type='text' onChange={(e)=>{setColors({...colors,color:e.target.value})}} placeholder='colorCss'/>
           <input type='text' onChange={(e)=>{setColors({...colors,name:e.target.value})}} placeholder='colorName'/>
-          <div onClick={handleColorChange}>Ajouter</div>
+          <div className={styles.button} onClick={handleColorChange}><p>Ajouter</p></div>
           </div>
-           
-            <input type='text' placeholder='productDescription'/></div>
+           <h3>Product Description</h3>
+           <textarea onChange={(e)=>{setFormData({...formData,description:e.target.value})}} className={styles.textArea}/></div>
             
 <button>Envoyer le produit</button>
         </form>

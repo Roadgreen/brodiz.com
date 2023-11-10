@@ -5,7 +5,7 @@ import { useContext,createContext,useState } from "react";
 
 type CommandeContext = {
 commandAdd:(Command:Command) => Promise<"ok" | "non ok">,
-commandCheck:(UserCommandCheck:UserCommandCheck) =>  Promise<Array>
+commandCheck:(UserCommandCheck:UserCommandCheck) =>  {}
 }
 interface Command {
   

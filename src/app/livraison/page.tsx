@@ -23,7 +23,7 @@ interface User {
 export default function Livraison() {
   const { UserConnected } = useGlobalContextUser();
   const [userConnected, setUserConnected] = useState(false);
-  const [user,setUser] = useState({});
+  const [user,setUser] = useState<User | any>();
 
   useEffect(() => {
     const userId = localStorage.getItem("userId");

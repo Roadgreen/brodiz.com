@@ -4,17 +4,17 @@ import styles from "./productCardDetails.module.css";
 import Image from "next/image";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 interface product {
-  id: string;
-  name: string;
-  img: Array<string>;
-  price: string;
-  price_ID: string;
-  description: string;
-  color:  Array<object>;
-  size: Array<string>;
-  category: Array<string>;
-  tag: string;
-  quantity: number;
+  id: string,
+  name: string,
+  img: Array<[string,string]>,
+  price:number,
+  notes:number,
+  description: string,
+  color: Array<Object>,
+  size:Array<string>,
+  category: Array<string>,
+  tag: Array<string>,
+  quantity:number,
 }
 
 export default function ProductCardDetails({ product }: { product: product }) {

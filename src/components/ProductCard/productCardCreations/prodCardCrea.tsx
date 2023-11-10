@@ -10,15 +10,15 @@ import { AiFillHeart } from "react-icons/ai";
 interface product {
   id: string,
   name: string,
-  img: Array<string>,
-  price:string,
-  price_ID: string,
+  img: Array<[string,string]>,
+  price:number,
+  notes:number,
   description: string,
   color: Array<Object>,
   size:Array<string>,
   category: Array<string>,
-  tag: string,
-  quantity: number,
+  tag: Array<string>,
+  quantity:number,
   
 }
 export default function ProdCardCrea({ id }: { id: number }) {

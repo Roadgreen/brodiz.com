@@ -54,14 +54,14 @@ export default function ProductCardDetails({ product }: { product: product }) {
     if (info.length > 2) {
       setColorSelection([{"name":info}]);
       // Update the colorChangeCss array to add the "selected" class for the clicked color and remove it from others
-      const newColorChangeCss = colors.map((x: any, i: number) =>
+      const newColorChangeCss = product.color.map((x: any, i: number) =>
         x.name === info ? styles.colorOptionSelected : styles.color
       );
       setColorChangeCss(newColorChangeCss);
     } else {
       setSizeSelection(info);
       // Update the sizeChangeCss array to add the "selected" class for the clicked size and remove it from others
-      const newSizeChangeCss = size.map((x: any) =>
+      const newSizeChangeCss = product.size.map((x: any) =>
         x === info ? styles.sizeOptionSelected : styles.sizeOption
       );
       setSizeChangeCss(newSizeChangeCss);
@@ -144,7 +144,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
           <h3>Taille:</h3>
           <div className={styles.sizeContainer}>
             <div className={styles.sizeDiv}>
-              {size.map((x: any, i: number) => {
+              {product.size.map((x: any, i: number) => {
                 return (
                   <div
                     className={sizeChangeCss[i]}
@@ -159,7 +159,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
           </div>
           <h3>Couleur:</h3>
           <div className={styles.colors}>
-            {colors.map((x: any, i: number) => {
+            {product.color.map((x: any, i: number) => {
               return (
                 <div
                   className={colorChangeCss[i]}

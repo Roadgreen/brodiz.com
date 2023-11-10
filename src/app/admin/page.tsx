@@ -13,7 +13,7 @@ export default function Page() {
     <AdminContextProvider>
     <div><h1>Admin</h1>
     <div className={styles.container}>
-      <div className={styles.buttonChoice} onClick={()=>{setPages(1)}}>Ajout d'article</div>
+      <div className={styles.buttonChoice} onClick={()=>{setPages(1)}}>Ajout d&apos;article</div>
       <div className={styles.buttonChoice} onClick={()=>{setPages(2)}}>Data</div>
     </div>
 <div>

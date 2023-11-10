@@ -12,9 +12,9 @@ export default function Slide() {
       <div>
         <h2>Réveillez votre garde-robe avec notre sweat brodé!</h2>
         <p>
-          Nous croyons fermement que chaque vêtement brodé est une œuvre d'art,
-          et nous sommes fiers de faire revivre cette forme d'art traditionnelle
-          d'une manière moderne et trendy.
+          Nous croyons fermement que chaque vêtement brodé est une œuvre d&apos;art,
+          et nous sommes fiers de faire revivre cette forme d&apos;art traditionnelle
+          d&apos;une manière moderne et trendy.
         </p>
         <Link href={``} passHref>
           <button className={styles.button}>Acheter maintenant</button>

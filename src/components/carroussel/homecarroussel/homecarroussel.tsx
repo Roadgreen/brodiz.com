@@ -54,8 +54,8 @@ const Carousssel = ({ products }: CarouselProps) => {
         modules={[Pagination]}
         className="mySwiper"
       >
-        {products.map(product => 
-           <SwiperSlide className={styles.swiperSlide}><ProductCard product={product}/></SwiperSlide>)}
+        {products.map((product,i) => 
+           <SwiperSlide key={i} className={styles.swiperSlide}><ProductCard product={product}/></SwiperSlide>)}
        
        
       </Swiper>

@@ -19,7 +19,7 @@ console.log(tot,livPrice,price,cartItem);
     })}
     
     <p>Sous-total: {price}€</p>
-    <p>Frais d'expédition estimés: {livPrice}€</p>
+    <p>Frais d&apos;expédition estimés: {livPrice}€</p>
     <p>Total: {tot}€</p>
       </div>
   

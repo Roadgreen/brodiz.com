@@ -94,7 +94,7 @@ function ConnectHub() {
       <h1>Mon compte</h1>
       <div className={styles.formContainer}>
         <form>
-          {userFind === 'register'? <p>Bienvenue chez Brodiz, créez un compte pour continuer</p> : <p>Indiquez votre email pour l'inscription ou vous connecter</p>}
+          {userFind === 'register'? <p>Bienvenue chez Brodiz, créez un compte pour continuer</p> : <p>Indiquez votre email pour l&apos;inscription ou vous connecter</p>}
           <div className={styles.InputContainer}>
             <input
               onChange={(e: any) => {
@@ -115,7 +115,7 @@ function ConnectHub() {
               </div>
               {userFind === 'register' ? (
                 <>
-                  <p>S'inscrire à la newsletter :</p>
+                  <p>S&apos;inscrire à la newsletter :</p>
                   <div className={styles.newsChecked}>
                    
                     <label className={styles.switch}>

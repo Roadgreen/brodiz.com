@@ -19,8 +19,8 @@ export default function CustomisationPage() {
           <p>
             Offrez à votre amour pour les animaux de compagnie une touche unique
             avec nos sweatshirts personnalisés. Chaque sweatshirt est
-            soigneusement brodé avec l'image de votre animal de compagnie
-            préféré, créant ainsi une pièce de mode qui célèbre l'amour que vous
+            soigneusement brodé avec l&apos;image de votre animal de compagnie
+            préféré, créant ainsi une pièce de mode qui célèbre l&apos;amour que vous
             partagez. Que vous ayez un chien, un chat, un lapin ou tout autre
             ami à quatre pattes, nos sweatshirts personnalisés sont la meilleure
             façon de les porter fièrement tout en restant au chaud et
@@ -36,8 +36,8 @@ export default function CustomisationPage() {
           <p>
             Offrez à votre amour pour les animaux de compagnie une touche unique
             avec nos sweatshirts personnalisés. Chaque sweatshirt est
-            soigneusement brodé avec l'image de votre animal de compagnie
-            préféré, créant ainsi une pièce de mode qui célèbre l'amour que vous
+            soigneusement brodé avec l&apos;image de votre animal de compagnie
+            préféré, créant ainsi une pièce de mode qui célèbre l&apos;amour que vous
             partagez. Que vous ayez un chien, un chat, un lapin ou tout autre
             ami à quatre pattes, nos sweatshirts personnalisés sont la meilleure
             façon de les porter fièrement tout en restant au chaud et

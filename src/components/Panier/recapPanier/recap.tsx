@@ -28,7 +28,7 @@ export default function Recap() {
       <h4>Récapitulatif</h4>
 <div>
 <p>Sous-total:  {price}€ </p>
-      <p>Frais d'expédition: {livPrice}€</p>
+      <p>Frais d&apos;expédition: {livPrice}€</p>
 </div>
 <p>Total: {tot}€</p>
 {price === 0 ?  

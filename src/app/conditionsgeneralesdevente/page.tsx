@@ -9,7 +9,7 @@ Date de dernière mise à jour : [Date de mise à jour]
 
 Acceptation des conditions générales
 
-En accédant au site Web de Brodiz (le "Site") et en effectuant des achats, vous acceptez d'être lié par les présentes Conditions Générales de Vente. Veuillez lire attentivement ces conditions avant de faire un achat. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser notre Site.
+En accédant au site Web de Brodiz (le &quot;Site&quot;) et en effectuant des achats, vous acceptez d&apos;être lié par les présentes Conditions Générales de Vente. Veuillez lire attentivement ces conditions avant de faire un achat. Si vous n&apos;acceptez pas ces conditions, veuillez ne pas utiliser notre Site.
 
 Commandes
 
@@ -19,10 +19,10 @@ Vous pouvez passer commande via notre Site en suivant le processus de commande i
 Vous devez fournir des informations exactes et complètes lors de la commande.
 2.2. Confirmation de commande
 
-Une fois la commande passée, nous vous enverrons un e-mail de confirmation de commande. Cet e-mail ne constitue pas une acceptation de votre commande, mais une confirmation que nous l'avons bien reçue.
+Une fois la commande passée, nous vous enverrons un e-mail de confirmation de commande. Cet e-mail ne constitue pas une acceptation de votre commande, mais une confirmation que nous l&apos;avons bien reçue.
 2.3. Acceptation de la commande
 
-Nous nous réservons le droit de refuser ou d'annuler toute commande, notamment en cas de problème de paiement, de problème de stock, de problème de livraison, ou de soupçon de fraude.
+Nous nous réservons le droit de refuser ou d&apos;annuler toute commande, notamment en cas de problème de paiement, de problème de stock, de problème de livraison, ou de soupçon de fraude.
 Prix et Paiement
 
 3.1. Prix
@@ -46,12 +46,12 @@ Droit de Rétractation
 Vous avez un délai de [nombre de jours] jours à compter de la réception de votre commande pour exercer votre droit de rétractation sans avoir à justifier de motifs ni à payer de pénalités.
 5.2. Conditions de rétractation
 
-Pour exercer votre droit de rétractation, veuillez nous contacter à l'adresse [adresse e-mail] et suivre les instructions qui vous seront fournies.
+Pour exercer votre droit de rétractation, veuillez nous contacter à l&apos;adresse [adresse e-mail] et suivre les instructions qui vous seront fournies.
 Garantie et Retours
 
 6.1. Garantie de conformité
 
-Vous bénéficiez d'une garantie légale de conformité pour les produits que vous achetez sur notre Site. Si un produit est défectueux ou non conforme, veuillez nous contacter pour obtenir des instructions sur les retours.
+Vous bénéficiez d&apos;une garantie légale de conformité pour les produits que vous achetez sur notre Site. Si un produit est défectueux ou non conforme, veuillez nous contacter pour obtenir des instructions sur les retours.
 Protection des Données Personnelles
 
 7.1. Collecte de données
@@ -59,7 +59,7 @@ Protection des Données Personnelles
 Nous collectons et traitons vos données personnelles conformément à notre Politique de Confidentialité.
 Propriété Intellectuelle
 
-8.1. Droits d'auteur et Marques
+8.1. Droits d&apos;auteur et Marques
 
 Tous les contenus du Site, y compris les images, textes, logos et marques, sont protégés par des droits de propriété intellectuelle détenus par Brodiz ou ses partenaires. Toute utilisation non autorisée est strictement interdite.
 Loi Applicable et Règlement des Litiges
@@ -69,7 +69,7 @@ Loi Applicable et Règlement des Litiges
 Les présentes Conditions Générales de Vente sont régies par la loi [Loi applicable].
 9.2. Règlement des Litiges
 
-En cas de litige, nous encourageons les parties à tenter de résoudre leur différend de manière amiable. En cas d'échec, les tribunaux de [Juridiction compétente] seront compétents pour tout litige découlant des présentes conditions.
+En cas de litige, nous encourageons les parties à tenter de résoudre leur différend de manière amiable. En cas d&apos;échec, les tribunaux de [Juridiction compétente] seront compétents pour tout litige découlant des présentes conditions.
         </p></div>
   )
 }

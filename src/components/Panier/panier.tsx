@@ -3,19 +3,23 @@ import {useContext} from 'react'
 import styles from './panier.module.css'
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { RiDeleteBin5Line } from 'react-icons/ri';
-
-interface product {
-    id: string;
+interface ColorObject {
+    color: string;
     name: string;
-    img: Array<string>;
-    price: string;
-    price_ID: string;
-    description: string;
-    color:  Array<object>;
-    size: Array<string>;
-    category: Array<string>;
-    tag: string;
-    quantity: number;
+  }
+  interface product {
+    id: string,
+    name: string,
+    img: Array<[string,string]>,
+    price:number,
+    notes:number,
+    price_ID: string,
+    description: string,
+    color: Array<ColorObject>,
+    size:Array<string>,
+    category: Array<string>,
+    tag: Array<string>,
+    quantity:number,
   }
 
  

@@ -7,14 +7,19 @@ import React, {
   Dispatch,
   SetStateAction,
 } from "react";
+interface ColorObject {
+  color: string;
+  name: string;
+}
 interface product {
   id: string,
   name: string,
   img: Array<[string,string]>,
   price:number,
   notes:number,
+  price_ID: string,
   description: string,
-  color: Array<Object>,
+  color: Array<ColorObject>,
   size:Array<string>,
   category: Array<string>,
   tag: Array<string>,

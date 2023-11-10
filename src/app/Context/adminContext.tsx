@@ -32,8 +32,22 @@ try{
 
     
   const returnData = await res.json();
-
-        return returnData.path;
+  const convertPath = (inputPath: string) => {
+    // Supprimer "public" du chemin
+    let pathWithoutPublic = inputPath.replace("public", "");
+  
+    // Remplacer les doubles barres obliques échappées par une seule barre oblique
+    let finalPath = pathWithoutPublic.replace(/\\\\/g, "/");
+  
+    // Remplacer les doubles barres obliques non échappées par une seule barre oblique
+    finalPath = finalPath.replace(/\\/g, "/");
+  
+    return finalPath;
+  }
+console.log(returnData);
+console.log(await convertPath(returnData.path));
+const path = await convertPath(returnData.path);
+        return path;
     
 }catch(err){
     console.log(err);

@@ -1,22 +1,27 @@
 import React, { useState } from 'react'
 import styles from './addProduct.module.css'
 import { useGlobalContextAdmin } from '@/app/Context/adminContext';
+import { useGlobalContext } from '@/app/Context/productStore';
 
 interface ColorObject {
   color: string;
   name: string;
 }
 interface FormData {
-   id:string,name:string,img:Array<[string]>,notes:string,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string
+   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL'];
   const availableCategory = ['Hoodies','Manga','Famille']
+  const {productAdd} = useGlobalContext();
   const [tags,setTags] = useState(['']);
+  const [alts,setAlts] = useState('');
+  const [error,setError] = useState(false);
+  const [success,setSuccess] = useState(false);
   const [colors,setColors] = useState({color:'',name:''});
   const {uploadImage} = useGlobalContextAdmin();
 const [formData,setFormData] = useState<FormData>({
-  id:'',name:'',img: [],notes:'',price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:''
+  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:'',collection: ''
 })
 const [imgData,setImgData] = useState([]);
 
@@ -28,8 +33,8 @@ if(e.target.files !== null){
     try{
       const result = await uploadImage(file);
       if(result){
-        console.log(result.path);
-        setFormData({...formData,img: [...formData.img,[result.path]]})
+        console.log(result);
+        setFormData({...formData,img: [...formData.img,[result,alts]]})
       }
     }catch(err){
       console.log(err);
@@ -37,6 +42,62 @@ if(e.target.files !== null){
  
   }
 }
+}
+const isFieldEmpty = async (fieldName:any) => {
+
+if(fieldName === ''){
+  console.log(false)
+  return false
+}  else if(fieldName === 0){
+  console.log(false)
+
+  return  false
+}else if(fieldName.length === 0){
+  console.log(false)
+
+  return false
+} else {
+  console.log(true)
+
+  return true
+}
+
+
+}
+const handleAddProduct = async (e: React.FormEvent) =>{
+  e.preventDefault();
+ if(
+ await isFieldEmpty(formData.id) &&
+ await isFieldEmpty(formData.name) &&
+ await isFieldEmpty(formData.img) &&
+ await isFieldEmpty(formData.notes) &&
+ await isFieldEmpty(formData.price) &&
+ await isFieldEmpty(formData.price_ID) &&
+ await isFieldEmpty(formData.model) &&
+ await isFieldEmpty(formData.category) &&
+ await isFieldEmpty(formData.tag) &&
+ await isFieldEmpty(formData.size) &&
+ await isFieldEmpty(formData.color) &&
+ await isFieldEmpty(formData.description) &&
+ await isFieldEmpty(formData.collection)
+ ){
+  setError(false);
+  console.log(formData)
+  const resultToAdd = await productAdd(formData);
+  console.log(resultToAdd)
+  if(resultToAdd === 202){
+  console.log(resultToAdd)
+setSuccess(true);
+  }else {
+    setSuccess(false);
+    setError(true);
+  }
+  
+ } else {
+  console.log('dans le true', formData);
+  setError(true);
+ }
+ 
 }
 const handleSizeChange = (e:React.ChangeEvent<HTMLInputElement>) => {
   const size = e.target.value;
@@ -78,20 +139,23 @@ const updatedColor = [...formData.color,colors];
         <form className={styles.ContainerAdd}>
           <div> <input type='text'onChange={(e)=>{setFormData({...formData,id:e.target.value})}} placeholder='productId'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,name:e.target.value})}} placeholder='productName'/>
+            <input type='text' placeholder='img1Alt' onChange={(e)=>{setAlts(e.target.value)}}/>
             <input type='file' onChange={handleFileUpload} placeholder='img1'/>
-            <input type='text' placeholder='img1Alt'/>
+            <input type='text' placeholder='img2Alt' onChange={(e)=>{setAlts(e.target.value)}}/>
             <input type='file'onChange={handleFileUpload} placeholder='img2'/>
-            <input type='text' placeholder='img2Alt'/>
+            <input type='text' placeholder='img3Alt' onChange={(e)=>{setAlts(e.target.value)}}/>
             <input type='file'onChange={handleFileUpload} placeholder='img3'/>
-            <input type='text' placeholder='img3Alt'/>
+            <input type='text' placeholder='img4Alt' onChange={(e)=>{setAlts(e.target.value)}}/>
             <input type='file'onChange={handleFileUpload} placeholder='img4'/>
-            <input type='text' placeholder='img4Alt'/>
+            <input type='text' placeholder='img5Alt' onChange={(e)=>{setAlts(e.target.value)}} />
             <input type='file'onChange={handleFileUpload} placeholder='img5'/>
-            <input type='text' placeholder='img5Alt'/></div>
-           <div><input type='text' onChange={(e)=>{setFormData({...formData,notes:e.target.value})}} placeholder='productNotes'/>
+            </div>
+           <div><input type='number' onChange={(e)=>{setFormData({...formData,notes:e.target.value})}} placeholder='productNotes'/>
             <input type='number'onChange={(e)=>{setFormData({...formData,price:e.target.valueAsNumber})}} placeholder='productPrice'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,price_ID:e.target.value})}} placeholder='productPriceId'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,model:e.target.value})}} placeholder='productModel'/>
+            <input type='text' onChange={(e)=>{setFormData({...formData,collection:e.target.value})}} placeholder='productCollection'/>
+
           <h3>Tag</h3>
           <div className={styles.list}>
           {formData.tag.map((e)=>(
@@ -144,8 +208,10 @@ const updatedColor = [...formData.color,colors];
           </div>
            <h3>Product Description</h3>
            <textarea onChange={(e)=>{setFormData({...formData,description:e.target.value})}} className={styles.textArea}/></div>
+            {error ? <p>Vérifiez les informations, il manque des données</p>: ''}
+            {success ? <p>Produit ajouté</p>: ''}
             
-<button>Envoyer le produit</button>
+<button onClick={handleAddProduct}>Envoyer le produit</button>
         </form>
     </div>
   )

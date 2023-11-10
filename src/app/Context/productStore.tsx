@@ -18,7 +18,19 @@ interface product {
   category: Array<string>,
   tag: string,
   quantity: number,
-  
+}
+interface productToAdd {
+  id: string,
+  name: string,
+  img: Array<[string,string]>,
+  price:number,
+  notes:number,
+  description: string,
+  color: Array<Object>,
+  size:Array<string>,
+  category: Array<string>,
+  tag: Array<string>,
+  collection:string
 }
 type ProductContext = {
   productSearch: (doc: object, collection: string, db: string) => Promise<product[]>;
@@ -26,6 +38,7 @@ type ProductContext = {
   setProductArray: Dispatch<SetStateAction<product[][]>>;
   selectedProduct: product;
   setSelectedProduct: Dispatch<SetStateAction<product>>;
+  productAdd: (productToAdd: productToAdd) => Promise<number>;
 };
 
 export const ProductContext = createContext<ProductContext>(
@@ -89,6 +102,32 @@ export const ProductContextProvider = ({ children }: any) => {
       return [];
     }
   };
+
+  const productAdd = async (
+    productToAdd: object,
+  ): Promise<number> => {
+    try {
+      console.log("try productsearch");
+      var myInit = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productToAdd),
+      };
+
+      const reponseAddProduct = await fetch(
+        process.env.FETCHPRODUCTADD ||
+          "http://localhost:8080/product/productAdd",
+        myInit
+      );
+      const data: any = await reponseAddProduct.json();
+     return data.code;
+      
+    } catch (err) {
+      console.log(err);
+      return 404    }
+  };
   return (
     <ProductContext.Provider
       value={{
@@ -97,6 +136,7 @@ export const ProductContextProvider = ({ children }: any) => {
         setProductArray,
         selectedProduct,
         setSelectedProduct,
+        productAdd
       }}
     >
       {children}

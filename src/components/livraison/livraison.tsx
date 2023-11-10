@@ -50,7 +50,7 @@ export default function LivraisonPart({User}:LivraisonPartProps) {
         if(User){
 setConnected(true);
         }
-      }, [cartItem]);
+      }, [cartItem,User]);
     const router = useRouter()
     const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''})
     const [userNotConnectInfo,setUserNotConnectInfo] = useState({prenom:'',nom:'',email:'',tel:''})

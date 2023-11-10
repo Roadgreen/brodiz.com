@@ -121,7 +121,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
       {productArray[id].length > 1 ? (
         cardProductMapping()
       ) : (
-        <div>Désolé il n'y a aucun article</div>
+        <div>Désolé il n&apos;y a aucun article</div>
       )}
     </div>
   );

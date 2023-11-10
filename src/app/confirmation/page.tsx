@@ -59,7 +59,7 @@ export default function Confirmation(){
         if (query.get('canceled')) {
             setSucess(false);
         }
-    },[cartItem])
+    },[cartItem,UserConnected])
     return (<>
     {sucess && user? (<div>
         <div><h1>Merci!</h1></div>

@@ -31,7 +31,7 @@ export default function ProductPage({
         setIsLoading(false);
       }
       searchProduct();
-    }, [params.product, selectedProduct, setSelectedProduct]);
+    }, [params.product, selectedProduct, setSelectedProduct,productSearch]);
 
   if (isLoading) {
     return <div>Chargement en cours...</div>;

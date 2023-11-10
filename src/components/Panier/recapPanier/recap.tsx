@@ -1,6 +1,7 @@
 import styles from './recap.module.css'
 import {useContext,useEffect} from 'react'
-import { useGlobalContextCart } from '@/app/Context/cartContext';import Link from 'next/link';
+import { useGlobalContextCart } from '@/app/Context/cartContext';
+import Link from 'next/link';
 import 'dotenv/config'
 
 export default function Recap() {
@@ -16,7 +17,7 @@ export default function Recap() {
     if (query.get('canceled')) {
       console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
     }
-  }, []);
+  }, [cartItem]);
  totalPrice(cartItem)
  
 

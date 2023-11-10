@@ -25,16 +25,18 @@ export default function ProductCardDetails({ product }: { product: product }) {
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
   const [colorSelection, setColorSelection] = useState<Object[]>();
-  const colors = product.color || [];
-  const size = product.size || [];
+  
   useEffect(() => {
     console.log(cartItem)
     // Initialize sizeChangeCss and colorChangeCss arrays with default classes
-    const defaultSizeChangeCss = size.map(() => styles.sizeOption);
-    const defaultColorChangeCss = colors.map(() => styles.color);
-    setSizeChangeCss(defaultSizeChangeCss);
-    setColorChangeCss(defaultColorChangeCss);
-  }, []);
+    if(product.color && product.size){
+      const defaultSizeChangeCss = product.size.map(() => styles.sizeOption);
+      const defaultColorChangeCss = product.color.map(() => styles.color);
+      setSizeChangeCss(defaultSizeChangeCss);
+      setColorChangeCss(defaultColorChangeCss);
+    }
+    
+  }, [cartItem,product.color,product.size]);
   const imgChange = (x: any) => {
     setImgSelection((prevSelection) => {
       const newIndex = (prevSelection[0] + x) % 6;

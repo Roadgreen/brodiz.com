@@ -3,7 +3,7 @@ import styles from './commandes.module.css'
 import { useGlobalContextCom } from '@/app/Context/commandeContext';
 import Image from 'next/image';
 function  Commandes(user:any){
-    const [Command, setCommand] = useState([]);     console.log(user.user.email);
+    const [Command, setCommand] = useState<Array<Object>>([]);     console.log(user.user.email);
 const {commandCheck} = useGlobalContextCom();
 useEffect(() => {
     // Utilisez une fonction asynchrone pour appeler commandCheck

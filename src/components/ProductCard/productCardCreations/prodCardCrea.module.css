@@ -5,6 +5,7 @@ height: 100%;
   min-height: 300px;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }

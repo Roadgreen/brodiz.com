@@ -150,7 +150,7 @@ const updatedColor = [...formData.color,colors];
             <input type='text' placeholder='img5Alt' onChange={(e)=>{setAlts(e.target.value)}} />
             <input type='file'onChange={handleFileUpload} placeholder='img5'/>
             </div>
-           <div><input type='number' onChange={(e)=>{setFormData({...formData,notes:e.target.value})}} placeholder='productNotes'/>
+           <div><input type='number' onChange={(e)=>{setFormData({...formData,notes:e.target.valueAsNumber})}} placeholder='productNotes'/>
             <input type='number'onChange={(e)=>{setFormData({...formData,price:e.target.valueAsNumber})}} placeholder='productPrice'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,price_ID:e.target.value})}} placeholder='productPriceId'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,model:e.target.value})}} placeholder='productModel'/>

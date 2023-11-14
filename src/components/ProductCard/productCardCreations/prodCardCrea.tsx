@@ -7,19 +7,23 @@ import { useGlobalContext } from "@/app/Context/productStore";
 import { AiOutlineHeart } from "react-icons/ai";
 import { AiFillHeart } from "react-icons/ai";
 
+interface ColorObject {
+  color: string;
+  name: string;
+}
 interface product {
   id: string,
   name: string,
   img: Array<[string,string]>,
   price:number,
   notes:number,
+  price_ID: string,
   description: string,
-  color: Array<Object>,
+  color: Array<ColorObject>,
   size:Array<string>,
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
-  
 }
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();

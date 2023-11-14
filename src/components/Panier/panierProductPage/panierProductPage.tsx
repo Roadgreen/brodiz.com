@@ -2,16 +2,21 @@ import { useGlobalContextCart } from "@/app/Context/cartContext"
 import styles from './panierProductPage.module.css'
 import Image from "next/image"
 import Link from "next/link";
+
+interface ColorObject{
+    name:string,
+    color:string
+}
 interface product {
     id: string,
     name: string,
-    img: Array<string>,
-    price:string,
+    img: [string, string][],
+    price:number,
     description: string,
-    color: string,
+    color: ColorObject[],
     size:Array<string>,
     category: Array<string>,
-    tag: string,
+    tag: string[],
     quantity: number,
     
   }

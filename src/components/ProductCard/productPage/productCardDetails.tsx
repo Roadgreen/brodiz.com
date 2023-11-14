@@ -3,20 +3,24 @@ import { useEffect, useState } from "react";
 import styles from "./productCardDetails.module.css";
 import Image from "next/image";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
+interface ColorObject {
+  color: string;
+  name: string;
+}
 interface product {
   id: string,
   name: string,
   img: Array<[string,string]>,
   price:number,
   notes:number,
+  price_ID: string,
   description: string,
-  color: Array<Object>,
+  color: Array<ColorObject>,
   size:Array<string>,
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
 }
-
 export default function ProductCardDetails({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
   const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);
@@ -24,7 +28,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
   const [sizeSelection, setSizeSelection] = useState<string>();
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
-  const [colorSelection, setColorSelection] = useState<Object[]>();
+  const [colorSelection, setColorSelection] = useState<ColorObject[]>();
   
   useEffect(() => {
     console.log(cartItem)
@@ -50,19 +54,19 @@ export default function ProductCardDetails({ product }: { product: product }) {
       ];
     });
   };
-  const handleClick = (info: string) => {
-    if (info.length > 2) {
-      setColorSelection([{"name":info}]);
+  const handleClick = (info:{ name: string; color: string },size:{size:string}) => {
+    if (info.name.length > 2) {
+      setColorSelection([{name:info.name,color:info.color}]);
       // Update the colorChangeCss array to add the "selected" class for the clicked color and remove it from others
       const newColorChangeCss = product.color.map((x: any, i: number) =>
-        x.name === info ? styles.colorOptionSelected : styles.color
+        x.name === info.name ? styles.colorOptionSelected : styles.color
       );
       setColorChangeCss(newColorChangeCss);
     } else {
-      setSizeSelection(info);
+      setSizeSelection(size.size);
       // Update the sizeChangeCss array to add the "selected" class for the clicked size and remove it from others
       const newSizeChangeCss = product.size.map((x: any) =>
-        x === info ? styles.sizeOptionSelected : styles.sizeOption
+        x === size.size ? styles.sizeOptionSelected : styles.sizeOption
       );
       setSizeChangeCss(newSizeChangeCss);
     }
@@ -148,7 +152,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
                 return (
                   <div
                     className={sizeChangeCss[i]}
-                    onClick={() => handleClick(x)}
+                    onClick={() => handleClick({name: '',color:''},{size:x})}
                     key={i}
                   >
                     {x}
@@ -165,7 +169,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
                   className={colorChangeCss[i]}
                   style={{ backgroundColor: x.color }}
                   key={i}
-                  onClick={() => handleClick(x.name)}
+                  onClick={() => handleClick({name: x.name,color: x.color},{size:''})}
                 ></div>
               );
             })}

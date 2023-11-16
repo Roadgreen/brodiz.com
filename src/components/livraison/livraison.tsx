@@ -147,13 +147,13 @@ console.log(itemsForCheckout, 'ici le cartItem');
     <h3>Livraison</h3>
 </div>
 <div>
-  {User && User.User && User.User.adress &&  sameAdress ? <div className={styles.ContainerLivCon}>
+  {User  && User.adress &&  sameAdress ? <div className={styles.ContainerLivCon}>
     <button className={styles.buttonOn} onClick={()=>{SetSameAdress(false)}}>Changer mon adresse</button>
     <div>
-    <p>{User.User.adress.adresse}</p>
-    <p>{User.User.adress.ville}</p>
-    <p>{User.User.adress.post}</p>
-    <p>{User.User.adress.pays}</p>
+    <p>{User.adress[0].adresse}</p>
+    <p>{User.adress[0].ville}</p>
+    <p>{User.adress[0].post}</p>
+    <p>{User.adress[0].pays}</p>
     </div>
   </div> :   <form className={styles.Form}>
         <div>

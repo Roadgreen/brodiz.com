@@ -4,8 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../homeSlider/homeslider.module.css";
 import image from "../../../../public/img/producthero image/Ryukwomen.jpg";
+import { useGlobalContextAnalytics } from "@/app/Context/analyticsContext";
 // Here is your Slide component
 export default function Slide() {
+  const {sendEvent} = useGlobalContextAnalytics();
+  const handleClick = () => {
+sendEvent({ url: '',
+  eventName: 'click',
+  sessionId:'',
+  data:{clickName : 'Acheter maintenant',clickCategorie: 'Home'}})
+  }
   return (
     <div className={styles.slideContainer}>
       <Image src={image} alt={"/Women embroidery"} width={500} height={500} />
@@ -17,7 +25,7 @@ export default function Slide() {
           d&apos;une manière moderne et trendy.
         </p>
         <Link href={``} passHref>
-          <button className={styles.button}>Acheter maintenant</button>
+          <button onClick={()=>{handleClick()}} className={styles.button}>Acheter maintenant</button>
         </Link>
       </div>
     </div>

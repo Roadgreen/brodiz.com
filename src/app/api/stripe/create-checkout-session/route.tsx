@@ -20,15 +20,15 @@ export  async function POST(request:Request,response:Response){
                           amount: 0,
                           currency: 'eur',
                         },
-                        display_name: 'Free shipping',
+                        display_name: 'Envoie gratuit',
                         delivery_estimate: {
                           minimum: {
                             unit: 'business_day',
-                            value: 5,
+                            value: 7,
                           },
                           maximum: {
                             unit: 'business_day',
-                            value: 7,
+                            value: 10,
                           },
                         },
                       },
@@ -37,18 +37,18 @@ export  async function POST(request:Request,response:Response){
                       shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: {
-                          amount: 1500,
+                          amount: 1000,
                           currency: 'eur',
                         },
-                        display_name: 'Next day air',
+                        display_name: 'Envoie Rapide',
                         delivery_estimate: {
                           minimum: {
                             unit: 'business_day',
-                            value: 1,
+                            value: 2,
                           },
                           maximum: {
                             unit: 'business_day',
-                            value: 1,
+                            value: 3,
                           },
                         },
                       },

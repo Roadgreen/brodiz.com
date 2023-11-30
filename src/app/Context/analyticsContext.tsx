@@ -115,19 +115,23 @@ const userIdCheck = () => {
           },
           body: JSON.stringify(pageView),
         };
-        const pageViewSend = await  fetch(
-          process.env.FETCHANALYTICSPAGEVIEW ||
-            "http://localhost:8080/analytic/page_view",
-          myInit
-        );
-        try{
-          const data = await pageViewSend.json();
-          console.log(data);
-          return data;
-        }catch(err){
-          return []
-          console.log(err);
+        if(window.location.hostname !== "localhost"){
+          const pageViewSend = await fetch(
+            process.env.FETCHANALYTICSPAGEVIEW ||
+              "http://192.168.1.166:8080/analytic/page_view",
+            myInit
+          );
+          try{
+            const data = await pageViewSend.json();
+            console.log(data);
+            return data;
+          }catch(err){
+            return []
+            console.log(err);
+          }
         }
+        
+        
       
       
 }
@@ -143,19 +147,23 @@ const sendEvent = async (event: event) =>{
       },
       body: JSON.stringify(event),
     };
-    const pageViewSend = await  fetch(
-      process.env.FETCHANALYTICSEVENT ||
-        "http://localhost:8080/analytic/event",
-      myInit
-    );
-    try{
-      const data = await pageViewSend.json();
-      console.log(data);
-      return data;
-    }catch(err){
-      return []
-      console.log(err);
+
+    if(window.location.hostname !== "localhost"){
+      const pageViewSend = await  fetch(
+        process.env.FETCHANALYTICSEVENT ||
+          "http://192.168.1.166:8080/analytic/event",
+        myInit
+      );
+      try{
+        const data = await pageViewSend.json();
+        console.log(data);
+        return data;
+      }catch(err){
+        return []
+        console.log(err);
+      }
     }
+   
   
   
 }

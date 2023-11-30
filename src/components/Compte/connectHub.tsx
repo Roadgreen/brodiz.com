@@ -3,12 +3,18 @@ import { UserContext } from '@/app/Context/UserAccountContext';
 import { useRouter } from 'next/navigation';
 import styles from './connectHub.module.css';
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
+import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
 
 function ConnectHub() {
+  const {sendEvent} = useGlobalContextAnalytics();
   const router = useRouter();
   const {userEmail,userData,userPswd,FindUser,userFind,Login,setUserData,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    sendEvent({ url: '',
+  eventName: 'click',
+  sessionId:'',
+  data:{clickName : 'continuer',clickCategorie: 'account'}})
     e.preventDefault();
     const email = userEmail;
     const password = userPswd;

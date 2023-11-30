@@ -18,17 +18,19 @@ const products = [product,product,product,product]
 export default function Home() {
   const {sendPageview} = useGlobalContextAnalytics();
   useEffect(()=>{
-    sendPageview( {url: '',
-    referrer: '',
-    userAgent: '',
-    visitorId: '',
-    userId: '',
-    sessionId: '',
-    timeOnPage: '',
-    screenResolution: '',
-    product: [''],
-    pageCategory: 'Home',
-    data: {}});
+        sendPageview( {url: '',
+        referrer: '',
+        userAgent: '',
+        visitorId: '',
+        userId: '',
+        sessionId: '',
+        timeOnPage: '',
+        screenResolution: '',
+        product: [''],
+        pageCategory: 'Home',
+        data: {
+        }});
+      
   })
  
 

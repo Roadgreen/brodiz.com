@@ -1,20 +1,16 @@
 import React from 'react'
 import styles from './slidePromotion.module.css'
 import Image from 'next/image'
+import womendog from '../../../../public/img/producthero image/womendog.jpg'
+import Menserpentard from '../../../../public/img/producthero image/Menserpentard.jpg'
+import bab from '../../../../public/img/producthero image/baby.png'
 
 export default function SlidePromotion() {
   return (
     <div className={styles.container}>
-       <h1 className={styles.h1_1}>
-       EGAYEZ VOS FÊTES AVEC NOTRE COLLECTION DE NOËL
-       </h1>
-        <h1 className={styles.h1_2}>
-            -20% 
-        </h1>
-        <h2>
-          Sur notre selection PERE NOEL*
-        </h2>
-
+     <div><Image className={styles.img} src={womendog} fill alt=''/></div>
+     <div><Image className={styles.img} src={Menserpentard} fill alt=''/></div>
+     <div><Image className={styles.img} src={bab} fill alt=''/></div>
     </div>
   )
 }

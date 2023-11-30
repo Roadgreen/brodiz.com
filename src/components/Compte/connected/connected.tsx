@@ -4,8 +4,10 @@ import Commandes from '../commandes/commandes';
 import Profil from '../profil/profil';
 import styles from './connected.module.css'
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
+import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
 
  function Connected(id:{id:string}){
+  const {sendPageview,sendEvent} = useGlobalContextAnalytics();
     const [user,setUser] = useState<any>({}); 
     const [menu,setMenu] = useState(1);
     const router = useRouter();
@@ -34,16 +36,65 @@ const {UserConnected} = useGlobalContextUser();
           }
         };
         fetchData();
-      }, [id,UserConnected,router,setUser]);
+       console.log(user);
+      if(user.adress){
+        sendPageview( {url: '',
+        referrer: '',
+        userAgent: '',
+        visitorId: '',
+        userId: '',
+        sessionId: '',
+        timeOnPage: '',
+        screenResolution: '',
+        product: [''],
+        pageCategory: 'Espace_client',
+        data: {
+user_pays: user.adress[0].pays || '',
+user_ville: user.adress[0].ville || '',
+user_commandes: user.commandes.length || '',
+user_newsletter: user.newsletter || '',
+}});
+      } else {
+        sendPageview( {url: '',
+        referrer: '',
+        userAgent: '',
+        visitorId: '',
+        userId: '',
+        sessionId: '',
+        timeOnPage: '',
+        screenResolution: '',
+        product: [''],
+        pageCategory: 'Espace_client',
+      data:{}})
+      }
+              
+      
+      }, [id,UserConnected,router,setUser,sendPageview]);
 
+      const handleChoose = (i:number) => {
+        let clickName = '';
+        switch(i){
+          case 1: clickName = 'commandes';
+          break;
+          case 2: clickName = 'mon_profil';
+          break;
+          case 3: clickName = 'ma_liste_de_favorie'
+        }
+        setMenu(i);
+
+        sendEvent({ url: '',
+  eventName: 'click',
+  sessionId:'',
+  data:{clickName : clickName,clickCategorie: 'account_section'}})
+      }
      
     return (
         <div className={styles.container}>
         <h1>Hello {user.email}</h1>
 <div className={styles.ButtonContainer}>
-    <span className={`${menu === 1 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{setMenu(1)}}>Commandes</span>
-    <span className={`${menu === 2 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{setMenu(2)}}>Profil</span>
-    <span className={`${menu === 3 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{setMenu(3)}}>Ma liste de favorie</span>
+    <span className={`${menu === 1 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(1)}}>Commandes</span>
+    <span className={`${menu === 2 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(2)}}>Profil</span>
+    <span className={`${menu === 3 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(3)}}>Ma liste de favorie</span>
 </div>
 {menu === 1? <Commandes user={user}/> : <></>}
 {menu === 2? <Profil user={user}/> : <></>}

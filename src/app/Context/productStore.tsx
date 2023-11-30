@@ -97,7 +97,7 @@ export const ProductContextProvider = ({ children }: any) => {
 
       const reponseFindProduct = await fetch(
         process.env.FETCHPRODUCTSEARCH ||
-          "http://localhost:8080/product/productSearch",
+          "http://192.168.1.166:8080/product/productSearch",
         myInit
       );
       const data: any = await reponseFindProduct.json();
@@ -128,7 +128,7 @@ export const ProductContextProvider = ({ children }: any) => {
 
       const reponseAddProduct = await fetch(
         process.env.FETCHPRODUCTADD ||
-          "http://localhost:8080/product/productAdd",
+          "http://192.168.1.166:8080/product/productAdd",
         myInit
       );
       const data: any = await reponseAddProduct.json();

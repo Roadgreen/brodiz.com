@@ -77,7 +77,7 @@ export default function UserContextProvider({ children }: any) {
     };
     console.log('dans le createAccount function',email,collection,)
     const response = await fetch(
-      process.env.FETCHLOGIN || "http://localhost:8080/users/addUser",
+      process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/addUser",
       myInit
     );
       const data = await response.json();
@@ -106,7 +106,7 @@ export default function UserContextProvider({ children }: any) {
       };
   
       const response = await fetch(
-        process.env.FETCHLOGIN || "http://localhost:8080/users/login",
+        process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/login",
         myInit
       );
       const resData = await response.json()
@@ -141,7 +141,7 @@ export default function UserContextProvider({ children }: any) {
         };
     
         const response = await fetch(
-          process.env.FETCHLOGIN || "http://localhost:8080/users/userchange",
+          process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/userchange",
           myInit
         );
         const resData = await response.json();
@@ -172,7 +172,7 @@ export default function UserContextProvider({ children }: any) {
     };
 
     const response = await fetch(
-      process.env.FETCHLOGIN || "http://localhost:8080/users/findUser",
+      process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/findUser",
       myInit
     );
 
@@ -203,7 +203,7 @@ const UserConnected = async (id:string) : Promise<{ code:number, status:string, 
 };
  const Token = await localStorage.getItem("token");
  const response = await fetch(
-  process.env.FETCHLOGIN || `http://localhost:8080/users/${id}/${Token}`,
+  process.env.FETCHLOGIN || `http://192.168.1.166:8080/users/${id}/${Token}`,
   myInit
 );
 const data = await response.json();

@@ -42,7 +42,7 @@ export const CommandeContext = createContext<CommandeContext>(
       };
       const checkCommand = await  fetch(
         process.env.FETCHCOMMANDSEARCH ||
-          "http://localhost:8080/command/commandCheck",
+          "http://192.168.1.166:8080/command/commandCheck",
         myInit
       );
       try{
@@ -69,7 +69,7 @@ export const CommandeContext = createContext<CommandeContext>(
     console.log('on est dans commandeAdd function');
   const sendCommand = await  fetch(
         process.env.FETCHCOMMANDSEARCH ||
-          "http://localhost:8080/command/commandAdd",
+          "http://192.168.1.166:8080/command/commandAdd",
         myInit
       );
 

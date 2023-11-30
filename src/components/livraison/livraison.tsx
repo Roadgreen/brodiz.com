@@ -132,7 +132,10 @@ console.log(itemsForCheckout, 'ici le cartItem');
 
      const response:Response | void = await fetch('/api/stripe/create-checkout-session',params);
 
-    
+     const data = await response.json(); // Parse the JSON data from the response
+     const checkoutURL = data.URL;
+     console.log(checkoutURL);
+     router.push(`${checkoutURL}`);
        
     
     }else {

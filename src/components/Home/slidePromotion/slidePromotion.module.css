@@ -4,23 +4,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    background-color: black;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
     color: aliceblue;
 }
-.h1_1{
-    font-size: 4em;
-    margin: 2px;
-    justify-content:space-around ;
-    align-items: center;
-    text-align: center;
-    margin: 30px;
+
+.container div{
+    position: relative;
+    width: 30%;
+    height: 500px;
+    clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+    transition:all 0.5s ease-in-out;
 }
-.h1_2{
-    font-size: 6em;
-    margin: 2px;
-    justify-content:space-around ;
-    align-items: center;
-    text-align: center;
-    margin: 30px;
+.container div:hover{
+    cursor: pointer;
+    position: relative;
+    width: 30%;
+    height: 500px;
+    clip-path: polygon(25% 0%, 90% 0%, 75% 90%, 0% 100%);
+    transition:all 0.5s ease-in-out;
+    -webkit-transition:all 0.5s ease-in-out;
+    -moz-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
 }
+.img{
+    object-fit: cover;
+}
+

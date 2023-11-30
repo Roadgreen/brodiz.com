@@ -7,6 +7,7 @@ import { ProductContextProvider } from './Context/productStore'
 import CartContextProvider from './Context/cartContext'
 import { CommandeContextProvider } from './Context/commandeContext'
 import UserContextProvider from './Context/UserAccountContext'
+import { AnalyticsContextProvider } from './Context/analyticsContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,11 +27,13 @@ export default function RootLayout({
         <DesktopMenu Text={Text}/>
         <ProductContextProvider>
         <CartContextProvider>
+          <AnalyticsContextProvider>
           <UserContextProvider>
             <CommandeContextProvider>
         {children}
         </CommandeContextProvider>
         </UserContextProvider>
+        </AnalyticsContextProvider>
         </CartContextProvider>
         </ProductContextProvider>
 

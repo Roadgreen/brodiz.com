@@ -9,7 +9,7 @@ export default function SlidePromotion() {
        EGAYEZ VOS FÊTES AVEC NOTRE COLLECTION DE NOËL
        </h1>
         <h1 className={styles.h1_2}>
-            -20% 
+            -20%
         </h1>
         <h2>
           Sur notre selection PERE NOEL*

@@ -12,7 +12,7 @@
     width: 100%;
     z-index: 1;
     color: #fff;
-    justify-content: center;
+    justify-content:center;
     align-items: center;
     font-size: 200%;
 }
@@ -37,20 +37,34 @@
     -moz-border-radius:10px;
     -ms-border-radius:10px;
     -o-border-radius:10px;
+    color: #fff;
     -webkit-border-radius:10px;
     border: 3px solid white;
-    background-color: #ffffff00;
-    transition: 1s ease-in-out;
+    background-color: #00000071;
+    transition:all 1s ease-in-out;
+    -webkit-transition:all 1s ease-in-out;
+    -moz-transition:all 1s ease-in-out;
+    -ms-transition:all 1s ease-in-out;
+    -o-transition:all 1s ease-in-out;
 }
 .button:hover{
-    font-size: 12px;
     cursor: pointer;
-    background-color: #fff;
-    transition: 1s ease-in-out;
-    -webkit-transition: 1s ease-in-out;
-    -moz-transition: 1s ease-in-out;
-    -ms-transition: 1s ease-in-out;
-    -o-transition: 1s ease-in-out;
+    width: 200px;
+    font-size: 15px;
+    height: 40px;
+    border-radius:10px;
+    -moz-border-radius:10px;
+    -ms-border-radius:10px;
+    -o-border-radius:10px;
+    color: #000000;
+    -webkit-border-radius:10px;
+    border: 3px solid white;
+    background-color: #ffffff;
+    transition:all 1s ease-in-out;
+    -webkit-transition:all 1s ease-in-out;
+    -moz-transition:all 1s ease-in-out;
+    -ms-transition:all 1s ease-in-out;
+    -o-transition:all 1s ease-in-out;
 }
 
 @media screen and (max-width: 768px) {

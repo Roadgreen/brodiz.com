@@ -8,13 +8,23 @@
 .p{
     color: gray;
 }
-.slideContainer div{
-    margin: 20px;
+.containerArticle{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin: 20px;
+    margin: 10px;
+    text-align: center;
+}
+
+.containerImg{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 300px;
+}
+.img{
+    object-fit: cover;
 }
 .button {
     display: inline-block;

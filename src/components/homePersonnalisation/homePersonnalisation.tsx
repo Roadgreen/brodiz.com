@@ -8,7 +8,7 @@ import image from "../../../public/img/producthero image/womendog.jpg";
 export default function HomePersonnalisation() {
   return (
     <div className={styles.slideContainer}>
-      <div>
+      <div className={styles.containerArticle}>
         <h2>vêtements brodés personnalisés</h2>
         <p className={styles.p}>
           Immortalisez votre compagnon à quatre pattes avec nos vêtements brodés
@@ -20,7 +20,8 @@ export default function HomePersonnalisation() {
           <button className={styles.button}>Personnalisé</button>
         </Link>
       </div>
-      <Image src={image} alt={"/Women embroidery"} width={500} height={500} />
+      <div className={styles.containerImg}> <Image className={styles.img} src={image} alt={"/Women embroidery"} fill/></div>
+     
     </div>
   );
 }

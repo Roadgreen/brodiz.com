@@ -1,6 +1,7 @@
 "use client"
 import { promises } from "dns";
-import React,{ useContext, createContext, useState, Dispatch, SetStateAction } from "react";
+import React,{ useContext, createContext, useState, Dispatch, SetStateAction, useEffect } from "react";
+import { URL } from "url";
 
 type UserContext = {
   CreateAccount: (User: User) => void;
@@ -58,10 +59,25 @@ export default function UserContextProvider({ children }: any) {
   const [userEmail, setUserEmail] = useState("");
   const [userPswd,setUserPswd] = useState("");
   const [userData,setUserData] = useState<any>({});
+  const [env,setEnv] = useState<string>('dev');
+
+  useEffect(()=>{
+    if(window.location.host === 
+      "localhost"){
+        setEnv('dev')
+      } else {
+        setEnv('prod')
+      }
+  },[])
   
   const CreateAccount = async (User: User) => {
     const { email, password, newsletter, date,collection } = User;
-
+    let envAdress: string | URL ;
+    if (env === 'dev') {
+      envAdress = new URL(process.env.ADDUSERDEV || '');
+    } else {
+      envAdress = new URL(process.env.ADDUSERPROD || '');
+    }
     var myInit = {
       method: "POST",
       headers: {
@@ -76,8 +92,9 @@ export default function UserContextProvider({ children }: any) {
       }),
     };
     console.log('dans le createAccount function',email,collection,)
+    
     const response = await fetch(
-      process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/addUser",
+     envAdress ,
       myInit
     );
       const data = await response.json();
@@ -90,6 +107,12 @@ export default function UserContextProvider({ children }: any) {
   };
 
   const Login = async (User: UserConnect):Promise<{code:number,id:string,user:object} | undefined | void> => {
+    let envAdress: string | URL ;
+    if (env === 'dev') {
+      envAdress = new URL(process.env.FETCHLOGINDEV || '');
+    } else {
+      envAdress = new URL(process.env.FETCHLOGINPROD || '');
+    }
     try{
       const { email, password,collection } = User;
 
@@ -106,7 +129,7 @@ export default function UserContextProvider({ children }: any) {
       };
   
       const response = await fetch(
-        process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/login",
+        envAdress,
         myInit
       );
       const resData = await response.json()
@@ -130,6 +153,12 @@ export default function UserContextProvider({ children }: any) {
     }
 
     const UserChanges = async (User: UserChange): Promise<{ User: UserChange }> => {
+      let envAdress: string | URL ;
+      if (env === 'dev') {
+        envAdress = new URL(process.env.USERCHANGESDEV || '');
+      } else {
+        envAdress = new URL(process.env.USERCHANGESPROD || '');
+      }
       try {
         const data = User;
         var myInit = {
@@ -141,7 +170,7 @@ export default function UserContextProvider({ children }: any) {
         };
     
         const response = await fetch(
-          process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/userchange",
+         envAdress,
           myInit
         );
         const resData = await response.json();
@@ -158,6 +187,12 @@ export default function UserContextProvider({ children }: any) {
     
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {
+  let envAdress: string | URL ;
+  if (env === 'dev') {
+    envAdress = new URL(process.env.FINDUSERDEV || '');
+  } else {
+    envAdress = new URL(process.env.FINDUSERPROD || '');
+  }
   try {
     const { email, collection } = User;
     const data = { email, collection };
@@ -172,7 +207,7 @@ export default function UserContextProvider({ children }: any) {
     };
 
     const response = await fetch(
-      process.env.FETCHLOGIN || "http://192.168.1.166:8080/users/findUser",
+      envAdress,
       myInit
     );
 
@@ -194,6 +229,7 @@ export default function UserContextProvider({ children }: any) {
   }
 };
 const UserConnected = async (id:string) : Promise<{ code:number, status:string, user:Object}> => {
+  
  try{console.log(id);
  var myInit = {
   method: "GET",
@@ -202,8 +238,14 @@ const UserConnected = async (id:string) : Promise<{ code:number, status:string, 
   },
 };
  const Token = await localStorage.getItem("token");
+ let envAdress: string | URL ;
+ if (env === 'dev') {
+   envAdress = new URL(process.env.USERCONNDEV || '');
+ } else {
+   envAdress = new URL(process.env.USERCONNPROD || '');
+ }
  const response = await fetch(
-  process.env.FETCHLOGIN || `http://192.168.1.166:8080/users/${id}/${Token}`,
+  `${envAdress}${id}/${Token}`,
   myInit
 );
 const data = await response.json();

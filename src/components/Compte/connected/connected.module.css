@@ -52,3 +52,49 @@
     -ms-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
 }
+.ButtonDisc{
+    display:flex ;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.266);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    transition: all 0.5S ease-in-out;
+    -webkit-transition: all 0.5S ease-in-out;
+    -moz-transition: all 0.5S ease-in-out;
+    -ms-transition: all 0.5S ease-in-out;
+    -o-transition: all 0.5S ease-in-out;
+}
+.ButtonDisc:hover{
+    cursor: pointer;
+    display:flex ;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.123);
+    border: 1px solid rgba(128, 128, 128, 0.266);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    width: 120px;
+    color: white;
+    height: 30px;
+    text-align: center;
+    transition: all 0.5S ease-in-out;
+    -webkit-transition: all 0.5S ease-in-out;
+    -moz-transition: all 0.5S ease-in-out;
+    -ms-transition: all 0.5S ease-in-out;
+    -o-transition: all 0.5S ease-in-out;
+}

@@ -26,7 +26,7 @@ export default function Home() {
         sessionId: '',
         timeOnPage: '',
         screenResolution: '',
-        product: [''],
+        product: {},
         pageCategory: 'Home',
         data: {
         }});

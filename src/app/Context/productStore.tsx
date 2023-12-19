@@ -4,6 +4,7 @@ import React, {
   useContext,
   createContext,
   useState,
+  useEffect,
   Dispatch,
   SetStateAction,
 } from "react";
@@ -79,6 +80,16 @@ export const ProductContextProvider = ({ children }: any) => {
   tag: [],
   quantity: 0,
 });
+const [env,setEnv] = useState<string>('dev');
+
+useEffect(()=>{
+  if(window.location.hostname === 
+    "localhost"){
+      setEnv('dev')
+    } else {
+      setEnv('prod')
+    }
+},[])
 
   const productSearch = async (
     doc: object,
@@ -86,6 +97,12 @@ export const ProductContextProvider = ({ children }: any) => {
     db: string
   ): Promise<product[]> => {
     try {
+      let envAdress: string | URL ;
+      if (env === 'dev') {
+        envAdress = process.env.FETCHPRODUCTSEARCHDEV || '';
+      } else {
+        envAdress = process.env.FETCHPRODUCTSEARCHPROD || '';
+      }
       console.log("try productsearch");
       var myInit = {
         method: "POST",
@@ -96,8 +113,7 @@ export const ProductContextProvider = ({ children }: any) => {
       };
 
       const reponseFindProduct = await fetch(
-        process.env.FETCHPRODUCTSEARCH ||
-          "http://192.168.1.166:8080/product/productSearch",
+        envAdress,
         myInit
       );
       const data: any = await reponseFindProduct.json();
@@ -117,6 +133,12 @@ export const ProductContextProvider = ({ children }: any) => {
     productToAdd: object,
   ): Promise<number> => {
     try {
+      let envAdress: string | URL ;
+      if (env === 'dev') {
+        envAdress = process.env.FETCHPRODUCTADDDEV || '';
+      } else {
+        envAdress = process.env.FETCHPRODUCTADDPROD || '';
+      }
       console.log("try productsearch");
       var myInit = {
         method: "POST",
@@ -127,8 +149,7 @@ export const ProductContextProvider = ({ children }: any) => {
       };
 
       const reponseAddProduct = await fetch(
-        process.env.FETCHPRODUCTADD ||
-          "http://192.168.1.166:8080/product/productAdd",
+      envAdress,
         myInit
       );
       const data: any = await reponseAddProduct.json();

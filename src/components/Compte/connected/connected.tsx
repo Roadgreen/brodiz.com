@@ -71,6 +71,11 @@ user_newsletter: user.newsletter || '',
       
       }, [id,UserConnected,router,setUser,sendPageview]);
 
+      const handleDisconnect = ()=>{
+        localStorage.removeItem('token');
+        router.push('/account')
+      }
+
       const handleChoose = (i:number) => {
         let clickName = '';
         switch(i){
@@ -91,6 +96,7 @@ user_newsletter: user.newsletter || '',
     return (
         <div className={styles.container}>
         <h1>Hello {user.email}</h1>
+    <div className={styles.ButtonDisc} onClick={()=>{handleDisconnect()}}>Déconnection</div>
 <div className={styles.ButtonContainer}>
     <span className={`${menu === 1 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(1)}}>Commandes</span>
     <span className={`${menu === 2 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(2)}}>Profil</span>

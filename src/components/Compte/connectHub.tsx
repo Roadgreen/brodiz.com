@@ -1,14 +1,30 @@
-import { useContext } from 'react';
-import { UserContext } from '@/app/Context/UserAccountContext';
+import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './connectHub.module.css';
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
 
 function ConnectHub() {
+  const [validateEmail,setValidateEmail] = useState(true);
   const {sendEvent} = useGlobalContextAnalytics();
   const router = useRouter();
-  const {userEmail,userData,userPswd,FindUser,userFind,Login,setUserData,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
+  const {userEmail,userData,userPswd,UserConnected,FindUser,userFind,Login,setUserData,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
+
+useEffect(()=>{
+  const id = localStorage.getItem('userId');
+
+if(id !== undefined && id !== null){
+  const connected = UserConnected(id);
+  connected.then((res:any)=>{
+    console.log(res.code)
+    if(res.code === 200){
+      router.push(`/account/${id}`);
+    }
+  }
+    
+  )
+}
+})
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     sendEvent({ url: '',
@@ -29,7 +45,10 @@ function ConnectHub() {
         const finded = FindUser({ email: email, collection: 'Admin' });
         // Test point: Admin user found
       }
+      setValidateEmail(false);
       return; // Exit early if the email is invalid or it is the Admin user.
+    }else{
+      setValidateEmail(true)
     }
   
     let code, id,user; // Declare the variables here to avoid redeclaration
@@ -111,6 +130,7 @@ function ConnectHub() {
             />
             <span className={styles.spanFoc}>Email</span>
           </div>
+          {validateEmail === false ?( <p>Il y a une erreur avec votre email</p>) : ''}
           {userFind === 'Wait' ? (
             <></>
           ) : (

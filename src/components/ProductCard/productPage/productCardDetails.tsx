@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import styles from "./productCardDetails.module.css";
 import Image from "next/image";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
+import { useGlobalContextAnalytics } from "@/app/Context/analyticsContext";
+
 interface ColorObject {
   color: string;
   name: string;
@@ -23,6 +25,7 @@ interface product {
 }
 export default function ProductCardDetails({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
+  const {sendPageview,sendEvent} = useGlobalContextAnalytics();
   const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);
   const [alertSelection, setAlertSelection] = useState<boolean>(false);
   const [sizeSelection, setSizeSelection] = useState<string>();
@@ -39,9 +42,26 @@ export default function ProductCardDetails({ product }: { product: product }) {
       setSizeChangeCss(defaultSizeChangeCss);
       setColorChangeCss(defaultColorChangeCss);
     }
-    
-  }, [cartItem,product.color,product.size]);
+    sendPageview( {url: '',
+    referrer: '',
+    userAgent: '',
+    visitorId: '',
+    userId: '',
+    sessionId: '',
+    timeOnPage: '',
+    screenResolution: '',
+    product: {id:product.id},
+    pageCategory: 'Product',
+    data: {
+    }});
+  }, [cartItem,product,sendPageview]);
+
+  
   const imgChange = (x: any) => {
+    sendEvent({ url: '',
+  eventName: 'click',
+  sessionId:'',
+  data:{clickName : 'Selection_image_x',clickCategorie: 'Product',product:product.id}})
     setImgSelection((prevSelection) => {
       const newIndex = (prevSelection[0] + x) % 6;
       return [
@@ -55,7 +75,12 @@ export default function ProductCardDetails({ product }: { product: product }) {
     });
   };
   const handleClick = (info:{ name: string; color: string },size:{size:string}) => {
+
     if (info.name.length > 2) {
+      sendEvent({ url: '',
+  eventName: 'click',
+  sessionId:'',
+  data:{clickName : 'Changement_couleur',clickCategorie: 'Product',product:product.id,product_color:info.name}})
       setColorSelection([{name:info.name,color:info.color}]);
       // Update the colorChangeCss array to add the "selected" class for the clicked color and remove it from others
       const newColorChangeCss = product.color.map((x: any, i: number) =>
@@ -63,6 +88,10 @@ export default function ProductCardDetails({ product }: { product: product }) {
       );
       setColorChangeCss(newColorChangeCss);
     } else {
+      sendEvent({ url: '',
+      eventName: 'click',
+      sessionId:'',
+      data:{clickName : 'Changement_taille',clickCategorie: 'Product',product:product.id,product_size:size.size}})
       setSizeSelection(size.size);
       // Update the sizeChangeCss array to add the "selected" class for the clicked size and remove it from others
       const newSizeChangeCss = product.size.map((x: any) =>
@@ -72,9 +101,14 @@ export default function ProductCardDetails({ product }: { product: product }) {
     }
   };
   const handleClickAddToCart = () => {
+    
     console.log(cartItem);
     // Vérifie que colorSelection et sizeSelection ne sont pas undefined
     if (colorSelection && sizeSelection) {
+      sendEvent({ url: '',
+    eventName: 'click',
+    sessionId:'',
+    data:{clickName : 'Add_to_cart',clickCategorie: 'Product',product:product.id,product_size: sizeSelection,product_color: colorSelection[0].name}})
       // Copie le produit actuel
       const updatedProduct = { ...product };
       // Met à jour les sélections de couleur et de taille dans le produit

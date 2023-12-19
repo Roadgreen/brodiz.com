@@ -19,7 +19,7 @@ interface pageView {
     sessionId: string,
     timeOnPage: string,
     screenResolution: string,
-    product: Array<string>,
+    product: object,
     pageCategory: string,
     data: {[key: string]: string;}
 }
@@ -41,6 +41,7 @@ export const AnalyticsContext = createContext<AnalyticsContext>(
 
 export const AnalyticsContextProvider = ({ children }: any) => {
     const [startTime, setStartTime] = useState<number | null>(null);
+
 
 const sendPageview = async (pageView: pageView) =>{
 const isSessionId =  localStorage.getItem('sessionId') as string ;

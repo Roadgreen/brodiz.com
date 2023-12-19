@@ -21,12 +21,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
     const upload =  await writeFile(imagePath, buffer);
     console.log(upload);
 
-      return NextResponse.json({success: true,path: imagePath});
+    return await  NextResponse.json({success: true,path: imagePath});
     } else {
     }
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ error: 'Internal Server Error' });
    
   }
 }

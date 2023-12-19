@@ -3,8 +3,9 @@ import { join } from 'path';
 import { writeFile } from 'fs/promises';
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  if (req.method === 'POST') {
   try {
-    if (req.method === 'POST') {
+   
       const data = await req.formData();
       const file = data.get('file') as File;
 
@@ -20,15 +21,15 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const upload =  await writeFile(imagePath, buffer);
     console.log(upload);
-    const obj = {success: true,path:imagePath}
-    return obj
+    return NextResponse.json({success:true,path:imagePath})
 
 
-    } else {
-    }
+   
   } catch (error) {
     console.error(error);
-    return Response.json({err: error})
+    return NextResponse.json({err: error})
    
   }
+} else {
+}
 }

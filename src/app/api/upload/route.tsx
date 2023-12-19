@@ -21,13 +21,13 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const upload =  await writeFile(imagePath, buffer);
     console.log(upload);
-    return NextResponse.json({success:true,path:imagePath})
+    return Response.json({data:{success:true,path:imagePath}})
 
 
    
   } catch (error) {
     console.error(error);
-    return NextResponse.json({err: error})
+    return Response.json({data:{err: error}})
    
   }
 } else {

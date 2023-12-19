@@ -2,7 +2,7 @@ import { NextRequest,NextResponse } from 'next/server';
 import { join } from 'path';
 import { writeFile } from 'fs/promises';
 
-export async function POST(req: Request, res: Response) {
+export async function POST(req: NextRequest, res: NextResponse) {
   try {
     if (req.method === 'POST') {
       const data = await req.formData();
@@ -20,7 +20,9 @@ export async function POST(req: Request, res: Response) {
 
     const upload =  await writeFile(imagePath, buffer);
     console.log(upload);
-   return Response.json({success: true,path: imagePath});
+    const obj = {success: true,path:imagePath}
+    return obj
+
 
     } else {
     }

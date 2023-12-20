@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { join } from 'path';
 import { writeFile } from 'fs/promises';
 
-export default async function POST(req: NextRequest, res: NextResponse): Promise<void | NextResponse> {
+export default async function post(req: NextRequest, res: NextResponse): Promise<void | NextResponse> {
   if (req.method === 'POST') {
     try {
       const data = await req.formData();

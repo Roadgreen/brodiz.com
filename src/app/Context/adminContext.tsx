@@ -29,7 +29,7 @@ try{
         method: 'POST',
         body: data
     })
-
+l
     
   const returnData = await res.json();
   const convertPath = (inputPath: string) => {

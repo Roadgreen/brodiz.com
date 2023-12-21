@@ -58,27 +58,24 @@ export default function UserContextProvider({ children }: any) {
   const [userEmail, setUserEmail] = useState("");
   const [userPswd,setUserPswd] = useState("");
   const [userData,setUserData] = useState<any>({});
-  const [env,setEnv] = useState<string>('dev');
 
-  useEffect(()=>{
-    if(window.location.hostname === 
-      "localhost"){
-        setEnv('dev')
-      } else {
-        setEnv('prod')
-      }
-  },[])
+  const envConfig = {
+    dev: {
+      apiUrl: "http://localhost:8080", // Remplacez par votre URL de développement
+    },
+    prod: {
+      apiUrl: "https://server.brodiz.com", // Remplacez par votre URL de production
+    },
+  };
+  
+  const env = window.location.hostname === "localhost" ? "dev" : "prod";
+  const config = envConfig[env];
 
  
   
   const CreateAccount = async (User: User) => {
     const { email, password, newsletter, date,collection } = User;
-    let envAdress: string | URL ;
-    if (env === 'dev') {
-      envAdress = process.env.ADDUSERDEV || '';
-    } else {
-      envAdress = process.env.ADDUSERPROD || '';
-    }
+    const envAdress = config + "/users/addUser";
     var myInit = {
       method: "POST",
       headers: {
@@ -108,12 +105,7 @@ export default function UserContextProvider({ children }: any) {
   };
 
   const Login = async (User: UserConnect):Promise<{code:number,id:string,user:object} | undefined | void> => {
-    let envAdress: string | URL ;
-    if (env === 'dev') {
-      envAdress = process.env.FETCHLOGINDEV || '';
-    } else {
-      envAdress = process.env.FETCHLOGINPROD || '';
-    }
+    const envAdress = config + "/users/login";
     try{
       const { email, password,collection } = User;
 
@@ -154,12 +146,7 @@ export default function UserContextProvider({ children }: any) {
     }
 
     const UserChanges = async (User: UserChange): Promise<{ User: UserChange }> => {
-      let envAdress: string | URL ;
-      if (env === 'dev') {
-        envAdress = process.env.USERCHANGESDEV || '';
-      } else {
-        envAdress = process.env.USERCHANGESPROD || '';
-      }
+    const envAdress = config + "/users/userchange";
       try {
         const data = User;
         var myInit = {
@@ -188,12 +175,7 @@ export default function UserContextProvider({ children }: any) {
     
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {
-  let envAdress: string | URL ;
-  if (env === 'dev') {
-    envAdress = process.env.FINDUSERDEV|| '';
-  } else {
-    envAdress = process.env.FINDUSERPROD || '';
-  }
+ const envAdress = config + "/users/findUser";
   
   try {
     const { email, collection } = User;
@@ -241,12 +223,7 @@ const UserConnected = async (id:string) : Promise<{ code:number, status:string, 
   },
 };
  const Token = await localStorage.getItem("token");
- let envAdress: string | URL ;
- if (env === 'dev') {
-   envAdress = process.env.USERCONNDEV || '';
- } else {
-   envAdress = process.env.USERCONNPROD || '';
- }
+const envAdress = config + "/users/"
  const response = await fetch(
   `${envAdress}${id}/${Token}`,
   myInit

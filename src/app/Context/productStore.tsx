@@ -80,16 +80,17 @@ export const ProductContextProvider = ({ children }: any) => {
   tag: [],
   quantity: 0,
 });
-const [env,setEnv] = useState<string>('dev');
+const envConfig = {
+  dev: {
+    apiUrl: "http://localhost:8080", // Remplacez par votre URL de développement
+  },
+  prod: {
+    apiUrl: "https://server.brodiz.com", // Remplacez par votre URL de production
+  },
+};
 
-useEffect(()=>{
-  if(window.location.hostname === 
-    "localhost"){
-      setEnv('dev')
-    } else {
-      setEnv('prod')
-    }
-},[])
+const env = window.location.hostname === "localhost" ? "dev" : "prod";
+const config = envConfig[env];
 
   const productSearch = async (
     doc: object,
@@ -97,12 +98,7 @@ useEffect(()=>{
     db: string
   ): Promise<product[]> => {
     try {
-      let envAdress: string | URL ;
-      if (env === 'dev') {
-        envAdress = process.env.FETCHPRODUCTSEARCHDEV || '';
-      } else {
-        envAdress = process.env.FETCHPRODUCTSEARCHPROD || '';
-      }
+     const envAdress = config + "/product/productSearch";
       console.log("try productsearch");
       var myInit = {
         method: "POST",
@@ -133,12 +129,7 @@ useEffect(()=>{
     productToAdd: object,
   ): Promise<number> => {
     try {
-      let envAdress: string | URL ;
-      if (env === 'dev') {
-        envAdress = process.env.FETCHPRODUCTADDDEV || '';
-      } else {
-        envAdress = process.env.FETCHPRODUCTADDPROD || '';
-      }
+   const envAdress = config + "/product/productAdd";
       console.log("try productsearch");
       var myInit = {
         method: "POST",

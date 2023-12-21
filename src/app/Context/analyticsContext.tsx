@@ -7,6 +7,7 @@ import React, {
   useState,
   Dispatch,
   SetStateAction,
+  useEffect,
 } from "react";
 
 
@@ -40,16 +41,24 @@ export const AnalyticsContext = createContext<AnalyticsContext>(
 );
 
 export const AnalyticsContextProvider = ({ children }: any) => {
+  useEffect(()=>{
+if(localStorage.getItem('sessionId')!== null){
+  const sessId = localStorage.getItem('sessionId') as string ;
+  setIsSessionId(sessId);
+} else if(localStorage.getItem('userId') !== null){
+  const userId = localStorage.getItem('userId') as string ;
+  setIsUserId(userId)
+}
+  },[])
     const [startTime, setStartTime] = useState<number | null>(null);
-
+  const [isSessionId,setIsSessionId] = useState('');
+  const [isUserId,setIsUserId] = useState('');
 
 const sendPageview = async (pageView: pageView) =>{
-const isSessionId =  localStorage.getItem('sessionId') as string ;
-const isUserId = localStorage.getItem('userId') as string;
 
 const userIdCheck = () => {
     let findId;
-    if(isUserId === null){
+    if(isUserId === ''){
        return findId = '';
     } else {
         return findId = isUserId;
@@ -132,7 +141,7 @@ const userIdCheck = () => {
           }
         }
         
-        
+      
       
       
 }

@@ -4,7 +4,8 @@ import logo from '../../../../public/img/logo/Logo1.png'
 import Image from 'next/image';
 import style  from './menu.module.css';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
+import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { usePathname } from 'next/navigation'
 import useWindowSize from '@/components/Function/usewindowsize';
@@ -15,11 +16,21 @@ const oswald = Oswald({
 });
 
 export default function DesktopMenu(Text:any){
+    const {cartItem,cartCheck} = useGlobalContextCart();
     const text = Text.Text.DesktopMenu;
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [cartNumber,setCartNumber] = useState(0);
     const pathname = usePathname();
     console.log(pathname,useWindowSize());
     const windowSize = useWindowSize();
+
+    useEffect(()=>{
+      const numberQuantity = cartCheck()
+      console.log('cartItem',cartItem);
+      if(numberQuantity){
+        setCartNumber(numberQuantity);
+      }
+    },[cartCheck])
 
     return (
         <div className={`${oswald.className} ${style.containerMenu}`}>
@@ -34,6 +45,7 @@ export default function DesktopMenu(Text:any){
             <Link className={pathname === '/blog'? style.active : style.Liens} href={'/blog'}>{text.d}</Link>
             <Link className={pathname === '/account'? style.active : style.Liens} href={'/account'}>{text.e}</Link>
             <Link className={pathname === '/panier'? style.active : style.Liens} href={'/panier'}>{text.f}</Link>
+            {cartNumber > 0 ? <div className={style.numberMenu}><p>{cartNumber}</p></div> : ''}
             </ul>
             {isMenuOpen ? (
   <>

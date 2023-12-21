@@ -13,7 +13,7 @@
         position:relative;
     }
     .ul{
-
+        position: relative;
         margin: 0px;
         padding: 0px;
     }
@@ -56,6 +56,30 @@
     .menuIcon{
         display: none;
     }
+    .numberMenu{
+        position: absolute;
+        top: -4px;
+        right: 0px;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        width: 15px;
+        height: 15px;
+        background-color: black;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+}
+.numberMenu p{
+    color: white;
+    font-size: 0.7em;
+
+}
 }
 
 

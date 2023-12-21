@@ -52,7 +52,7 @@ interface products {
   quantity: number,
 }[]
 type CartContext = {
-  addToCart: (products: product) => void; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
+  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
 }
 
 const product = [ prod];
@@ -62,7 +62,7 @@ export const CartContext = createContext<CartContext>(
 );
 
 
-export default function CartContextProvider({children}:any) {
+export  function CartContextProvider({children}:any) {
   const [cartItem, setCartItem] = useState<product[]>([]);
   const [addedToCart,setAddedToCart] = useState<boolean>(false);
   const [storedCart,setStoredCart] = useState([]);
@@ -203,8 +203,16 @@ const updatedCart = (products:product) => {
   totalPrice(updatedCart);
   
 }
+const cartCheck = () =>{
+let quantity = 0;
+for(var i = 0;i < cartItem.length; i++){
+quantity += cartItem[i].quantity;
+}
+return quantity
+ 
+}
   return <CartContext.Provider value={{
-    addToCart,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart
+    addToCart,cartCheck,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart
   }}>{children}</CartContext.Provider>;
 }
 export const useGlobalContextCart = () => useContext(CartContext);

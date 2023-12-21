@@ -52,7 +52,10 @@ const useEnvironment = () => {
   const [env, setEnv] = useState<string>('dev');
 
   useEffect(() => {
-    setEnv(window.location.hostname === "localhost" ? "dev" : "prod");
+    if (typeof window !== 'undefined'){
+      setEnv(window.location.hostname === "localhost" ? "dev" : "prod");
+    }
+  
   }, []);
 
   return env;

@@ -61,17 +61,22 @@ export default function UserContextProvider({ children }: any) {
 
   const envConfig = {
     dev: {
-      apiUrl: "http://localhost:8080", // Remplacez par votre URL de développement
+      apiUrl: "http://localhost:8080",
     },
     prod: {
-      apiUrl: "https://server.brodiz.com", // Remplacez par votre URL de production
+      apiUrl: "https://server.brodiz.com",
     },
   };
   
-  const env = window.location.hostname === "localhost" ? "dev" : "prod";
+  const getEnv = () => {
+    if (typeof window !== 'undefined') {
+      return window.location.hostname === "localhost" ? "dev" : "prod";
+    }
+    return "dev";  // Valeur par défaut pour le rendu côté serveur
+  };
+  
+  const env = getEnv();
   const config = envConfig[env];
-
- 
   
   const CreateAccount = async (User: User) => {
     const { email, password, newsletter, date,collection } = User;

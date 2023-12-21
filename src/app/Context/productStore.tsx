@@ -48,23 +48,9 @@ type ProductContext = {
   productAdd: (productToAdd: productToAdd) => Promise<number>;
 };
 
-const useEnvironment = () => {
-  const [env, setEnv] = useState<string>('dev');
-
-  useEffect(() => {
-    if (typeof window !== 'undefined'){
-      setEnv(window.location.hostname === "localhost" ? "dev" : "prod");
-    }
-  
-  }, []);
-
-  return env;
-};
-
 export const ProductContext = createContext<ProductContext>(
   {} as ProductContext
 );
-
 
 export const ProductContextProvider = ({ children }: any) => {
   const [productArray, setProductArray] = useState<product[][]>([[{  id: "",
@@ -94,27 +80,16 @@ export const ProductContextProvider = ({ children }: any) => {
   tag: [],
   quantity: 0,
 });
-const envConfig: {
-  dev: {
-      apiUrl: string;
-  };
-  prod: {
-      apiUrl: string;
-  };
-  [key: string]: {
-      apiUrl: string;
-  };
-} = {
-  dev: {
-      apiUrl: "http://localhost:8080",
-  },
-  prod: {
-      apiUrl: "https://server.brodiz.com",
-  },
-};
+const [env,setEnv] = useState<string>('dev');
 
-const env = useEnvironment();
-const config = envConfig[env];
+useEffect(()=>{
+  if(window.location.hostname === 
+    "localhost"){
+      setEnv('dev')
+    } else {
+      setEnv('prod')
+    }
+},[])
 
   const productSearch = async (
     doc: object,
@@ -122,7 +97,12 @@ const config = envConfig[env];
     db: string
   ): Promise<product[]> => {
     try {
-     const envAdress = config + "/product/productSearch";
+      let envAdress: string | URL ;
+      if (env === 'dev') {
+        envAdress = process.env.FETCHPRODUCTSEARCHDEV || '';
+      } else {
+        envAdress = process.env.FETCHPRODUCTSEARCHPROD || '';
+      }
       console.log("try productsearch");
       var myInit = {
         method: "POST",
@@ -153,7 +133,12 @@ const config = envConfig[env];
     productToAdd: object,
   ): Promise<number> => {
     try {
-   const envAdress = config + "/product/productAdd";
+      let envAdress: string | URL ;
+      if (env === 'dev') {
+        envAdress = process.env.FETCHPRODUCTADDDEV || '';
+      } else {
+        envAdress = process.env.FETCHPRODUCTADDPROD || '';
+      }
       console.log("try productsearch");
       var myInit = {
         method: "POST",

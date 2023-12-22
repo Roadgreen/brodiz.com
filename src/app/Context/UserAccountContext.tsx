@@ -80,7 +80,7 @@ export default function UserContextProvider({ children }: any) {
   
   const CreateAccount = async (User: User) => {
     const { email, password, newsletter, date,collection } = User;
-    const envAdress = config + "/users/addUser";
+    const envAdress = config.apiUrl + "/users/addUser";
     var myInit = {
       method: "POST",
       headers: {
@@ -110,7 +110,7 @@ export default function UserContextProvider({ children }: any) {
   };
 
   const Login = async (User: UserConnect):Promise<{code:number,id:string,user:object} | undefined | void> => {
-    const envAdress = config + "/users/login";
+    const envAdress = config.apiUrl + "/users/login";
     try{
       const { email, password,collection } = User;
 
@@ -151,7 +151,7 @@ export default function UserContextProvider({ children }: any) {
     }
 
     const UserChanges = async (User: UserChange): Promise<{ User: UserChange }> => {
-    const envAdress = config + "/users/userchange";
+    const envAdress = config.apiUrl + "/users/userchange";
       try {
         const data = User;
         var myInit = {
@@ -180,7 +180,7 @@ export default function UserContextProvider({ children }: any) {
     
 
  const FindUser = async (User: UserSearch): Promise<{code:number,status:string}> => {
- const envAdress = config + "/users/findUser";
+ const envAdress = config.apiUrl + "/users/findUser";
   
   try {
     const { email, collection } = User;
@@ -228,7 +228,7 @@ const UserConnected = async (id:string) : Promise<{ code:number, status:string, 
   },
 };
  const Token = await localStorage.getItem("token");
-const envAdress = config + "/users/"
+const envAdress = config.apiUrl + "/users/"
  const response = await fetch(
   `${envAdress}${id}/${Token}`,
   myInit

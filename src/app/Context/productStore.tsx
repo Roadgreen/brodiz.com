@@ -12,6 +12,13 @@ interface ColorObject {
   color: string;
   name: string;
 }
+
+interface comments {
+  username: string,
+  date: Date,
+  comments:string
+  }
+  
 interface product {
   id: string,
   name: string,
@@ -21,6 +28,7 @@ interface product {
   price_ID: string,
   description: string,
   color: Array<ColorObject>,
+  comments: Array<any>,
   size:Array<string>,
   category: Array<string>,
   tag: Array<string>,
@@ -46,6 +54,7 @@ type ProductContext = {
   selectedProduct: product;
   setSelectedProduct: Dispatch<SetStateAction<product>>;
   productAdd: (productToAdd: productToAdd) => Promise<number>;
+ productCommentAdd: (comments: comments, id: string, category: string) => Promise<any>
 };
 
 export const ProductContext = createContext<ProductContext>(
@@ -159,6 +168,35 @@ useEffect(()=>{
       console.log(err);
       return 404    }
   };
+
+
+const productCommentAdd = async (comments:comments,id:string,category:string) => {
+ 
+  try{
+    var myInit = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({comments,id,category}),
+    };
+    let envAdress:string | URL;
+    if(env === 'dev'){
+    envAdress = 'http://localhost:8080';
+    } else{
+      envAdress = 'http://server.brodiz.com'
+    }
+    const reponseAddComment = await fetch(
+      envAdress + '/product/commentAdd',
+        myInit
+      );
+      const response = await reponseAddComment.json();
+      return response
+  }catch(err){
+    console.log(err)
+  }
+  }; 
+
   return (
     <ProductContext.Provider
       value={{
@@ -167,7 +205,8 @@ useEffect(()=>{
         setProductArray,
         selectedProduct,
         setSelectedProduct,
-        productAdd
+        productAdd,
+        productCommentAdd
       }}
     >
       {children}

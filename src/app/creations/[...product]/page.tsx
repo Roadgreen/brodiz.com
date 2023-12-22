@@ -6,6 +6,7 @@ import { useGlobalContext } from "@/app/Context/productStore";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import ProductCardDetails from "@/components/ProductCard/productPage/productCardDetails";
 import PanierProductPage from "@/components/Panier/panierProductPage/panierProductPage";
+import ProductCardComments from "@/components/ProductCard/productCardComments/productCardComments";
 
 export default function ProductPage({
   params,
@@ -42,7 +43,7 @@ export default function ProductPage({
   <ProductCardDetails product={selectedProduct} /> : <></>
       }
       {addedToCart ? <PanierProductPage/> : ''}
-    
+    <ProductCardComments comments={selectedProduct.comments}/>
     </div>
   );
 }

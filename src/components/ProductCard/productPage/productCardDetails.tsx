@@ -48,7 +48,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
     visitorId: '',
     userId: '',
     sessionId: '',
-    timeOnPage: '',
+    timeOnPage: new Date,
     screenResolution: '',
     product: {id:product.id},
     pageCategory: 'Product',

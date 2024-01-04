@@ -51,7 +51,7 @@ useEffect(()=>{
     <div className={styles.ContainerComments} key={i}>
         <div>
         <p>{item.username}</p>
-<p>{item.date.toString()}</p>
+<p>{new Date(item.date).toLocaleDateString()}</p>
         </div>
 <p>{item.comments}</p>
     </div>

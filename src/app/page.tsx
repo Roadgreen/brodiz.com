@@ -24,7 +24,7 @@ export default function Home() {
         visitorId: '',
         userId: '',
         sessionId: '',
-        timeOnPage: '',
+        timeOnPage: new Date,
         screenResolution: '',
         product: {},
         pageCategory: 'Home',

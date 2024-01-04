@@ -18,7 +18,7 @@ interface pageView {
     visitorId:string,
     userId: string,
     sessionId: string,
-    timeOnPage: string,
+    timeOnPage: Date,
     screenResolution: string,
     product: object,
     pageCategory: string,
@@ -70,7 +70,7 @@ const userIdCheck = () => {
     pageView.userId =  userIdCheck();
     pageView.userAgent = window.navigator.userAgent;
     pageView.screenResolution = `${window.screen.width},${window.screen.height} `;
-    pageView.timeOnPage = `${new Date()}` 
+    pageView.timeOnPage = new Date(); 
 
     const generateVisitorId = (): string => {
         // Essayez de récupérer l'identifiant de visiteur stocké localement

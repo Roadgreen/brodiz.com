@@ -13,7 +13,7 @@ export default function Creations() {
     visitorId: '',
     userId: '',
     sessionId: '',
-    timeOnPage: '',
+    timeOnPage: new Date,
     screenResolution: '',
     product: {},
     pageCategory: 'Home',

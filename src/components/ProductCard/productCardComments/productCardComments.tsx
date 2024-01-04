@@ -9,7 +9,7 @@ comments:string
 }
 
 interface ProductCardCommentsProps {
-    comments: comments[];
+    comments: Object[];
   }
   
 

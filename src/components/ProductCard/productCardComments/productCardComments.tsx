@@ -4,7 +4,7 @@ import styles from "./productCardComments.module.css"
 
 interface comments {
 username: string,
-date: string,
+date: Date,
 comments:string
 }
 
@@ -51,7 +51,7 @@ useEffect(()=>{
     <div className={styles.ContainerComments} key={i}>
         <div>
         <p>{item.username}</p>
-<p>{item.date}</p>
+<p>{item.date.toString()}</p>
         </div>
 <p>{item.comments}</p>
     </div>

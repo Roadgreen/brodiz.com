@@ -9,7 +9,7 @@ interface ColorObject {
 }
 interface comments {
   username: string,
-  date: string,
+  date: Date,
   comments:string
   }
 interface FormData {

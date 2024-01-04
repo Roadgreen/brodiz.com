@@ -46,7 +46,7 @@ interface productToAdd {
   category: Array<string>,
   tag: Array<string>,
   collection:string,
-  comments:
+  comments:Array<comments>
 }
 type ProductContext = {
   productSearch: (doc: object, collection: string, db: string) => Promise<product[]>;
@@ -75,7 +75,7 @@ export const ProductContextProvider = ({ children }: any) => {
   category: [],
   tag: [],
   quantity: 0,
-  comments: []
+  comments: [],
 }]]);
 
   const [selectedProduct, setSelectedProduct] = useState<product>({  id: "",

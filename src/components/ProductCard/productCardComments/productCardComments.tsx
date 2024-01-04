@@ -47,7 +47,7 @@ useEffect(()=>{
         <button>Envoyer</button>
         </div>) : '' }
        <div>
-       {comments.comments.length > 0 && comments.comments.map((item, i) => (
+       {comments && comments.comments && comments.comments.length > 0 && comments.comments.map((item, i) => (
           <div className={styles.ContainerComments} key={i}>
             <div>
               <p>{item.username}</p>

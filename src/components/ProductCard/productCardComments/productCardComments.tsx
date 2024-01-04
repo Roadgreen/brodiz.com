@@ -38,7 +38,8 @@ useEffect(()=>{
 
 
   return (
-    <div>
+    <div className={styles.container}>
+      
         {userConnected ? ( <div className={styles.ContainersCommentsAdd}><p>Ajoutez un commentaire:</p>
         <label >Votre prénom:</label>
         <input id="prenom" name="prenom" placeholder="Votre prenom"></input>

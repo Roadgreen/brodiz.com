@@ -7,8 +7,13 @@ interface ColorObject {
   color: string;
   name: string;
 }
+interface comments {
+  username: string,
+  date: string,
+  comments:string
+  }
 interface FormData {
-   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<Object>,
+   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL'];

@@ -28,7 +28,7 @@ interface product {
   price_ID: string,
   description: string,
   color: Array<ColorObject>,
-  comments: Array<Object>,
+  comments: Array<comments>,
   size:Array<string>,
   category: Array<string>,
   tag: Array<string>,
@@ -46,7 +46,7 @@ interface productToAdd {
   category: Array<string>,
   tag: Array<string>,
   collection:string,
-  comments:Array<Object>
+  comments:Array<comments>
 }
 type ProductContext = {
   productSearch: (doc: object, collection: string, db: string) => Promise<product[]>;

@@ -11,6 +11,11 @@ interface ColorObject {
   color: string;
   name: string;
 }
+interface comments {
+  username: string,
+  date: string,
+  comments:string
+  }
 interface product {
   id: string,
   name: string,
@@ -24,7 +29,7 @@ interface product {
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
-  comments: Array<Object>
+  comments: Array<comments>
 }
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();

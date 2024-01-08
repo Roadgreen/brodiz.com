@@ -5,7 +5,6 @@ import styles from './page.module.css'
 import Slide from '@/components/slider/homeSlider/homeslider'
 import HomePersonnalisation from '@/components/homePersonnalisation/homePersonnalisation'
 import ProductCard from '@/components/ProductCard/productCardHome/productcard'
-import Caroussel from '@/components/carroussel/homecarroussel/homecarroussel'
 import SlidePromotion from '@/components/Home/slidePromotion/slidePromotion'
 import { useGlobalContextAnalytics } from './Context/analyticsContext'
 const product = {
@@ -39,7 +38,7 @@ export default function Home() {
      <Slide/>
 <SlidePromotion/>
      <HomePersonnalisation/>
-     <Caroussel products={products}/>
+   
     </main>
   )
 }

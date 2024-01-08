@@ -52,12 +52,12 @@ export default function DesktopMenu(Text:any){
     <AiOutlineClose className={style.menuIcon} onClick={() => setIsMenuOpen(false)} />
     <div style={{height:windowSize.height}} className={`${style.mobileMenu} ${style.open}`}>
     <ul className={style.ulMobile}>
-<li><Link className={pathname === '/'? style.active : style.Liens} href={'/'}>{text.a}</Link></li>
-<li><Link className={pathname === '/creations'? style.active : style.Liens} href={'/creations'}>{text.b}</Link></li>
-<li><Link className={pathname === '/customisations'? style.active : style.Liens} href={'/customisations'}>{text.c}</Link></li>
-<li><Link className={pathname === '/blog'? style.active : style.Liens} href={'/blog'}>{text.d}</Link></li>
-<li><Link className={pathname === '/account'? style.active : style.Liens}  href={'/account'}>{text.e}</Link></li>
-<li><Link className={pathname === '/panier'? style.active : style.Liens} href={'/panier'}>{text.f}</Link></li>
+<li><Link onClick={() => setIsMenuOpen(false)} className={pathname === '/'? style.active : style.Liens} href={'/'}>{text.a}</Link></li>
+<li><Link onClick={() => setIsMenuOpen(false)} className={pathname === '/creations'? style.active : style.Liens} href={'/creations'}>{text.b}</Link></li>
+<li><Link onClick={() => setIsMenuOpen(false)} className={pathname === '/customisations'? style.active : style.Liens} href={'/customisations'}>{text.c}</Link></li>
+<li><Link onClick={() => setIsMenuOpen(false)} className={pathname === '/blog'? style.active : style.Liens} href={'/blog'}>{text.d}</Link></li>
+<li><Link onClick={() => setIsMenuOpen(false)} className={pathname === '/account'? style.active : style.Liens}  href={'/account'}>{text.e}</Link></li>
+<li><Link onClick={() => setIsMenuOpen(false)} className={pathname === '/panier'? style.active : style.Liens} href={'/panier'}>{text.f}</Link></li>
 </ul>
     </div>
   </>

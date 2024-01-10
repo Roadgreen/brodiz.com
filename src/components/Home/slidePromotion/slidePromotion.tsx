@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./slidePromotion.module.css";
 import Image from "next/image";
 import Img1 from "@/productImg/Hoodies/hommeJPPMT.jpg";
+import useParallax from "@/components/Function/parallax";
 
 export default function SlidePromotion() {
+  const para = useRef<HTMLAllCollection>();
+  useParallax(para,0.1)
   return (
-    <div className={styles.container}>
-      <div className={styles.containerImg}>
+    <div  className={styles.container}>
+      <div ref={para} className={styles.containerImg}>
         <Image
           className={styles.img}
           src={Img1}

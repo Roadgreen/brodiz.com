@@ -20,6 +20,7 @@ interface ColorObject {
     category: Array<string>,
     tag: Array<string>,
     quantity:number,
+    custom:Object
   }
 
  

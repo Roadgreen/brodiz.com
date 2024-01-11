@@ -31,6 +31,7 @@ interface product {
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
+  custom:Object
 }
 interface adresse {
   adresse: string;
@@ -50,6 +51,7 @@ interface products {
   category: Array<string>,
   tag: string,
   quantity: number,
+  custom:Object
 }[]
 type CartContext = {
   addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;

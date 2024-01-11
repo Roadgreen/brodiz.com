@@ -18,7 +18,7 @@ interface product {
     category: Array<string>,
     tag: string[],
     quantity: number,
-    
+    custom:Object
   }
 
 export default function PanierProductPage(){

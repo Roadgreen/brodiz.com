@@ -24,7 +24,7 @@ interface product {
   quantity:number,
   custom:Object
 }
-export default function ProductCardDetails({ product }: { product: product }) {
+export default function CustomTablier({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
   const {sendPageview,sendEvent} = useGlobalContextAnalytics();
   const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);

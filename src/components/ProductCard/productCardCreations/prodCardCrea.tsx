@@ -29,7 +29,8 @@ interface product {
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
-  comments: Array<comments>
+  comments: Array<comments>,
+  custom:Object
 }
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();

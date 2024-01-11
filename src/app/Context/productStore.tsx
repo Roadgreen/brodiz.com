@@ -33,6 +33,7 @@ interface product {
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
+  custom:Object
 }
 interface productToAdd {
   id: string,
@@ -47,6 +48,7 @@ interface productToAdd {
   tag: Array<string>,
   collection:string,
   comments:Array<comments>
+  custom:Object
 }
 type ProductContext = {
   productSearch: (doc: object, collection: string, db: string) => Promise<product[]>;
@@ -76,6 +78,7 @@ export const ProductContextProvider = ({ children }: any) => {
   tag: [],
   quantity: 0,
   comments: [],
+  custom:{}
 }]]);
 
   const [selectedProduct, setSelectedProduct] = useState<product>({  id: "",
@@ -90,7 +93,8 @@ export const ProductContextProvider = ({ children }: any) => {
   category: [],
   tag: [],
   quantity: 0,
-  comments: []
+  comments: [],
+  custom:{}
 });
 const [env,setEnv] = useState<string>('dev');
 

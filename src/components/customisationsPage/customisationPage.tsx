@@ -1,10 +1,13 @@
+"use client"
 import React from "react";
 import styles from "./customisationPage.module.css";
 import Image from "next/image";
 import femmeTablier from '@/productImg/Tablier/tablierfemme.jpg'
 import womendog from '../../../public/img/producthero image/womendog.jpg'
+import { useRouter } from 'next/navigation'
 
 export default function CustomisationPage() {
+  const router = useRouter()
   return (
     <div className={styles.container}>
       <div className={styles.firstCustom}>
@@ -38,7 +41,7 @@ export default function CustomisationPage() {
           <p>
           Découvrez l'élégance de la personnalisation avec notre gamme exclusive de tabliers brodés, conçus spécialement pour répondre aux besoins de votre commerce ou de votre maison. Chez Brodiz.com, nous croyons que chaque détail compte, c'est pourquoi nos tabliers personnalisés allient style, durabilité et un caractère unique.
           </p>
-          <button className={styles.button}>Acheter</button>
+          <button onClick={() => router.push('/customisations/Tablier/cust_Tablier_001')} className={styles.button}>Acheter</button>
         </div>
         <div className={styles.imgContainer}>
           <Image

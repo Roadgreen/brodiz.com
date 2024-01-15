@@ -16,8 +16,8 @@ interface FormData {
    id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,
 }
 export default function AddProduct() {
-  const availableSizes = ['S','M','L','XL','XXL'];
-  const availableCategory = ['Hoodies','Manga','Famille']
+  const availableSizes = ['S','M','L','XL','XXL','Taille Unique'];
+  const availableCategory = ['Hoodies','Manga','Famille','Customisation','Cuisine']
   const {productAdd} = useGlobalContext();
   const [tags,setTags] = useState(['']);
   const [alts,setAlts] = useState('');

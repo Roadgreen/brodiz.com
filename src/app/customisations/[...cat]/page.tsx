@@ -1,13 +1,16 @@
+"use client";
 import React from 'react'
 import { useGlobalContextCart } from '@/app/Context/cartContext';
 import { useGlobalContext } from '@/app/Context/productStore';
-import CustomTablier from '@/components/customisationsPage/customisationsProduct/customTablier/customTablier'
+import CustomProduct from '@/components/customisationsPage/customisationsProduct/customProduct';
 import { useState,useEffect } from 'react';
+import PanierProductPage from '@/components/Panier/panierProductPage/panierProductPage';
+import ProductCardComments from '@/components/ProductCard/productCardComments/productCardComments';
 
 export default function Page({
     params,
   }: {
-    params: { product: Array<string> };
+    params: { cat: Array<string> };
   }) {
     const [isLoading, setIsLoading] = useState(true);
     console.log(params);
@@ -17,10 +20,10 @@ export default function Page({
       useEffect(() => {
         console.log(selectedProduct, Object.keys(selectedProduct));
         async function searchProduct() {
-          if (selectedProduct.id.length === 0) {
+          if (selectedProduct.id !== params.cat[1]) {
             const product = await productSearch(
-              { id: params.product[1] },
-              params.product[0],
+              { id: params.cat[1] },
+              "Customisation",
               "Product"
             );
             setSelectedProduct(product?.[0] ?? {});
@@ -28,14 +31,19 @@ export default function Page({
           setIsLoading(false);
         }
         searchProduct();
-      }, [params.product, selectedProduct, setSelectedProduct,productSearch]);
+      }, [params.cat, selectedProduct, setSelectedProduct,productSearch]);
   
     if (isLoading) {
       return <div>Chargement en cours...</div>;
     }
   return (
-    <>
-    <CustomTablier product={selectedProduct}/>
-    </>
+    <div>
+    {selectedProduct.img ? 
+      <CustomProduct product={selectedProduct}/> : <></>
+    }
+    {addedToCart ? <PanierProductPage/> : ''}
+  <ProductCardComments comments={selectedProduct.comments}/>
+  </div>
+  
   )
 }

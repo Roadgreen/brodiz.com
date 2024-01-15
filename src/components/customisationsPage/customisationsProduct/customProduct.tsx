@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import styles from "./productCardDetails.module.css";
+import styles from "./customProduct.module.css";
 import Image from "next/image";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { useGlobalContextAnalytics } from "@/app/Context/analyticsContext";
@@ -24,7 +24,7 @@ interface product {
   quantity:number,
   custom:Object
 }
-export default function CustomTablier({ product }: { product: product }) {
+export default function CustomProduct({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
   const {sendPageview,sendEvent} = useGlobalContextAnalytics();
   const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);

@@ -4,12 +4,13 @@
   width: 100%;
   height: 100%;
   align-items: center;
+  margin-top: 20px;
 }
 .productContainer {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  
   width: 90%;
   height: 100%;
 }
@@ -56,9 +57,42 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  margin-left: 20px;
   height: 100%;
   justify-content: center;
   align-items: center;
+}
+.customisation{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+width: 100%;
+
+}
+.customisation div:first-child{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+margin: 10px;
+width: 50%;
+height: 100%;
+
+}
+.customisation div:last-child{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+margin: 10px;
+height: 100%;
+width: 50%;
+}
+.customisation div:last-child select{
+margin-top: 10px;
 }
 .descriptionContainer h3 {
   width: 100%;
@@ -100,6 +134,7 @@
   background-color: rgb(255, 255, 255);
   width: 40px;
   height: 40px;
+  font-size: 0.7em;
   border: 1px solid grey;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -195,6 +230,49 @@
   -ms-transition: 0.5s all;
   -o-transition: 0.5s all;
 }
+.Input{
+ display: none;
+}
+.labelInputImg{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid gray;
+  width: 150px;
+  height: 100%;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.selectFont{
+  width: 200px;
+  height: 30px;
+  border: 1px solid gray;
+  border-radius: 10px;
+  font-weight: 300;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid gray;
+  cursor: pointer;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.textArea{
+  background-color: rgb(255, 255, 255);
+  border: 2px solid gray;
+  width: 300px;
+  height: 50px;
+  margin-bottom: 10px;
+  font-size: small;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 
 @media (max-width: 860px) {
   .Container {

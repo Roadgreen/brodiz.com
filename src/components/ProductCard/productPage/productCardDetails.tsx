@@ -27,7 +27,7 @@ interface product {
 export default function ProductCardDetails({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
   const {sendPageview,sendEvent} = useGlobalContextAnalytics();
-  const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);
+  const [imgSelection, setImgSelection] = useState(0);
   const [alertSelection, setAlertSelection] = useState<boolean>(false);
   const [sizeSelection, setSizeSelection] = useState<string>();
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
@@ -64,18 +64,8 @@ export default function ProductCardDetails({ product }: { product: product }) {
     sendEvent({ url: '',
   eventName: 'click',
   sessionId:'',
-  data:{clickName : 'Selection_image_x',clickCategorie: 'Product',product:product.id}})
-    setImgSelection((prevSelection) => {
-      const newIndex = (prevSelection[0] + x) % 6;
-      return [
-        newIndex,
-        (newIndex + 1) % 6,
-        (newIndex + 2) % 6,
-        (newIndex + 3) % 6,
-        (newIndex + 4) % 6,
-        (newIndex + 5) % 6,
-      ];
-    });
+  data:{clickName : `Selection_image_${x}`,clickCategorie: 'Product',product:product.id}})
+    setImgSelection(x);
   };
   const handleClick = (info:{ name: string; color: string },size:{size:string}) => {
 
@@ -149,8 +139,8 @@ export default function ProductCardDetails({ product }: { product: product }) {
             <div className={styles.bigImgContainer}>
               <Image
                 className={styles.bigImg}
-                src={product.img[imgSelection[0]][0]}
-                alt={product.img[imgSelection[0]][1]}
+                src={product.img[imgSelection][0]}
+                alt={product.img[imgSelection][1]}
                 fill
               />
             </div>

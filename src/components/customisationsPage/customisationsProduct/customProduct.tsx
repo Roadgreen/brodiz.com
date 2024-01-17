@@ -4,6 +4,45 @@ import styles from "./customProduct.module.css";
 import Image from "next/image";
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { useGlobalContextAnalytics } from "@/app/Context/analyticsContext";
+import handleUploadImage from "@/app/api/upload/uploadcustomserver";
+import {
+  indie_flower,
+  pacifico,
+  vt323,
+  orbitron,
+  anton,
+  comic_neue,
+  lobster,
+  press_start_2p,
+  architects_daughter,
+  baloo_tammudu_2,
+  chewy,
+  kalam,
+  luckiest_guy,
+  permanent_marker,
+  rock_salt,
+  satisfy,
+  shadows_into_light,
+  sigmar_one,
+  domine,
+  manrope,
+  catamaran,
+  patua_one,
+  arvo,
+  raleway,
+  oswald,
+  montserrat,
+  lato,
+  open_sans,
+  nunito_sans,
+  playfair_display,
+  merriweather,
+  roboto,
+  poppins,
+  work_sans,
+  noto_sans,
+} from '@/app/Context/fontContext';
+import { fontOptions,fontNames } from "@/app/Context/fontContext";
 
 interface ColorObject {
   color: string;
@@ -27,12 +66,17 @@ interface product {
 export default function CustomProduct({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
   const {sendPageview,sendEvent} = useGlobalContextAnalytics();
-  const [imgSelection, setImgSelection] = useState([0, 1, 2, 3, 4, 5]);
+  const [imgSelection, setImgSelection] = useState(0);
   const [alertSelection, setAlertSelection] = useState<boolean>(false);
   const [sizeSelection, setSizeSelection] = useState<string>();
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
   const [colorSelection, setColorSelection] = useState<ColorObject[]>();
+  //Pour l'upload d'image
+  const [uploadedImagePath, setUploadedImagePath] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedFont, setSelectedFont] = useState('');
+  const [fonts, setFonts] = useState([]);
   
   useEffect(() => {
     console.log(cartItem)
@@ -56,26 +100,38 @@ export default function CustomProduct({ product }: { product: product }) {
     data: {
     }});
    
+
   }, [cartItem,product,sendPageview]);
 
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const img = e.target.files
+      const uploadResult = await handleUploadImage(img[0]);
+
+      if ('error' in uploadResult) {
+        setError(uploadResult.error);
+      } else {
+        setUploadedImagePath(uploadResult.imagePath);
+        console.log(uploadResult.imagePath)
+        setError(null);
+      }
+    } else {
+      setError('Veuillez sélectionner une image.');
+    }
+  };
   
-  
+  const handleFontChange = (e:any) => {
+    setSelectedFont(e.target.value);
+  };
+
+ 
+ 
   const imgChange = (x: any) => {
     sendEvent({ url: '',
   eventName: 'click',
   sessionId:'',
-  data:{clickName : 'Selection_image_x',clickCategorie: 'Product',product:product.id}})
-    setImgSelection((prevSelection) => {
-      const newIndex = (prevSelection[0] + x) % 6;
-      return [
-        newIndex,
-        (newIndex + 1) % 6,
-        (newIndex + 2) % 6,
-        (newIndex + 3) % 6,
-        (newIndex + 4) % 6,
-        (newIndex + 5) % 6,
-      ];
-    });
+  data:{clickName : `Selection_image_${x}`,clickCategorie: 'Product',product:product.id}})
+    setImgSelection(x);
   };
   const handleClick = (info:{ name: string; color: string },size:{size:string}) => {
 
@@ -130,6 +186,7 @@ export default function CustomProduct({ product }: { product: product }) {
   };
   return (
     <div className={styles.Container}>
+      
       <div className={styles.productContainer}>
         {product.img && product.img[0] ? (
           <div className={styles.imgsContainer}>
@@ -149,8 +206,8 @@ export default function CustomProduct({ product }: { product: product }) {
             <div className={styles.bigImgContainer}>
               <Image
                 className={styles.bigImg}
-                src={product.img[imgSelection[0]][0]}
-                alt={product.img[imgSelection[0]][1]}
+                src={product.img[imgSelection][0]}
+                alt={product.img[imgSelection][1]}
                 fill
               />
             </div>
@@ -160,10 +217,38 @@ export default function CustomProduct({ product }: { product: product }) {
         )}
         <div className={styles.descriptionContainer}>
           <h1>{product.name}</h1>
-          <h3>{product.price}€</h3>
+          <h3 className={styles.price}>{product.price}€</h3>
           <p className={styles.description}>{product.description}</p>
+          <h3>Customisation:</h3>
+          <div className={styles.customisation}>
+            <div>
+            <h4>Votre Logo:</h4>
+          {uploadedImagePath !== null ? (<Image src={`http://localhost:8080/uploadImg/getImage/${uploadedImagePath}`} alt="Image de logo" width={50} height={50} />) : ''}
+          <input id="file" className={styles.Input} type="file" onChange={handleUpload} />
+          <label htmlFor="file" className={styles.labelInputImg}>
+            Choisissez une image
+          </label>
+            </div>
+         <div>
+         <h4>Choisissez une police :</h4>
+      <select id="fontSelector" className={styles.selectFont} value={selectedFont} onChange={handleFontChange}>
+      {fontOptions.map((font,i) => (
+          <option key={i} style={{fontSize:30}} className={font.className} value={fontNames[i]}>
+            {`${fontNames[i]}`}
+          </option>
+        ))}
+        {/* Ajoutez d'autres options selon les polices disponibles */}
+      </select>
+         </div>
+
+         
+          </div>
+         
+      <h4>Décrivez nous votre envie: </h4>
+      <textarea className={styles.textArea}></textarea>
           <h3>Taille:</h3>
           <div className={styles.sizeContainer}>
+
             <div className={styles.sizeDiv}>
               {product.size.map((x: any, i: number) => {
                 return (

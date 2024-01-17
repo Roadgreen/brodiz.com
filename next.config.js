@@ -1,5 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'http',
+            hostname: 'localhost',
+            port: '8080',
+            pathname: '/uploadImg/getImage/**',
+          },
+        ],
+      },
     env:{
         FETCHPRODUCTSEARCHDEV:"http://localhost:8080/product/productSearch",
         FETCHPRODUCTSEARCHPROD:"https://server.brodiz.com/product/productSearch",

@@ -72,6 +72,8 @@ export default function CustomProduct({ product }: { product: product }) {
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
   const [colorSelection, setColorSelection] = useState<ColorObject[]>();
+  const [custoParcours,setCustoParcours] = useState<number>(1);
+  const [textArea,setTextArea] = useState<string>('');
   //Pour l'upload d'image
   const [uploadedImagePath, setUploadedImagePath] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -174,6 +176,13 @@ export default function CustomProduct({ product }: { product: product }) {
       updatedProduct.color = colorSelection;
       updatedProduct.size = [sizeSelection];
       updatedProduct.quantity = 1;
+      
+      updatedProduct.custom =  {
+          selectedFont,
+          uploadedImagePath,
+          textArea
+      }
+      console.log(updatedProduct);
       // Appelle addToCart du contexte global avec le produit mis à jour
       addToCart(updatedProduct);
       setAlertSelection(false);
@@ -220,16 +229,27 @@ export default function CustomProduct({ product }: { product: product }) {
           <h3 className={styles.price}>{product.price}€</h3>
           <p className={styles.description}>{product.description}</p>
           <h3>Customisation:</h3>
-          <div className={styles.customisation}>
-            <div>
-            <h4>Votre Logo:</h4>
-          {uploadedImagePath !== null ? (<Image src={`http://localhost:8080/uploadImg/getImage/${uploadedImagePath}`} alt="Image de logo" width={50} height={50} />) : ''}
-          <input id="file" className={styles.Input} type="file" onChange={handleUpload} />
-          <label htmlFor="file" className={styles.labelInputImg}>
-            Choisissez une image
-          </label>
-            </div>
-         <div>
+
+      {/*Début du parcours de personnalisation*/}
+
+          {custoParcours === 1 ? (
+   <div className={styles.customisation}>
+   <div>
+   <h4>Votre Logo:</h4>
+   <p>Lorsque votre logo s&apos;affiche, ou si vous ne voulez pas de logo cliquez sur suivant</p>
+ {uploadedImagePath !== null ? (<Image src={`http://localhost:8080/uploadImg/getImage/${uploadedImagePath}`} alt="Image de logo" width={50} height={50} />) : ''}
+ {error !== null ? <p>{error}</p> : ''}
+ <input id="file" className={styles.Input} type="file" onChange={handleUpload} />
+ <label htmlFor="file" className={styles.labelInputImg}>
+   Choisissez une image
+ </label>
+   </div>
+   <div className={styles.Suivant} onClick={()=>setCustoParcours(2)}>Suivant</div>
+   </div>
+          ): ''}
+  {custoParcours === 2 ? (
+   <div className={styles.customisation}>
+   <div>
          <h4>Choisissez une police :</h4>
       <select id="fontSelector" className={styles.selectFont} value={selectedFont} onChange={handleFontChange}>
       {fontOptions.map((font,i) => (
@@ -240,13 +260,33 @@ export default function CustomProduct({ product }: { product: product }) {
         {/* Ajoutez d'autres options selon les polices disponibles */}
       </select>
          </div>
+         <div className={styles.Suivant} onClick={()=>setCustoParcours(3)}>Suivant</div>
+   </div>
+          ): ''}
 
-         
-          </div>
-         
-      <h4>Décrivez nous votre envie: </h4>
-      <textarea className={styles.textArea}></textarea>
-          <h3>Taille:</h3>
+{custoParcours === 3 ? (
+   <div className={styles.customisation}>
+    <div>
+    <h4>Décrivez nous votre envie: </h4>
+      <textarea onChange={(e)=>{setTextArea(e.target.value)}} className={styles.textArea}></textarea>
+    </div>
+         <div className={styles.Suivant} onClick={()=>setCustoParcours(4)}>Suivant</div>
+   </div>
+          ): ''}
+
+{custoParcours === 4 ? (
+   <div className={styles.customisation}>
+<h4>Votre commande est prête à être ajouté au panier!</h4>    
+   </div>
+          ): ''}
+
+
+
+      {/*Fin du parcours de personnalisation*/}
+
+      <div className={styles.tailleColor} >
+        <div>
+        <h3>Taille:</h3>
           <div className={styles.sizeContainer}>
 
             <div className={styles.sizeDiv}>
@@ -263,7 +303,9 @@ export default function CustomProduct({ product }: { product: product }) {
               })}
             </div>
           </div>
-          <h3>Couleur:</h3>
+        </div>
+      <div>
+      <h3>Couleur:</h3>
           <div className={styles.colors}>
             {product.color.map((x: any, i: number) => {
               return (
@@ -276,6 +318,10 @@ export default function CustomProduct({ product }: { product: product }) {
               );
             })}
           </div>
+      </div>
+        
+      </div>
+        
           {alertSelection ? (
             <div className="">
               <p>Veuillez sélectionner une taille et une couleur</p>

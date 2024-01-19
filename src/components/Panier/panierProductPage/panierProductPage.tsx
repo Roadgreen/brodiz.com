@@ -36,6 +36,7 @@ const dernierArticle = cartItem[cartItem.length - 1];
 <div className={styles.containerArticle}>
     {
 cartItem.map((x:any,i:number)=>{
+    console.log(x.size)
     return( <div key={i} className={styles.containerLastArticle}>
    
 
@@ -45,7 +46,7 @@ cartItem.map((x:any,i:number)=>{
         <div className={styles.prodDesc}>
             <p>{x.name}</p>
             <p>{x.price}€</p>
-            <p>{x.size}</p>
+            <p>{x.size[0] === "Taille Unique" ? "T/U" : x.size}</p>
             <p>Quantité: {x.quantity}</p>
         </div>
         </div>)

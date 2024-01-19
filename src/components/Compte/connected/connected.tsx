@@ -98,12 +98,14 @@ user_newsletter: user.newsletter || '',
         <h1>Hello {user.email}</h1>
     <div className={styles.ButtonDisc} onClick={()=>{handleDisconnect()}}>Déconnection</div>
 <div className={styles.ButtonContainer}>
-    <span className={`${menu === 1 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(1)}}>Commandes</span>
-    <span className={`${menu === 2 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(2)}}>Profil</span>
+  
+    <span className={`${menu === 1 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(1)}}>Profil</span>
+    <span className={`${menu === 2 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(2)}}>Commandes</span>
     <span className={`${menu === 3 ? styles.activeSpan : styles.nonActiveSpan}`} onClick={()=>{handleChoose(3)}}>Ma liste de favorie</span>
 </div>
-{menu === 1? <Commandes user={user}/> : <></>}
-{menu === 2? <Profil user={user}/> : <></>}
+
+{menu === 1? <Profil user={user}/> : <></>}
+{menu === 2? <Commandes user={user}/> : <></>}
 
 
     </div>

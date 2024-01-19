@@ -12,6 +12,7 @@ export default function Profil(user:any) {
   const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''});
   const [name,setName] = useState({name:'',lastname:''});
 console.log(user.user.email)
+//TODO ici dans le profil ne pas oublier de changer le user en useState pour prendre en compte les modification apporter par l'utilisateur et vérifier les infos avec un useeffect pour rentrer les infos user dans le usestate
 const handleChangeAdd = (e:string,n:any)=>{
 
   setAdress(adress => ({
@@ -55,9 +56,9 @@ if(check){
         <h1>Profil</h1>
         <div className={styles.containerProfil}><div className={styles.InfoContainer}>
     <h4>Nom</h4>
-<p>{user.user.name}</p>
+<p>{user.user.name ? user.user.name : 'Renseigner votre prénom'}</p>
 <h4>Prénom</h4>
-<p>{user.user.lastname}</p>
+<p>{user.user.lastname ? user.user.lastname : 'Renseigner votre nom'}</p>
 <h4>email</h4>
 <p>{user.user.email}</p>
 <h4>adresse</h4>

@@ -33,9 +33,10 @@ height: 100%;
 }
 
 .Form div input::placeholder{
-   padding: 10px;
+   padding: 30px;
    color: rgb(0, 0, 0);
 }
+
 .Form button{
     width: 200px;
     height: 25px;

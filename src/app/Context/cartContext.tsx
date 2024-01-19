@@ -196,20 +196,23 @@ AllPrice()
  
 }
 const updatedCart = (products:product) => {
+  const updatedCart = cartItem;
   const id = products.id;
   const hisId = (x:product) => x.id === id;
-  const ind = cartItem.findIndex(hisId);
-  const updatedCart = cartItem.splice(ind,1,products);
+  const ind = updatedCart.findIndex(hisId);
+  console.log(ind);
+  updatedCart.splice(ind,1,products);
+  console.log(updatedCart);
   localStorage.setItem('cart',JSON.stringify(updatedCart))
   setCartItem(updatedCart);
   totalPrice(updatedCart);
-  
 }
 const cartCheck = () =>{
 let quantity = 0;
 for(var i = 0;i < cartItem.length; i++){
-quantity += cartItem[i].quantity;
+return quantity += cartItem[i].quantity;
 }
+console.log(quantity);
 return quantity
  
 }

@@ -58,12 +58,15 @@ console.log(cartItem.length)
     </div>
     )}))
 
-    const handleChange = (x:any,y:any) => {
-        const product = cartItem;
-        const hisId = (f:any) => f.id === y;
-        const ind = cartItem.findIndex(hisId);
-        product[ind].quantity = x;
-        updatedCart(cartItem[ind]);
+    const handleChange = (x:string,y:string) => {
+        const products = cartItem;
+        const idProduct = y;
+        const productNewQuantity = x;
+        const hisId = (f:any) => f.id === idProduct;
+        const index = cartItem.findIndex(hisId);
+        products[index].quantity = Number(productNewQuantity);
+        updatedCart(products[index]);
+        
     }
     const handleSup = (x:any) => {
         removeFromCart(x)

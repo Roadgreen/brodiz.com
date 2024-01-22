@@ -106,6 +106,10 @@ export default function CustomProduct({ product }: { product: product }) {
   }, [cartItem,product,sendPageview]);
 
   const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    sendEvent({ url: '',
+    eventName: 'click',
+    sessionId:'',
+    data:{clickName : 'Upload_img',clickCategorie: 'custom_product'}})
     if (e.target.files) {
       const img = e.target.files
       const uploadResult = await handleUploadImage(img[0]);
@@ -123,6 +127,10 @@ export default function CustomProduct({ product }: { product: product }) {
   };
   
   const handleFontChange = (e:any) => {
+    sendEvent({ url: '',
+    eventName: 'click',
+    sessionId:'',
+    data:{clickName : 'Font_changed',clickCategorie: 'custom_product'}})
     setSelectedFont(e.target.value);
   };
 

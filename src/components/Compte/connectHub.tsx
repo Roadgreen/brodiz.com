@@ -82,6 +82,7 @@ if(id !== undefined && id !== null){
         break;
   
       case 'register':
+        
         const news = isNews;
         const date = new Date();
         const register: any = CreateAccount({

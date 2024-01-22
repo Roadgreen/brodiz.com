@@ -46,7 +46,7 @@ const {UserConnected} = useGlobalContextUser();
         sessionId: '',
         timeOnPage: new Date,
         screenResolution: '',
-        product: [''],
+        product: {},
         pageCategory: 'Espace_client',
         data: {
 user_pays: user.adress[0].pays || '',
@@ -63,7 +63,7 @@ user_newsletter: user.newsletter || '',
         sessionId: '',
         timeOnPage: new Date,
         screenResolution: '',
-        product: [''],
+        product: {},
         pageCategory: 'Espace_client',
       data:{}})
       }

@@ -1,8 +1,10 @@
 import Image from "next/image"
-import {useContext} from 'react'
+import {useContext,useEffect} from 'react'
 import styles from './panier.module.css'
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import { useGlobalContextAnalytics } from './Context/analyticsContext'
+
 interface ColorObject {
     color: string;
     name: string;
@@ -25,7 +27,35 @@ interface ColorObject {
 
  
 export default function Cart() {
+    const {sendPageview,sendEvent} = useGlobalContextAnalytics();
     const {cartItem,updatedCart,removeFromCart} = useGlobalContextCart();
+    useEffect(()=>{
+        const product = cartItem.map((x)=>{
+            return(
+                {
+                    productId:x.id,
+                    productQuantity:x.quantity,
+                    productName: x.name,
+                    productColor: x.color,
+                    productSize: x.size
+                }
+            )
+        })
+        sendPageview( {url: '',
+        referrer: '',
+        userAgent: '',
+        visitorId: '',
+        userId: '',
+        sessionId: '',
+        timeOnPage: new Date,
+        screenResolution: '',
+        product: {},
+        pageCategory: 'Panier',
+        data: {
+            product
+        }});
+      
+  },[])
 console.log(cartItem.length)
     const checkMap = (Cart:product[]) => (Cart.map((x:product) =>{
         console.log(x);
@@ -59,6 +89,10 @@ console.log(cartItem.length)
     )}))
 
     const handleChange = (x:string,y:string) => {
+        sendEvent({ url: '',
+        eventName: 'click',
+        sessionId:'',
+        data:{clickName : 'quantity_change',clickCategorie: 'Panier',product: y,product_quantity: x}})
         const products = cartItem;
         const idProduct = y;
         const productNewQuantity = x;
@@ -69,6 +103,10 @@ console.log(cartItem.length)
         
     }
     const handleSup = (x:any) => {
+        sendEvent({ url: '',
+        eventName: 'click',
+        sessionId:'',
+        data:{clickName : 'remove_from_cart',clickCategorie: 'Panier',product: x.id}})
         removeFromCart(x)
         console.log(cartItem);
     }

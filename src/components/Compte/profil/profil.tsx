@@ -3,10 +3,12 @@ import styles from './profil.module.css'
 import { useGlobalContextCart } from '@/app/Context/cartContext'
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 import { useSearchParams } from 'next/navigation';
+import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
 
 export default function Profil(user:any) {
   const{AdressCheck} = useGlobalContextCart();
   const {UserChanges} = useGlobalContextUser();
+  const {sendEvent} = useGlobalContextAnalytics();
   const [modif,setModif] = useState(true);
   const[modifOk,setModifOk] = useState(false);
   const [adress,setAdress] = useState({adresse:'',post:'',ville:'',pays:''});
@@ -30,6 +32,10 @@ const handleChangeAdd = (e:string,n:any)=>{
     
     }
 const handleClick = async () =>{
+  sendEvent({ url: '',
+  eventName: 'click',
+  sessionId:'',
+  data:{clickName : 'Modifier_adresse',clickCategorie: 'account',user_Id: user.user.id}})
   console.log('dans le handleclick')
 
   const check:any = AdressCheck(adress);

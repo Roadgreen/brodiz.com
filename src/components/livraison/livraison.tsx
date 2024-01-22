@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { NextResponse } from "next/server";
 import { loadStripe } from '@stripe/stripe-js';
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
+import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
 
 interface User {
   id:string,
@@ -27,6 +28,7 @@ const stripePromise = loadStripe(
   );
 
 export default function LivraisonPart({User}:LivraisonPartProps) {
+  const {sendPageview} = useGlobalContextAnalytics();
   const {AdressCheck,livPrice,tot,price,cartItem} = useGlobalContextCart();
   const {FindUser} = useGlobalContextUser();
 
@@ -35,6 +37,18 @@ export default function LivraisonPart({User}:LivraisonPartProps) {
   const [sameAdress,SetSameAdress] = useState(true);
 
     useEffect(() => {
+      sendPageview( {url: '',
+        referrer: '',
+        userAgent: '',
+        visitorId: '',
+        userId: '',
+        sessionId: '',
+        timeOnPage: new Date,
+        screenResolution: '',
+        product: {},
+        pageCategory: 'Livraison',
+        data: {
+        }});
       console.log(User);
       console.log(cartItem);
 
@@ -49,6 +63,7 @@ export default function LivraisonPart({User}:LivraisonPartProps) {
         }
         if(User){
 setConnected(true);
+
         }
       }, [cartItem,User]);
     const router = useRouter()

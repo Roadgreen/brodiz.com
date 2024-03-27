@@ -51,7 +51,7 @@ export default function HomePersonnalisation() {
   const [prix, setPrix] = useState<number>(39.99);
   const [buySize, setBuySize] = useState<boolean>(false);
   const [size, setSize] = useState<string>("");
-  const [color, setColor] = useState<Object>({
+  const [color, setColor] = useState<ColorObject>({
     color: "#ECC931",
     name: "Jaune",
   });
@@ -74,7 +74,7 @@ export default function HomePersonnalisation() {
   const router = useRouter();
   const Canvas = useRef(null);
 
-  const divMouve = useRef(null);
+  const divMouve = useRef<HTMLDivElement>(null);
   const handlePrice = useCallback(async () => {
     if (Logo && text.length > 1 && custoPosition) {
       setPrix(59.99);
@@ -437,7 +437,7 @@ export default function HomePersonnalisation() {
           <div
             className={`${styles.buttonBuy} ${fontOptions[2].className}`}
             onClick={() => {
-              handleBuy();
+              handleBuy('');
             }}
           >
             Acheter

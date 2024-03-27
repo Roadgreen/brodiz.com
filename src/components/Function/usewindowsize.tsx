@@ -1,4 +1,6 @@
+"use client"
 import React, { useEffect, useState } from "react";
+
 
 const useViewportSize = () => {
   const [viewportSize, setViewportSize] = useState({

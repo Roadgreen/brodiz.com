@@ -66,7 +66,7 @@ const userIdCheck = () => {
     return findId;
 }
     pageView.url = window.location.href;
-    pageView.referrer = document.referrer;
+    pageView.referrer = window.document.referrer;
     pageView.userId =  userIdCheck();
     pageView.userAgent = window.navigator.userAgent;
     pageView.screenResolution = `${window.screen.width},${window.screen.height} `;

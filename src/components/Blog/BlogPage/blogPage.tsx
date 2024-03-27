@@ -30,6 +30,7 @@ useEffect(() => {
     
     if(typeof window !== undefined && typeof process.env.URLIMGBLOGDEV !== undefined && typeof process.env.URLIMGBLOGPROD !== undefined && window.location.hostname === 'localhost'){
        setEnvAdress(process.env.URLIMGBLOGDEV)
+    }else{
         setEnvAdress(process.env.URLIMGBLOGPROD);
     }
     const fetchData = async () => {

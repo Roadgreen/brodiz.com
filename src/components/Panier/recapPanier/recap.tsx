@@ -37,7 +37,7 @@ export default function Recap() {
 : 
 <div className={styles.link} >
   <Link href={'/livraison'} className={styles.button}>
-    Checkout
+    Paiement
   </Link>
 
 

@@ -1,3 +1,4 @@
+
 import './globals.css'
 import { Inter } from 'next/font/google'
 import DesktopMenu from '@/components/Menu/MenuDesktop/menu'
@@ -8,7 +9,8 @@ import {CartContextProvider} from './Context/cartContext'
 import { CommandeContextProvider } from './Context/commandeContext'
 import UserContextProvider from './Context/UserAccountContext'
 import { AnalyticsContextProvider } from './Context/analyticsContext'
-
+import Menusticky from '@/components/Menu/MenuDesktop/Menu sticky/menuSticky'
+import { BlogContextProvider} from './Context/blogContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -29,16 +31,19 @@ export default function RootLayout({
         <CartContextProvider>
           <AnalyticsContextProvider>
           <UserContextProvider>
+          <BlogContextProvider>
             <CommandeContextProvider>
             <DesktopMenu Text={Text}/>
+            <Menusticky/>
         {children}
         <Footer Text={Text}/>
         </CommandeContextProvider>
+        </BlogContextProvider>
         </UserContextProvider>
         </AnalyticsContextProvider>
         </CartContextProvider>
         </ProductContextProvider>
-
+        
         
         </body>
     </html>

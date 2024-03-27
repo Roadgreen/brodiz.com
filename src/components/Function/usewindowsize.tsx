@@ -1,37 +1,32 @@
-"use client"
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 
-
-// Hook
-function useWindowSize() {
-  // Initialize state with undefined width/height so server and client renders match
-  // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
+const useViewportSize = () => {
+  const [viewportSize, setViewportSize] = useState({
+    width: document.documentElement.clientWidth,
+    height: document.documentElement.clientHeight,
   });
 
-  useEffect(() => {
-    // only execute all the code below in client side
-    // Handler to call on window resize
-    function handleResize() {
-      // Set window width/height to state
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
-    }
-    
-    // Add event listener
-    window.addEventListener("resize", handleResize);
-     
-    // Call handler right away so state gets updated with initial window size
-    handleResize();
-    
-    // Remove event listener on cleanup
-    return () => window.removeEventListener("resize", handleResize);
-  }, []); // Empty array ensures that effect is only run on mount
-  return windowSize;
-}
+  const handleResize = () => {
+    setViewportSize({
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight,
+    });
+  };
 
-export default useWindowSize;
+  useEffect(() => {
+    // Mettez à jour la taille du viewport au montage initial
+    handleResize();
+
+    // Ajoutez un écouteur d'événement de redimensionnement
+    window.addEventListener("resize", handleResize);
+
+    // Nettoyez l'écouteur d'événement lors du démontage du composant
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []); // Le tableau de dépendances est vide, donc cela s'exécute une seule fois
+
+  return viewportSize;
+};
+
+export default useViewportSize;

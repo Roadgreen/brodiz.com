@@ -35,6 +35,7 @@ interface product {
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true); 
+  const [selectedCat,setSelectedCat] = useState<string>('');
   const { productSearch, productArray, setProductArray, setSelectedProduct } =
     useGlobalContext();
 
@@ -46,9 +47,9 @@ export default function ProdCardCrea({ id }: { id: number }) {
           "Hoodies",
           "Product"
         );
-        const prod2: Array<product> = await productSearch({}, "Baby", "Product");
+        const prod2: Array<product> = await productSearch({}, "Pull", "Product");
         const prod3: Array<product> = await productSearch({}, "Bain", "Product");
-        const prod4: Array<product> = await productSearch({}, "Pull", "Product");
+        const prod4: Array<product> = await productSearch({}, "Baby", "Product");
 
       
         setProductArray([prod1, prod2, prod3, prod4]);
@@ -68,6 +69,10 @@ export default function ProdCardCrea({ id }: { id: number }) {
       </div>
     );
   }
+  const handleCatChange = async (i:string)=>{
+    setSelectedCat(i);
+  }
+
   const handleClick = async (id: number, index: number, aed: string) => {
     async function collectionName() {
       let collection = "";
@@ -75,11 +80,11 @@ export default function ProdCardCrea({ id }: { id: number }) {
         case (id = 0):
           return (collection = "Hoodies");
         case (id = 1):
-          return (collection = "Baby");
-        case (id = 2):
-          return (collection = "Bain");
-        case (id = 3):
           return (collection = "Pull");
+        case (id = 2):
+          return (collection = "Baby");
+        case (id = 3):
+          return (collection = "Bain");
       }
     }
 
@@ -88,8 +93,33 @@ export default function ProdCardCrea({ id }: { id: number }) {
     router.push(`/creations/${collection}/${aed}`);
   };
 
+  const filterSelection = () =>{
+    let filter:Array<string> = [];
+    switch(id){
+      case 0: 
+      filter = ['Homme','Femme','Enfant'];
+      break;
+      case 1:
+        filter = ['Homme','Femme','Enfant'];
+        break;
+      case 3:
+        filter = ['Serviette','Peignoir'];
+        break;
+    }
+
+    return filter.map((filter:string,i:number)=>{
+      return (
+<div key={i} className={selectedCat === filter ? styles.ActivedFilter : styles.Filter} onClick={()=>{handleCatChange(filter)}}>{filter}</div>
+      )
+    })
+  }
+
   const cardProductMapping: any = () => {
-    return productArray[id].map((x: any, i: number) => {
+    const filteredProducts = selectedCat !== ''
+    ? productArray[id].filter((product: any) => product.category.includes(selectedCat))
+    : productArray[id];
+    console.log(productArray[id]);
+    return filteredProducts.map((x: any, i: number) => {
       const colors = x.color;
       return (
         <div
@@ -128,12 +158,20 @@ export default function ProdCardCrea({ id }: { id: number }) {
 
   // Render the content when loading is done
   return (
-    <div className={styles.Container}>
-      {productArray[id].length > 1 ? (
+    <div className={styles.ContainerMenu}>
+      <div className={styles.Menu}>
+{filterSelection()}
+      </div>
+     
+  <div className={styles.Container}>
+      
+      {productArray[id].length > 0 ? (
         cardProductMapping()
       ) : (
         <div>Désolé il n&apos;y a aucun article</div>
       )}
     </div>
+    </div>
+  
   );
 }

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-type UploadImageResponse = {
+export type UploadImageResponse = {
   imagePath: string;
 };
 
@@ -26,3 +26,4 @@ export default async function handleUploadImage(file: File): Promise<UploadImage
     return { error: 'Erreur lors de l\'upload.' };
   }
 }
+

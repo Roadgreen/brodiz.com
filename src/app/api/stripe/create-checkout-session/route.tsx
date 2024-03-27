@@ -17,18 +17,18 @@ export  async function POST(request:Request,response:Response){
                       shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: {
-                          amount: 0,
+                          amount: 5,
                           currency: 'eur',
                         },
-                        display_name: 'Envoie gratuit',
+                        display_name: 'Mondial Relay',
                         delivery_estimate: {
                           minimum: {
                             unit: 'business_day',
-                            value: 7,
+                            value: 4,
                           },
                           maximum: {
                             unit: 'business_day',
-                            value: 10,
+                            value: 7,
                           },
                         },
                       },
@@ -37,10 +37,10 @@ export  async function POST(request:Request,response:Response){
                       shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: {
-                          amount: 1000,
+                          amount: 8.80,
                           currency: 'eur',
                         },
-                        display_name: 'Envoie Rapide',
+                        display_name: 'La poste - en boite au lettre',
                         delivery_estimate: {
                           minimum: {
                             unit: 'business_day',

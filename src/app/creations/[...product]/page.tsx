@@ -39,7 +39,7 @@ export default function ProductPage({
   }
   return (
     <div>
-      {selectedProduct.img ? 
+      {selectedProduct.img ?
   <ProductCardDetails product={selectedProduct} /> : <></>
       }
       {addedToCart ? <PanierProductPage/> : ''}

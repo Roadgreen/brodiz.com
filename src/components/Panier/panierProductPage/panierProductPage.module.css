@@ -51,15 +51,16 @@
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  width: 500px;
+  width: 70%;
   margin-bottom: 20px;
 }
 .prodDesc{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    gap: 20px;
     align-items: center;
-    width: 350px;
+    width:80%;
    
 }
 .containerLastArticle h3 {
@@ -126,7 +127,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        width: 500px;
+        width: 100%;
         margin-bottom: 20px;
       }
       .prodDesc{

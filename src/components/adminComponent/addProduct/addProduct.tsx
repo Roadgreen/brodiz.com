@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import styles from './addProduct.module.css'
 import { useGlobalContextAdmin } from '@/app/Context/adminContext';
 import { useGlobalContext } from '@/app/Context/productStore';
@@ -13,33 +13,43 @@ interface comments {
   comments:string
   }
 interface FormData {
-   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,
+   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,custom:Object
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL','Taille Unique'];
-  const availableCategory = ['Hoodies','Manga','Famille','Customisation','Cuisine']
+  const availableCategory = ['Hoodies','Manga','Famille','Customisation','Cuisine','Pull','Tablier','Homme','Femme','Enfant','Chaussette']
   const {productAdd} = useGlobalContext();
   const [tags,setTags] = useState(['']);
+  const [custom,setCustom] = useState(false);
+  const [customChoice,setCustomChoice]= useState('');
+  const [customName,setCustomName] = useState('');
   const [alts,setAlts] = useState('');
+  const [textCustom,setTextCustom] = useState('');
+  const [customArray,setCustomArray] = useState<any>([]);
   const [error,setError] = useState(false);
   const [success,setSuccess] = useState(false);
   const [colors,setColors] = useState({color:'',name:''});
   const {uploadImage} = useGlobalContextAdmin();
 const [formData,setFormData] = useState<FormData>({
-  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:'',collection: '',comments:[]
+  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:'',collection: '',comments:[],custom:{}
 })
 const [imgData,setImgData] = useState([]);
-
+useEffect(() => {
+  // Mise à jour des options du select lorsque customArray est mis à jour
+  // Cela garantit que les options sont toujours à jour avec les données les plus récentes
+}, [customArray]);
 const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 if(e.target.files !== null){
   const file = e.target.files[0];
-  if(file){
+  if(file && formData.id !== ''){
   
     try{
-      const result = await uploadImage(file);
+
+      const result = await uploadImage(file,formData.id);
+      console.log(result)
       if(result){
         console.log(result);
-        setFormData({...formData,img: [...formData.img,[result,alts]]})
+        setFormData({...formData,img: [...formData.img,[result.imagePath,alts]]})
       }
     }catch(err){
       console.log(err);
@@ -84,7 +94,8 @@ const handleAddProduct = async (e: React.FormEvent) =>{
  await isFieldEmpty(formData.size) &&
  await isFieldEmpty(formData.color) &&
  await isFieldEmpty(formData.description) &&
- await isFieldEmpty(formData.collection)
+ await isFieldEmpty(formData.collection)&&
+ await isFieldEmpty(formData.custom)
  ){
   setError(false);
   console.log(formData)
@@ -136,7 +147,28 @@ const updatedColor = [...formData.color,colors];
   
   console.log(await formData.color);
 }
+const handleChangeCustomSelect = async (e:any) => {
+  e.preventDefault();
+  const valeurActuelle:string = textCustom;
+  const dernierCaractere:string[] = valeurActuelle.split(';').map(item => item.trim());
 
+
+    setFormData({...formData,custom:{custom: true, customType: 'select', customName:customName,customSelect:dernierCaractere}})
+    console.log(dernierCaractere);
+    console.log(customArray);
+    console.log(formData);
+    setCustomArray(dernierCaractere);
+  
+};
+const handleChangeCustomInput = (e:any) => {
+  const inputPattern = e.target.value;
+  if(customName !== ''){
+    setFormData({...formData,custom:{custom:true,customType:'input',customName: customName,customInputPattern:inputPattern}})
+
+  } else {
+    console.log('no name');
+  }
+}
 
   return (
     <div className={styles.container}>
@@ -161,6 +193,58 @@ const updatedColor = [...formData.color,colors];
             <input type='text' onChange={(e)=>{setFormData({...formData,model:e.target.value})}} placeholder='productModel'/>
             <input type='text' onChange={(e)=>{setFormData({...formData,collection:e.target.value})}} placeholder='productCollection'/>
 
+  <h3>Custom</h3>
+  <div>
+    <div>
+    <label>
+    <input onClick={()=>setCustom(true)} name='custom' value="true" type='radio' />
+    Oui</label>
+    </div>
+   
+<div>
+<label>
+    <input onClick={()=>setCustom(false)} name='custom'  value="false" type='radio' />
+    Non</label>
+</div>
+{custom ? (<div>
+  <h3>Selection custom Option</h3>
+  <div>
+<label>
+    <input onClick={()=>setCustomChoice('select')} name='customChoice'  value="" type='radio' />
+    Custom Selection</label>
+</div>
+<div>
+<label>
+    <input onClick={()=>setCustomChoice('input')} name='customChoice'  value="false" type='radio' />
+    TextInput</label>
+</div>
+
+</div>) : ''}
+{custom !== false && customChoice === 'select' ? (<div>
+  <h3>Description custom pour selection : </h3>
+  <input onChange={(e)=>setCustomName(e.target.value)}  />
+  <h3>Séparer les selects avec un ';'</h3>
+  <textarea
+        value={textCustom}
+        onChange={(e)=>{setTextCustom(e.target.value)}}
+      />
+      <button onClick={(e)=>{handleChangeCustomSelect(e)}}>Validé</button>
+     
+     
+</div>) : ''}
+{custom !== false && customChoice === 'input' ? (<div>
+<h3>Description custom pour l'input : </h3>
+  <input onChange={(e)=>setCustomName(e.target.value)}  />
+  <h3>Input pattern:</h3>
+  <input
+        value={textCustom}
+        onChange={handleChangeCustomInput}
+      />
+     
+</div>): ''}
+  
+
+</div>
           <h3>Tag</h3>
           <div className={styles.list}>
           {formData.tag.map((e)=>(

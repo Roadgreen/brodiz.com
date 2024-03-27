@@ -1,4 +1,5 @@
-.Container{
+@media (min-width:768px) {
+  .Container{
     width: 100%;
     height: 100%;
     margin-bottom: 20px;
@@ -94,6 +95,7 @@ align-items: center;
     border: 0px solid gray;
     margin-left: 10px;
 }
+
 .InputContainer input{
     outline: none;
     overflow: visible;
@@ -150,6 +152,16 @@ align-items: center;
     -o-transform: translatex(-155px) translateY(-17px) scale(1);
     transition: all 0.5s ease-in-out ;
 }
+.InputContainer input:invalid + .spanFoc {
+  background-color: rgb(255, 255, 255);
+  transform: translatex(-155px) translateY(-17px) scale(1);
+  -webkit-transform: translatex(-155px) translateY(-17px) scale(1);
+  -moz-transform: translatex(-155px) translateY(-17px) scale(1);
+  -ms-transform: translatex(-155px) translateY(-17px) scale(1);
+  -o-transform: translatex(-155px) translateY(-17px) scale(1);
+  transition: all 0.5s ease-in-out ;
+}
+
 
 /* The switch - the box around the slider */
 .newsChecked label {
@@ -213,3 +225,254 @@ align-items: center;
   .newsChecked span:before {
     border-radius: 50%;
   }
+  .forgetMdp{
+    font-size: 0.7em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}
+@media (max-width:768px) {
+  .Container{
+    width: 100%;
+    height: 100%;
+    margin-bottom: 20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formContainer{
+    border: 1px solid gray;
+    border-radius: 10px;
+    width: 90%;
+    text-align: center;
+    height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center   ;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.button{
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+    margin: 20px;
+    font-size: 1em;
+    border: 0px solid ;
+    background-color: black;
+    color: white;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+}
+.button:hover{
+    cursor: pointer;
+    height: 30px;
+    width: 100px;
+    border: 0px solid ;
+    background-color: rgba(151, 151, 151, 0.505);
+    color: rgb(0, 0, 0);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+}
+.newsChecked{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+height: 30px;
+width: 100px;
+}
+
+
+  
+.InputContainer {
+    display: flex;
+justify-content: center;
+align-items: center;
+    border: 0.5px solid gray;
+    height: 30px;
+    width: 200px;
+    z-index: 0;
+    overflow: visible;
+    margin-top: 20px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+
+}
+.formContainer form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.formContainer form p{
+  width: 80%;
+}
+.formContainer form input{
+    height: 30px;
+    background-color: rgba(240, 248, 255, 0);
+    border: 0px solid gray;
+    margin-left: 10px;
+}
+
+.InputContainer input{
+    outline: none;
+    overflow: visible;
+}
+.InputContainer input:focus{
+    z-index:1;
+    outline: none;
+    height: 60px;
+    width: 170px;
+    border: 0px solid rgba(128, 128, 128, 0);
+    transition: all 0.5s ease-in-out ;
+    -webkit-transition: all 0.5s ease-in-out ;
+    -moz-transition: all 0.5s ease-in-out ;
+    -ms-transition: all 0.5s ease-in-out ;
+    -o-transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:focus::placeholder{
+   position: absolute;
+   z-index: 10;
+   width: 50px;
+   height: 50px;
+   background-color: rgba(255, 255, 255, 0);
+   visibility: visible;
+   transform: translateY(-15px) scale(1);
+   -webkit-transform: translateY(-15px) scale(1);
+   -moz-transform: translateY(-15px) scale(1);
+   -ms-transform: translateY(-15px) scale(1);
+   -o-transform: translateY(-15px) scale(1);
+   transition: all 0.5s ease-in-out ;
+}
+.InputContainer span{
+    transform: translatex(-155px) scale(1);
+    -webkit-transform: translatex(-155px) scale(1);
+    -moz-transform: translatex(-155px) scale(1);
+    -ms-transform: translatex(-155px) scale(1);
+    -o-transform: translatex(-155px) scale(1);
+    transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:focus + .spanFoc{
+    background-color: rgb(255, 255, 255);
+    transform: translatex(-155px) translateY(-17px) scale(1);
+    -webkit-transform: translatex(-155px) translateY(-17px) scale(1);
+    -moz-transform: translatex(-155px) translateY(-17px) scale(1);
+    -ms-transform: translatex(-155px) translateY(-17px) scale(1);
+    -o-transform: translatex(-155px) translateY(-17px) scale(1);
+    transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:valid + .spanFoc {
+    background-color: rgb(255, 255, 255);
+    transform: translatex(-155px) translateY(-17px) scale(1);
+    -webkit-transform: translatex(-155px) translateY(-17px) scale(1);
+    -moz-transform: translatex(-155px) translateY(-17px) scale(1);
+    -ms-transform: translatex(-155px) translateY(-17px) scale(1);
+    -o-transform: translatex(-155px) translateY(-17px) scale(1);
+    transition: all 0.5s ease-in-out ;
+}
+.InputContainer input:invalid + .spanFoc {
+  background-color: rgb(255, 255, 255);
+  transform: translatex(-155px) translateY(-17px) scale(1);
+  -webkit-transform: translatex(-155px) translateY(-17px) scale(1);
+  -moz-transform: translatex(-155px) translateY(-17px) scale(1);
+  -ms-transform: translatex(-155px) translateY(-17px) scale(1);
+  -o-transform: translatex(-155px) translateY(-17px) scale(1);
+  transition: all 0.5s ease-in-out ;
+}
+
+
+/* The switch - the box around the slider */
+.newsChecked label {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 20px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .newsChecked label input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .newsChecked span {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .newsChecked span:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 9px;
+    bottom: px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+ .newsChecked label input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  .newsChecked label input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  .newsChecked label input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .newsChecked span{
+    border-radius: 34px;
+  }
+  
+  .newsChecked span:before {
+    border-radius: 50%;
+  }
+  .forgetMdp{
+    font-size: 0.7em;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+}

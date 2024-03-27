@@ -114,10 +114,13 @@ useEffect(()=>{
   ): Promise<product[]> => {
     try {
       let envAdress: string | URL ;
+      let urlImg;
       if (env === 'dev') {
         envAdress = process.env.FETCHPRODUCTSEARCHDEV || '';
+        urlImg = process.env.URLIMGDEV;
       } else {
         envAdress = process.env.FETCHPRODUCTSEARCHPROD || '';
+        urlImg = process.env.URLIMGPROD;
       }
       console.log("try productsearch");
       var myInit = {
@@ -133,7 +136,28 @@ useEffect(()=>{
         myInit
       );
       const data: any = await reponseFindProduct.json();
+      console.log(data)
       if (data.code === 202) {
+       const product = await data.Product; 
+       console.log(product);
+       if(product[0].category.includes("Customisation")){
+        return data.Product;
+       }else{
+        const product = await data.Product; 
+        for (let i = 0; i < product.length; i++) {
+          console.log(product);
+          // Vérifiez si l'objet a une propriété 'img' et si 'img' est un tableau non vide
+          if (product[i].img && product[i].img.length > 0) {
+            console.log(product)
+              // Ajoutez la nouvelle chaîne à la position 0 de la première image
+              for (let e = 0; e < product[i].img.length; e++) {
+                console.log(product[i].img);
+              product[i].img[e][0] = urlImg + product[i].img[e][0];
+              console.log(product[i].img);
+          }}
+      }
+       }
+       
         return data.Product;
       } else if (data.code === 404) {
         console.log("err lors de la recherche de produit");

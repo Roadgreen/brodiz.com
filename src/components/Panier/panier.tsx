@@ -3,7 +3,7 @@ import {useContext,useEffect} from 'react'
 import styles from './panier.module.css'
 import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import { useGlobalContextAnalytics } from './Context/analyticsContext'
+import { useGlobalContextAnalytics } from  '@/app/Context/analyticsContext'
 
 interface ColorObject {
     color: string;
@@ -69,7 +69,7 @@ console.log(cartItem.length)
     <div>
     <label>Quantité: </label>
 
-<select onChange={e => handleChange(e.target.value,x.id)} name="quantity" id="quantity">
+<select style={{width:50,height:20,fontSize:15}} onChange={e => handleChange(e.target.value,x.id)} name="quantity" id="quantity">
     <option value={x.quantity}>{x.quantity}</option>
     <option value={1}>1</option>
     <option value={2}>2</option>

@@ -1,50 +1,55 @@
 // Import necessary libraries
 import React, { useEffect,useState } from "react";
 import Image from "next/image";
-import { Anybody } from 'next/font/google'
+import { Oswald } from 'next/font/google'
 import Link from "next/link";
 import styles from "../homeSlider/homeslider.module.css";
-import image from '@/productImg/Hoodies/hommeslider.jpg';
+import image from '@/productImg/Home/HeroImg.jpg';
 import { useGlobalContextAnalytics } from "@/app/Context/analyticsContext";
 import useWindowSize from "@/components/Function/usewindowsize";
 import { useRef } from 'react';
 import useParallax from '@/components/Function/parallax';
 
-const anybody = Anybody({
+const oswald = Oswald({
   subsets: ['latin'],
   display:'swap',
-  weight:"200"
+  weight:"700"
+})
+const oswald2 = Oswald({
+  subsets: ['latin'],
+  display:'swap',
+  weight:"400"
 })
 // Here is your Slide component
 export default function Slide() {
-  const parallaxRef = useRef<HTMLDivElement>();
-  const textParallax = useRef<HTMLDivElement>();
-    useParallax(parallaxRef,0.3)
-    useParallax(textParallax,0.1);
+
   const {sendEvent} = useGlobalContextAnalytics();
   const windowSize = useWindowSize();
-  const [height, setHeight] = useState(500);
+  const [height, setHeight] = useState(windowSize.height);
+
+  useEffect(()=>{
+    setHeight(windowSize.height)
+  },[windowSize])
+
   const handleClick = () => {
 sendEvent({ url: '',
   eventName: 'click',
   sessionId:'',
   data:{clickName : 'Acheter maintenant',clickCategorie: 'Home'}})
   }
-  useEffect(() => {
-    windowSize.height
-    setHeight(windowSize.height - 150);
-  }, [windowSize.height]);
+
   return (
     <div className={styles.slideContainer} style={{ height: `${height}px` }}>
-      
-      <div  ref={textParallax} className={`${styles.containerText} ${anybody.className}`}>
-        <h1>UN JOUR</h1>
-        <h1>UN STYLE</h1>
-        <p>Décrouvrez nos Broderie <br></br>de qualités</p>
-        <button className={styles.button}>Découvrir</button>
+         <div  className={`${styles.containerText}`}>
+       <h1 className={oswald.className}>ICI C'EST<br/> BRODERIE</h1>
+       <div className={styles.French}><div style={{backgroundColor:'#012697'}}></div><div style={{backgroundColor:'#f9f9f9'}}></div><div style={{backgroundColor:'#fd1e32'}}></div></div>
+       <p className={oswald2.className}>Explorez l'élégance brodée au cœur de la France.</p>
+       <div className={`${styles.button} ${oswald2.className}`}>Découvrir</div>
       </div>
-      <div className={styles.containerImg} ref={parallaxRef}>
-        <Image className={styles.img} src={image} fill  alt={'homme avec sweat brodé'}/>
+       <div style={{ height: `${height}px` }} className={styles.containerImg} >
+   
+     
+        <Image className={styles.img}  src={image} fill alt={'homme avec sweat brodé'}/>
       </div>
   
      

@@ -54,7 +54,7 @@ interface products {
   custom:Object
 }[]
 type CartContext = {
-  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>void;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
+  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>Promise<boolean>;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
 }
 
 const product = [ prod];
@@ -136,32 +136,40 @@ function removeAccents(str:string) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-const AdressCheck = (a:adresse) => {
+const AdressCheck = (a:adresse): Promise<boolean> => {
   console.log(a)
   const remoAccent = removeAccents(a.adresse);
   const add = remoAccent.replace(/\s+/g, "+")
   const url = `https://api-adresse.data.gouv.fr/search/?q=${add}&postcode=${a.post}`
-  return fetch(url)
-  .then((res: Response) => res.json()) // Convertir la réponse en JSON
-  .then((data: any) => {
-    console.log(data)
-    const features = data.features; // Extraire les features de la réponse
+  
+  return new Promise((resolve, reject) => {
+    fetch(url)
+      .then((res: Response) => res.json())
+      .then((data: any) => {
+        console.log(data)
+        const features = data.features;
+console.log(features);
+        if (features && features.length === 0) {
+          // Aucune correspondance trouvée
+          resolve(false);
+        } else if (features && features.length > 1) {
+          // Une seule correspondance trouvée
+          const Add = features[0].properties;
+          setAdress({city:Add.city,postcode: Add.postcode,street:Add.street,housenumber:Add.housenumber});
+          resolve(true);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        reject(err);
+      });
+  });
+}
 
-    if (features && features.length === 0) {
-      // Vérifier si les features existent et ont une longueur supérieure à 0
-      // Faire le traitement approprié ici
-      return false;
-    } else if (features && features.length === 1) {
-      const Add = features[0].properties;
-      setAdress({city:Add.city,postcode: Add.postcode,street:Add.street,housenumber:Add.housenumber})
-      return true;
-    }
-  })
-  .catch((err) => console.log(err));
-}
 const AllPrice = () => {
- return setTot(price + livPrice);
-}
+  const formattedTot = (price + livPrice).toFixed(2);
+  setTot(parseFloat(formattedTot));
+};
 const totalPrice =  (products:any) => {
   let totalPrice = 0;
   let quant = 0;
@@ -176,18 +184,18 @@ const totalPrice =  (products:any) => {
   const livraison = () => {
     switch (quant){
       case 1:
-        setLivPrice(6.70);
+        setLivPrice(8.80);
         break;
         case 2:
-          setLivPrice(8.25);
+          setLivPrice(10.15);
           break;
           case 3: 
-          setLivPrice(9.55);
-          case 4: setLivPrice(9.55);
+          setLivPrice(10.15);
+          case 4: setLivPrice(15);
           break;
-          case 5 : setLivPrice(14.65);
+          case 5 : setLivPrice(15);
           break;
-          default: setLivPrice(14.65);
+          default: setLivPrice(15);
     }
   }
   livraison()

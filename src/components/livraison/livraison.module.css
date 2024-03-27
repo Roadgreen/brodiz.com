@@ -125,8 +125,10 @@
     }
     .Container Form input::placeholder{
         padding-left: 10px;
+        font-size: 1.5em;
     }
     .Button{
+        font-size: 1.0em;
         cursor: pointer;
         border: 0px solid gray;
         background-color: black;

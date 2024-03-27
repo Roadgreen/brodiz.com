@@ -22,7 +22,15 @@ interface product {
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
-  custom:Object
+  custom:{
+    custom:Boolean,
+    customName: string,
+    customSelect: Array<string>,
+    customType:string,
+    customInputPattern:string,
+    customResult:string
+
+  }
 }
 export default function ProductCardDetails({ product }: { product: product }) {
   const { addToCart,addedToCart,setAddedToCart,cartItem } = useGlobalContextCart();
@@ -33,6 +41,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
   const [sizeChangeCss, setSizeChangeCss] = useState<string[]>([]);
   const [colorChangeCss, setColorChangeCss] = useState<string[]>([]);
   const [colorSelection, setColorSelection] = useState<ColorObject[]>();
+  const [custo,setCusto] = useState<string>(product.custom.customType === 'select' ? product.custom.customSelect[0] : '' );
   
   useEffect(() => {
     console.log(cartItem)
@@ -108,6 +117,8 @@ export default function ProductCardDetails({ product }: { product: product }) {
       updatedProduct.color = colorSelection;
       updatedProduct.size = [sizeSelection];
       updatedProduct.quantity = 1;
+      {product.custom.custom ?  updatedProduct.custom = {custom:true,customResult: custo,customInputPattern:'',customName:product.custom.customName,customSelect:product.custom.customSelect,customType:product.custom.customType} : ''}
+     
       // Appelle addToCart du contexte global avec le produit mis à jour
       addToCart(updatedProduct);
       setAlertSelection(false);
@@ -152,6 +163,10 @@ export default function ProductCardDetails({ product }: { product: product }) {
           <h1>{product.name}</h1>
           <h3>{product.price}€</h3>
           <p className={styles.description}>{product.description}</p>
+          {product.custom.custom === true && product.custom.customType === "select" ? (<div className={styles.SelectDiv}><h3>{product.custom.customName}</h3><select onChange={(e)=>{setCusto(e.target.value)}} className={styles.Select}>{product.custom.customSelect.map((item,i)=>(
+            <option key={i} value={item}>{item}</option>
+          ))}</select></div>) : ''}
+           {product.custom.custom === true && product.custom.customType === "input" ? (<div className={styles.SelectDiv}><h3>{product.custom.customName}</h3><input type="text" onChange={(e)=>{setCusto(e.target.value)}}></input></div>) : ''}
           <h3>Taille:</h3>
           <div className={styles.sizeContainer}>
             <div className={styles.sizeDiv}>

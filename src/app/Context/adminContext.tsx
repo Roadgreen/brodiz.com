@@ -4,13 +4,14 @@ import React, {
   useContext,
   createContext,
   useState,
+  useEffect,
   Dispatch,
   SetStateAction,
 } from "react";
-
+import HandleUploadProduct from "../api/upload/uploadProductImg";
 
 type AdminContext = {
-    uploadImage: (file: File) => Promise<any>;
+    uploadImage: (file: File,productId:string) => Promise<any>;
 };
 
 export const AdminContext = createContext<AdminContext>(
@@ -18,41 +19,21 @@ export const AdminContext = createContext<AdminContext>(
 );
 
 export const AdminContextProvider = ({ children }: any) => {
-const uploadImage = async (file:any) =>{
-  console.log(file,'log du files');
-if(!file) return
-try{
+  const [env,setEnv] = useState<string>('dev');
+  useEffect(()=>{
+    if(window.location.hostname === 
+      "localhost"){
+        setEnv('dev')
+      } else {
+        setEnv('prod')
+      }
+  },[])
 
-  const data = new FormData()
-  data.append('file', file);
-    const res = await fetch('/api/upload',{
-        method: 'POST',
-        body: data
-    })
-
-    
-  const returnData = await res.json();
-  const convertPath = (inputPath: string) => {
-    // Supprimer "public" du chemin
-    let pathWithoutPublic = inputPath.replace("public", "");
-  
-    // Remplacer les doubles barres obliques échappées par une seule barre oblique
-    let finalPath = pathWithoutPublic.replace(/\\\\/g, "/");
-  
-    // Remplacer les doubles barres obliques non échappées par une seule barre oblique
-    finalPath = finalPath.replace(/\\/g, "/");
-  
-    return finalPath;
-  }
-console.log(returnData);
-console.log(await convertPath(returnData.path));
-const path = await convertPath(returnData.path);
-        return path;
-    
-}catch(err){
-    console.log(err);
-    return err
-}
+const uploadImage = async (file:any,productId:string) =>{
+  console.log('o est dans le uplaodimage')
+ const imgPath = await HandleUploadProduct(file,productId);
+ await imgPath
+ return  imgPath;
 }
 
 

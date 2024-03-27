@@ -32,7 +32,7 @@ export default function CustomisationPage() {
             confortable. Montrez votre amour inconditionnel avec style grâce à
             nos sweatshirts personnalisés.
           </p>
-          <button className={styles.button}>Acheter</button>
+          <button className={styles.button}>Créer</button>
         </div>
       </div>
       <div className={styles.firstCustom}>
@@ -41,7 +41,7 @@ export default function CustomisationPage() {
           <p>
           Découvrez l'élégance de la personnalisation avec notre gamme exclusive de tabliers brodés, conçus spécialement pour répondre aux besoins de votre commerce ou de votre maison. Chez Brodiz.com, nous croyons que chaque détail compte, c'est pourquoi nos tabliers personnalisés allient style, durabilité et un caractère unique.
           </p>
-          <button onClick={() => router.push('/customisations/Tablier/cust_Tablier_001')} className={styles.button}>Acheter</button>
+          <button onClick={() => router.push('/customisations/Tablier/cust_Tablier_001')} className={styles.button}>Créer</button>
         </div>
         <div className={styles.imgContainer}>
           <Image

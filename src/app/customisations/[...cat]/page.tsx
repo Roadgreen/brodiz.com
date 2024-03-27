@@ -18,7 +18,6 @@ export default function Page({
       useGlobalContext();
       const {addedToCart} = useGlobalContextCart();
       useEffect(() => {
-        console.log(selectedProduct, Object.keys(selectedProduct));
         async function searchProduct() {
           if (selectedProduct.id !== params.cat[1]) {
             const product = await productSearch(
@@ -26,12 +25,23 @@ export default function Page({
               "Customisation",
               "Product"
             );
+            console.log(await productSearch(
+              { id: params.cat[1] },
+              "Customisation",
+              "Product"
+            ));
             setSelectedProduct(product?.[0] ?? {});
           }
           setIsLoading(false);
         }
-        searchProduct();
-      }, [params.cat, selectedProduct, setSelectedProduct,productSearch]);
+      
+        // Only call searchProduct if the selectedProduct ID has changed
+        if (selectedProduct.id !== params.cat[1]) {
+          searchProduct();
+        } else {
+          setIsLoading(false);
+        }
+      }, [setSelectedProduct]);
   
     if (isLoading) {
       return <div>Chargement en cours...</div>;

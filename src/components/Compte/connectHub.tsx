@@ -8,13 +8,15 @@ function ConnectHub() {
   const [validateEmail,setValidateEmail] = useState(true);
   const {sendEvent} = useGlobalContextAnalytics();
   const router = useRouter();
-  const {userEmail,userData,userPswd,UserConnected,FindUser,userFind,Login,setUserData,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
+  const {userEmail,userData,userPswd,UserConnected,FindUser,userFind,Login,setUserData,setUserPswd,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
 
 useEffect(()=>{
   const id = localStorage.getItem('userId');
-
+console.log(id);
 if(id !== undefined && id !== null){
   const connected = UserConnected(id);
+  console.log(userFind)
+  console.log(connected);
   connected.then((res:any)=>{
     console.log(res.code)
     if(res.code === 200){
@@ -25,6 +27,8 @@ if(id !== undefined && id !== null){
   )
 }
 })
+
+
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
     sendEvent({ url: '',
@@ -137,9 +141,10 @@ if(id !== undefined && id !== null){
           ) : (
             <>
               <div className={styles.InputContainer}>
-                <input pattern="[a-zA-Z]+" required />
+                <input  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" onChange={(e:any)=>{setUserPswd(e.target.value)}}  required />
                 <span className={styles.spanFoc}>Mdp</span>
               </div>
+              <div onClick={()=>{}} className={styles.forgetMdp}><p>Mot de passe oublié ?</p></div>
               {userFind === 'register' ? (
                 <>
                   <p>S&apos;inscrire à la newsletter :</p>

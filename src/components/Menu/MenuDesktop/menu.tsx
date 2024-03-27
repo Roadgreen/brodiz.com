@@ -9,6 +9,7 @@ import { useGlobalContextCart } from "@/app/Context/cartContext";
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { usePathname } from 'next/navigation'
 import useWindowSize from '@/components/Function/usewindowsize';
+
 const oswald = Oswald({
   weight: '600',
   subsets: ['latin'],
@@ -33,7 +34,7 @@ export default function DesktopMenu(Text:any){
     },[cartCheck])
 
     return (
-        <div className={`${oswald.className} ${style.containerMenu}`}>
+        <div className={pathname === '/' ? `${oswald.className} ${style.containerMenu}` : `${oswald.className} ${style.containerMenuNonHome}` }>
             <ul className={style.ul}><Link className={pathname === '/'? style.active : style.Liens} href={'/'}>{text.a}</Link>
             <Link className={pathname === '/creations'? style.active : style.Liens} href={'/creations'}>{text.b}</Link>
             <Link className={pathname === '/customisations'? style.active : style.Liens} href={'/customisations'}>{text.c}</Link>
@@ -45,7 +46,7 @@ export default function DesktopMenu(Text:any){
             <Link className={pathname === '/blog'? style.active : style.Liens} href={'/blog'}>{text.d}</Link>
             <Link className={pathname === '/account'? style.active : style.Liens} href={'/account'}>{text.e}</Link>
             <Link className={pathname === '/panier'? style.active : style.Liens} href={'/panier'}>{text.f}</Link>
-            {cartNumber > 0 ? <div className={style.numberMenu}><p>{cartNumber}</p></div> : ''}
+            {cartItem.length > 0 ? <div className={style.numberMenu}><p>{cartNumber}</p></div> : ''}
             </ul>
             {isMenuOpen ? (
   <>

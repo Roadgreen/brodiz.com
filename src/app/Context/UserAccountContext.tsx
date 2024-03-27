@@ -104,6 +104,7 @@ export default function UserContextProvider({ children }: any) {
       console.log(data);
       if(data.code === 202){
         await localStorage.setItem("token",data.token);
+        await localStorage.setItem("userId",data.id);
       }
       return data;
     

@@ -30,17 +30,7 @@ export default function Cart() {
     const {sendPageview,sendEvent} = useGlobalContextAnalytics();
     const {cartItem,updatedCart,removeFromCart} = useGlobalContextCart();
     useEffect(()=>{
-        const product = cartItem.map((x)=>{
-            return(
-                {
-                    productId:x.id,
-                    productQuantity:x.quantity,
-                    productName: x.name,
-                    productColor: x.color,
-                    productSize: x.size
-                }
-            )
-        })
+    
         sendPageview( {url: '',
         referrer: '',
         userAgent: '',
@@ -52,7 +42,7 @@ export default function Cart() {
         product: {},
         pageCategory: 'Panier',
         data: {
-            product
+            cartItem
         }});
       
   },[cartItem,sendPageview])

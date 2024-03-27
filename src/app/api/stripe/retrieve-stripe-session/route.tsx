@@ -4,7 +4,7 @@ import { NextResponse } from 'next/server';
 
 export  async function POST(request:Request,response:Response){
 
-    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY,{apiVersion: '2022-11-15',})
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '',{apiVersion: '2022-11-15',})
     const res = await request.json();
     console.log(res , 'ici normalement tu as le request',request);
     if(request.method === 'POST'){

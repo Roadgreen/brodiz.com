@@ -223,7 +223,7 @@ const handleChangeCustomInput = (e:any) => {
 {custom !== false && customChoice === 'select' ? (<div>
   <h3>Description custom pour selection : </h3>
   <input onChange={(e)=>setCustomName(e.target.value)}  />
-  <h3>Séparer les selects avec un ';'</h3>
+  <h3>Séparer les selects avec un {`';'`}</h3>
   <textarea
         value={textCustom}
         onChange={(e)=>{setTextCustom(e.target.value)}}
@@ -233,7 +233,7 @@ const handleChangeCustomInput = (e:any) => {
      
 </div>) : ''}
 {custom !== false && customChoice === 'input' ? (<div>
-<h3>Description custom pour l'input : </h3>
+<h3>Description custom pour {`l'input`} : </h3>
   <input onChange={(e)=>setCustomName(e.target.value)}  />
   <h3>Input pattern:</h3>
   <input

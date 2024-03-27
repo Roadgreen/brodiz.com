@@ -39,7 +39,7 @@ export default function CustomisationPage() {
         <div className={styles.textContainer}>
           <h3>Personnalisé vos Tabliers avec de la Broderie</h3>
           <p>
-          Découvrez l'élégance de la personnalisation avec notre gamme exclusive de tabliers brodés, conçus spécialement pour répondre aux besoins de votre commerce ou de votre maison. Chez Brodiz.com, nous croyons que chaque détail compte, c'est pourquoi nos tabliers personnalisés allient style, durabilité et un caractère unique.
+          Découvrez {`l'élégance`} de la personnalisation avec notre gamme exclusive de tabliers brodés, conçus spécialement pour répondre aux besoins de votre commerce ou de votre maison. Chez Brodiz.com, nous croyons que chaque détail compte, c'est pourquoi nos tabliers personnalisés allient style, durabilité et un caractère unique.
           </p>
           <button onClick={() => router.push('/customisations/Tablier/cust_Tablier_001')} className={styles.button}>Créer</button>
         </div>

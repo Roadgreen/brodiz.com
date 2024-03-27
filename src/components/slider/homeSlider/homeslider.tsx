@@ -41,9 +41,9 @@ sendEvent({ url: '',
   return (
     <div className={styles.slideContainer} style={{ height: `${height}px` }}>
          <div  className={`${styles.containerText}`}>
-       <h1 className={oswald.className}>ICI C'EST<br/> BRODERIE</h1>
+       <h1 className={oswald.className}>ICI {`C'EST`}<br/> BRODERIE</h1>
        <div className={styles.French}><div style={{backgroundColor:'#012697'}}></div><div style={{backgroundColor:'#f9f9f9'}}></div><div style={{backgroundColor:'#fd1e32'}}></div></div>
-       <p className={oswald2.className}>Explorez l'élégance brodée au cœur de la France.</p>
+       <p className={oswald2.className}>Explorez {`l'élégance`} brodée au cœur de la France.</p>
        <div className={`${styles.button} ${oswald2.className}`}>Découvrir</div>
       </div>
        <div style={{ height: `${height}px` }} className={styles.containerImg} >

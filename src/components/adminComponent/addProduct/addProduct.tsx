@@ -13,7 +13,15 @@ interface comments {
   comments:string
   }
 interface FormData {
-   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,custom:Object
+   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,custom:{
+    custom:Boolean,
+    customName: string,
+    customSelect: Array<string>,
+    customType:string,
+    customInputPattern:string,
+    customResult:string
+
+  }
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL','Taille Unique'];
@@ -31,7 +39,14 @@ export default function AddProduct() {
   const [colors,setColors] = useState({color:'',name:''});
   const {uploadImage} = useGlobalContextAdmin();
 const [formData,setFormData] = useState<FormData>({
-  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:'',collection: '',comments:[],custom:{}
+  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:'',collection: '',comments:[],custom: {
+    custom: false,
+    customName: '',
+    customSelect: [],
+    customType: '',
+    customInputPattern:'',
+    customResult: ''
+}
 })
 const [imgData,setImgData] = useState([]);
 useEffect(() => {
@@ -42,7 +57,7 @@ const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 if(e.target.files !== null){
   const file = e.target.files[0];
   if(file && formData.id !== ''){
-  
+
     try{
 
       const result = await uploadImage(file,formData.id);
@@ -54,7 +69,7 @@ if(e.target.files !== null){
     }catch(err){
       console.log(err);
     }
- 
+
   }
 }
 }
@@ -153,7 +168,7 @@ const handleChangeCustomSelect = async (e:any) => {
   const dernierCaractere:string[] = valeurActuelle.split(';').map(item => item.trim());
 
 
-    setFormData({...formData,custom:{custom: true, customType: 'select', customName:customName,customSelect:dernierCaractere}})
+    setFormData({...formData,custom:{customResult:'',custom: true, customType: 'select', customName:customName,customSelect:dernierCaractere,customInputPattern:''}})
     console.log(dernierCaractere);
     console.log(customArray);
     console.log(formData);
@@ -163,7 +178,7 @@ const handleChangeCustomSelect = async (e:any) => {
 const handleChangeCustomInput = (e:any) => {
   const inputPattern = e.target.value;
   if(customName !== ''){
-    setFormData({...formData,custom:{custom:true,customType:'input',customName: customName,customInputPattern:inputPattern}})
+    setFormData({...formData,custom:{customResult:'',custom:true,customType:'input',customName: customName,customInputPattern:inputPattern,customSelect:[]}})
 
   } else {
     console.log('no name');

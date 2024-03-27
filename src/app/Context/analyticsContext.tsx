@@ -158,7 +158,7 @@ const sendEvent = async (event: event) =>{
       body: JSON.stringify(event),
     };
 
-    if(window.location.hostname !== "localhost"){
+    if(typeof window !== undefined && window.location.hostname !== "localhost"){
       const pageViewSend = await  fetch(
         process.env.FETCHANALYTICSEVENT ||
           "http://192.168.1.166:8080/analytic/event",

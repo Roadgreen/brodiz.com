@@ -24,12 +24,8 @@ const oswald2 = Oswald({
 export default function Slide() {
 
   const {sendEvent} = useGlobalContextAnalytics();
-  const windowSize = useWindowSize();
-  const [height, setHeight] = useState(windowSize.height);
 
-  useEffect(()=>{
-    setHeight(windowSize.height)
-  },[windowSize])
+ 
 
   const handleClick = () => {
 sendEvent({ url: '',
@@ -39,14 +35,14 @@ sendEvent({ url: '',
   }
 
   return (
-    <div className={styles.slideContainer} style={{ height: `${height}px` }}>
+    <div className={styles.slideContainer} style={{ height: `100vh` }}>
          <div  className={`${styles.containerText}`}>
        <h1 className={oswald.className}>ICI {`C'EST`}<br/> BRODERIE</h1>
        <div className={styles.French}><div style={{backgroundColor:'#012697'}}></div><div style={{backgroundColor:'#f9f9f9'}}></div><div style={{backgroundColor:'#fd1e32'}}></div></div>
        <p className={oswald2.className}>Explorez {`l'élégance`} brodée au cœur de la France.</p>
        <div className={`${styles.button} ${oswald2.className}`}>Découvrir</div>
       </div>
-       <div style={{ height: `${height}px` }} className={styles.containerImg} >
+       <div style={{ height: `100vh` }} className={styles.containerImg} >
    
      
         <Image className={styles.img}  src={image} fill alt={'homme avec sweat brodé'}/>

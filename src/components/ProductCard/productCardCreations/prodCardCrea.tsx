@@ -16,22 +16,30 @@ interface comments {
   date: Date,
   comments:string
   }
-interface product {
-  id: string,
-  name: string,
-  img: Array<[string,string]>,
-  price:number,
-  notes:number,
-  price_ID: string,
-  description: string,
-  color: Array<ColorObject>,
-  size:Array<string>,
-  category: Array<string>,
-  tag: Array<string>,
-  quantity:number,
-  comments: Array<comments>,
-  custom:Object
-}
+  interface product {
+    id: string,
+    name: string,
+    img: Array<[string,string]>,
+    price:number,
+    notes:number,
+    price_ID: string,
+    description: string,
+    color: Array<ColorObject>,
+    comments: Array<comments>,
+    size:Array<string>,
+    category: Array<string>,
+    tag: Array<string>,
+    quantity:number,
+    custom:{
+      custom:Boolean,
+      customName: string,
+      customSelect: Array<string>,
+      customType:string,
+      customInputPattern:string,
+      customResult:string
+  
+    }
+  }
 export default function ProdCardCrea({ id }: { id: number }) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(true); 

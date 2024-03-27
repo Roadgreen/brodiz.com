@@ -65,11 +65,11 @@ const userIdCheck = () => {
     }
     return findId;
 }
-    pageView.url = window.location.href ;
-    pageView.referrer = window.document.referrer;
+    pageView.url = typeof window !== undefined ? window.location.href : '';
+    pageView.referrer = typeof window !== undefined ? window.document.referrer : '';
     pageView.userId =  userIdCheck();
-    pageView.userAgent = window.navigator.userAgent;
-    pageView.screenResolution = `${window.screen.width},${window.screen.height} `;
+    pageView.userAgent = typeof window !== undefined ? window.navigator.userAgent : '';
+    pageView.screenResolution = typeof window !== undefined ? `${window.screen.width},${window.screen.height} ` : '';
     pageView.timeOnPage = new Date(); 
 
     const generateVisitorId = (): string => {
@@ -125,7 +125,7 @@ const userIdCheck = () => {
           },
           body: JSON.stringify(pageView),
         };
-        if(window.location.hostname !== "localhost"){
+        if(typeof window !== undefined && window.location.hostname !== "localhost"){
           const pageViewSend = await fetch(
             process.env.FETCHANALYTICSPAGEVIEW ||
               "http://192.168.1.166:8080/analytic/page_view",
@@ -148,7 +148,7 @@ const userIdCheck = () => {
 const sendEvent = async (event: event) =>{
     const isSessionId = await localStorage.getItem('sessionId') as string;
 
-    event.url = window.location.href;
+    event.url = typeof window !== undefined ? window.location.href: '';
     event.sessionId = isSessionId;
     var myInit = {
       method: "POST",

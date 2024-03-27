@@ -7,7 +7,7 @@ export type UploadImageResponse = {
 export default  async function HandleUploadProduct(file: File,productId?:string): Promise<UploadImageResponse | { error: string }> {
  console.log('dns le handleuploadproduct')
     let env = '';
-       if(window.location.hostname === 
+       if(typeof window !== undefined && window.location.hostname === 
          "localhost"){
            env = 'dev'
          } else {
@@ -47,7 +47,7 @@ export default  async function HandleUploadProduct(file: File,productId?:string)
    export   async function HandleUploadBlog(file: File,articleId:string): Promise<UploadImageResponse | { error: string } > {
     console.log('dns le handleuploadBlog', file)
        let env = '';
-          if(window.location.hostname ===
+          if(typeof window !== undefined && window.location.hostname ===
             "localhost"){
               console.log('dev')
               env = 'dev'

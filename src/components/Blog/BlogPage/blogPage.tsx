@@ -46,7 +46,7 @@ useEffect(() => {
 
 const BlogArticle = () => {
     let envAdress:any;
-    if(window.location.hostname === 'localhost'){
+    if(typeof window !== undefined && window.location.hostname === 'localhost'){
        envAdress = process.env.URLIMGBLOGDEV
     }else{
         envAdress = process.env.URLIMGBLOGPROD

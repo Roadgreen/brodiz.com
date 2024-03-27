@@ -65,7 +65,7 @@ const userIdCheck = () => {
     }
     return findId;
 }
-    pageView.url = window.location.href;
+    pageView.url = window.location.href ;
     pageView.referrer = window.document.referrer;
     pageView.userId =  userIdCheck();
     pageView.userAgent = window.navigator.userAgent;

@@ -55,7 +55,7 @@ export default function Cart() {
             product
         }});
       
-  },[])
+  },[cartItem,sendPageview])
 console.log(cartItem.length)
     const checkMap = (Cart:product[]) => (Cart.map((x:product) =>{
         console.log(x);

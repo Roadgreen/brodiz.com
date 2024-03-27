@@ -37,7 +37,7 @@ export default function Menusticky() {
           setStick(true);
           setMobile(true)
         }
-      }, [scrollHeight]);
+      }, [windowSize.width,scrollHeight]);
   return (
     <div
       className={stick ? styles.Container : styles.ContainerNonex}

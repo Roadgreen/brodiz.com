@@ -22,13 +22,13 @@ interface pageView {
     screenResolution: string,
     product: object,
     pageCategory: string,
-    data: {[key: string]: string;}
+    data: object
 }
 interface event {
     url: string,
     eventName: string,
     sessionId:string,
-    data:{[key: string]: string;},
+    data:object,
 }
 
 type AnalyticsContext = {

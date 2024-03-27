@@ -69,7 +69,7 @@ user_newsletter: user.newsletter || '',
       }
               
       
-      }, [id,UserConnected,router,setUser,sendPageview]);
+      }, [id,UserConnected,router,setUser,sendPageview,user]);
 
       const handleDisconnect = ()=>{
         localStorage.removeItem('token');

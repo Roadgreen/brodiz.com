@@ -31,7 +31,7 @@ export default function DesktopMenu(Text:any){
       if(numberQuantity){
         setCartNumber(numberQuantity);
       }
-    },[cartCheck])
+    },[cartCheck,cartItem])
 
     return (
         <div className={pathname === '/' ? `${oswald.className} ${style.containerMenu}` : `${oswald.className} ${style.containerMenuNonHome}` }>

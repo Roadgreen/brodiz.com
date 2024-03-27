@@ -24,7 +24,7 @@ interface LivraisonPartProps {
 }
 
 const stripePromise = loadStripe(
-  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+  process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || ''
 );
 
 export default function LivraisonPart({ User }: LivraisonPartProps) {
@@ -68,7 +68,7 @@ export default function LivraisonPart({ User }: LivraisonPartProps) {
     if (User) {
       setConnected(true);
     }
-  }, [cartItem, User]);
+  }, [cartItem, User,sendPageview]);
   const router = useRouter();
   const [adress, setAdress] = useState({
     adresse: "",

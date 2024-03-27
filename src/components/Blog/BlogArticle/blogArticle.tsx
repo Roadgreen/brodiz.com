@@ -26,7 +26,7 @@ const fetchData = async ()=>{
     setArticle(newArticle);
 }
 fetchData()
-},[])
+},[articleReader,id])
   return (
     <div className={styles.container}>
         <div className={styles.containerImg}><Image className={styles.ig} src={article.img}  alt={`image de l'article de broderie`} fill/></div>

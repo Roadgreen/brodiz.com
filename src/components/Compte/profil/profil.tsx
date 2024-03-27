@@ -18,7 +18,7 @@ useEffect(()=>{
   if(user && user.user.adress){
 setAdress({adresse:user.user.adress[0].adresse,post:user.user.adress[0].postalcode,ville:user.user.adress[0].ville,pays:user.user.adress[0].pays})
   }
-},[])
+},[user])
 //TODO ici dans le profil ne pas oublier de changer le user en useState pour prendre en compte les modification apporter par l'utilisateur et vérifier les infos avec un useeffect pour rentrer les infos user dans le usestate
 const handleChangeAdd = (e:string,n:any)=>{
 

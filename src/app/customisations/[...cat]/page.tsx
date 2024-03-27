@@ -41,7 +41,7 @@ export default function Page({
         } else {
           setIsLoading(false);
         }
-      }, [setSelectedProduct]);
+      }, [setSelectedProduct,params.cat,productSearch,selectedProduct.id]);
   
     if (isLoading) {
       return <div>Chargement en cours...</div>;

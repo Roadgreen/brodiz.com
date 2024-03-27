@@ -1,18 +1,20 @@
-"use client"
 import React, { useEffect, useState } from "react";
 
 
-const useViewportSize = () => {
+const useViewportSize =  () => {
+
   const [viewportSize, setViewportSize] = useState({
-    width: window.document.documentElement.clientWidth,
-    height: window.document.documentElement.clientHeight,
+    width: typeof window !== 'undefined' ? window.document.documentElement.clientWidth : 0,
+    height: typeof window !== 'undefined' ? window.document.documentElement.clientHeight : 0,
   });
 
   const handleResize = () => {
-    setViewportSize({
-      width: window.document.documentElement.clientWidth,
-      height: window.document.documentElement.clientHeight,
-    });
+    if (typeof window !== 'undefined') {
+      setViewportSize({
+        width: window.document.documentElement.clientWidth,
+        height: window.document.documentElement.clientHeight,
+      });
+    }
   };
 
   useEffect(() => {

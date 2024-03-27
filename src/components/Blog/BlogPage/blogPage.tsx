@@ -21,11 +21,17 @@ interface article{
 
 export default function BlogPage() {
   const router = useRouter()
+  const [envAdress,setEnvAdress] = useState<any>('');
     const [articlesArray,setArticlesArray] = useState<Array<Object>>(['']);
 const {allArticle} = useGlobalContextBlog();
 
 useEffect(() => {
-
+  
+    
+    if(typeof window !== undefined && typeof process.env.URLIMGBLOGDEV !== undefined && typeof process.env.URLIMGBLOGPROD !== undefined && window.location.hostname === 'localhost'){
+       setEnvAdress(process.env.URLIMGBLOGDEV)
+        setEnvAdress(process.env.URLIMGBLOGPROD);
+    }
     const fetchData = async () => {
       try {
         const data = await allArticle();
@@ -45,12 +51,7 @@ useEffect(() => {
   }
 
 const BlogArticle = () => {
-    let envAdress:any;
-    if(typeof window !== undefined && window.location.hostname === 'localhost'){
-       envAdress = process.env.URLIMGBLOGDEV
-    }else{
-        envAdress = process.env.URLIMGBLOGPROD
-    }
+  
         return (
             <div  className={styles.blogArticleContainer}>
    {articlesArray.map((x: any, i: number) => {

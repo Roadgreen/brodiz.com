@@ -16,6 +16,11 @@ import { useRouter } from "next/navigation";
 import html2canvas from "html2canvas";
 import handleUploadImage from '@/app/api/upload/uploadcustomserver'
 import {UploadImageResponse} from '@/app/api/upload/uploadcustomserver'
+
+interface ColorObject {
+  color: string;
+  name: string;
+}
 interface product {
   id: string;
   name: string;
@@ -58,7 +63,7 @@ export default function HomePersonnalisation() {
     notes: 5,
     price_ID: "",
     description: "",
-    color: [{}],
+    color: [{name:'',color:''}],
     size: [""],
     category: [""],
     tag: [""],
@@ -91,7 +96,8 @@ export default function HomePersonnalisation() {
   useEffect(() => {
     handlePrice();
     if (divMouve && divMouve.current) {
-      const slider = divMouve.current;
+    
+    const slider = divMouve.current;
       let isDragging = false;
 
       slider.addEventListener("pointerdown", (e) => {

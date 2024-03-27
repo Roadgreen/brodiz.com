@@ -33,7 +33,15 @@ interface product {
   category: Array<string>,
   tag: Array<string>,
   quantity:number,
-  custom:Object
+  custom:{
+    custom:Boolean,
+    customName: string,
+    customSelect: Array<string>,
+    customType:string,
+    customInputPattern:string,
+    customResult:string
+
+  }
 }
 interface productToAdd {
   id: string,
@@ -48,7 +56,15 @@ interface productToAdd {
   tag: Array<string>,
   collection:string,
   comments:Array<comments>
-  custom:Object
+  custom:{
+    custom:Boolean,
+    customName: string,
+    customSelect: Array<string>,
+    customType:string,
+    customInputPattern:string,
+    customResult:string
+
+  }
 }
 type ProductContext = {
   productSearch: (doc: object, collection: string, db: string) => Promise<product[]>;
@@ -78,7 +94,12 @@ export const ProductContextProvider = ({ children }: any) => {
   tag: [],
   quantity: 0,
   comments: [],
-  custom:{}
+  custom:{custom:false,
+    customName: '',
+    customSelect: [],
+    customType: '',
+    customInputPattern:'',
+    customResult:''}
 }]]);
 
   const [selectedProduct, setSelectedProduct] = useState<product>({  id: "",
@@ -94,7 +115,12 @@ export const ProductContextProvider = ({ children }: any) => {
   tag: [],
   quantity: 0,
   comments: [],
-  custom:{}
+  custom:{custom:false,
+    customName: '',
+    customSelect: [],
+    customType: '',
+    customInputPattern:'',
+    customResult:''}
 });
 const [env,setEnv] = useState<string>('dev');
 

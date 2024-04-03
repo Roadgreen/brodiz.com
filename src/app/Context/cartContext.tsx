@@ -3,17 +3,7 @@ import { features } from "process";
 import { useContext, createContext, useState,useEffect,SetStateAction,Dispatch } from "react";
 
 
-const prod = {
-  id: "HUI",
-  image: "/img/producthero image/Ryukwomen.jpg",
-  name: "Ryuk Sweatshirt Death Note",
-  price: 60,
-  category: "hoodies",
-  quantity: 1,
-  color: "blanc",
-  size: "L",
-  alt: "hoodies skull ryuk",
-};
+
 interface ColorObject {
   color: string;
   name: string;
@@ -57,7 +47,7 @@ type CartContext = {
   addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>Promise<boolean>;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
 }
 
-const product = [ prod];
+
 
 export const CartContext = createContext<CartContext>(
   {} as CartContext

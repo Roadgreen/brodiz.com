@@ -20,6 +20,24 @@ const nextConfig = {
             port: '8080',
             pathname: '/uploadImg/getProductImage/**',
           },
+          {
+            protocol: 'https',
+            hostname: 'server.brodiz.com',
+            port: '',
+            pathname: '/uploadImg/getProductImage/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'server.brodiz.com',
+            port: '',
+            pathname: '/uploadImg/getImage/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'server.brodiz.com',
+            port: '',
+            pathname: '/uploadImg/getBlogImage/**',
+          },
         ],
       },
     env:{

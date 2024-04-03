@@ -49,6 +49,7 @@ interface productToAdd {
   img: Array<[string,string]>,
   price:number,
   notes:number,
+  price_ID:string,
   description: string,
   color: Array<Object>,
   size:Array<string>,
@@ -200,7 +201,7 @@ useEffect(()=>{
   };
 
   const productAdd = async (
-    productToAdd: object,
+    productToAdd: productToAdd,
   ): Promise<number> => {
     try {
       let envAdress: string | URL ;

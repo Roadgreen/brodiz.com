@@ -41,7 +41,7 @@ export default function Menusticky() {
   return (
     <div
       className={stick ? styles.Container : styles.ContainerNonex}
-      style={mobile ? { top: windowSize.height -100 } :  { top: windowSize.height / 4 }}
+      style={mobile ? { top: windowSize.height -100 } :  { top: '25%'}}
     >
         
       <div onClick={() => router.push('/')}>

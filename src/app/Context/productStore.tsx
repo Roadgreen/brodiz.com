@@ -141,10 +141,14 @@ useEffect(()=>{
     try {
       let envAdress: string | URL ;
       let urlImg;
+      console.log(env);
       if (env === 'dev') {
+        console.log('dans dev')
         envAdress = process.env.FETCHPRODUCTSEARCHDEV || '';
         urlImg = process.env.URLIMGDEV;
       } else {
+        console.log('dans else')
+
         envAdress = process.env.FETCHPRODUCTSEARCHPROD || '';
         urlImg = process.env.URLIMGPROD;
       }

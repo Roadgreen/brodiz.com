@@ -60,7 +60,7 @@ const BlogArticle = () => {
                   <div
                     className={styles.blogArticle}
                     key={i}
-                    onClick={()=>{handleClick(x._id)}}
+                    onClick={()=>{handleClick(x.id)}}
                   >
                     <div className={styles.imgContainer}>
                         <Image className={styles.img} src={`${envAdress}${x.img}`} fill alt=''/>

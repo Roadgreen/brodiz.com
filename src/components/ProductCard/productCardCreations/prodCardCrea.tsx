@@ -23,7 +23,7 @@ interface comments {
     price:number,
     notes:number,
     price_ID: string,
-    description: string,
+    description: {short:string,long:string},
     color: Array<ColorObject>,
     comments: Array<comments>,
     size:Array<string>,

@@ -28,7 +28,7 @@ interface product {
   price: number;
   notes: number;
   price_ID: string;
-  description: string;
+  description: {short:string,long:string};
   color: Array<ColorObject>;
   size: Array<string>;
   category: Array<string>;
@@ -62,7 +62,7 @@ export default function HomePersonnalisation() {
     price: 0,
     notes: 5,
     price_ID: "",
-    description: "",
+    description: {short:'', long:''},
     color: [{name:'',color:''}],
     size: [""],
     category: [""],

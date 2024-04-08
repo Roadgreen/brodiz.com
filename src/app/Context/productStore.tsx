@@ -26,7 +26,10 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
-  description: string,
+  description: {
+    short:string,
+    long:string
+},
   color: Array<ColorObject>,
   comments: Array<comments>,
   size:Array<string>,
@@ -50,7 +53,10 @@ interface productToAdd {
   price:number,
   notes:number,
   price_ID:string,
-  description: string,
+  description: {
+    short:string,
+    long:string
+},
   color: Array<Object>,
   size:Array<string>,
   category: Array<string>,
@@ -86,7 +92,7 @@ export const ProductContextProvider = ({ children }: any) => {
   name: "",
   img: [],
   price: 0,
-  description: "",
+  description: {short:'',long:''},
   price_ID:'',
   color: [],
   notes:0,
@@ -109,7 +115,7 @@ export const ProductContextProvider = ({ children }: any) => {
   price: 0,
   notes:0,
   price_ID:'',
-  description: "",
+  description: {short:'',long:''},
   color: [],
   size: [],
   category: [],

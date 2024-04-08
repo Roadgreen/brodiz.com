@@ -13,7 +13,7 @@ interface comments {
   comments:string
   }
 interface FormData {
-   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description:string,collection:string,comments:Array<comments>,custom:{
+   id:string,name:string,img:Array<[string,string]>,notes: number,price: number,price_ID:string,model:string,category:Array<string>,tag:Array<string>,size:Array<string>,color:ColorObject[],description: {short:string,long:string},collection:string,comments:Array<comments>,custom:{
     custom:Boolean,
     customName: string,
     customSelect: Array<string>,
@@ -39,7 +39,7 @@ export default function AddProduct() {
   const [colors,setColors] = useState({color:'',name:''});
   const {uploadImage} = useGlobalContextAdmin();
 const [formData,setFormData] = useState<FormData>({
-  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description:'',collection: '',comments:[],custom: {
+  id:'',name:'',img: [],notes: 0,price: 0,price_ID:'',model:'',category:[],tag:[],size:[],color: [],description: {short:'',long:''},collection: '',comments:[],custom: {
     custom: false,
     customName: '',
     customSelect: [],
@@ -310,8 +310,15 @@ const handleChangeCustomInput = (e:any) => {
           <input type='text' onChange={(e)=>{setColors({...colors,name:e.target.value})}} placeholder='colorName'/>
           <div className={styles.button} onClick={handleColorChange}><p>Ajouter</p></div>
           </div>
-           <h3>Product Description</h3>
-           <textarea onChange={(e)=>{setFormData({...formData,description:e.target.value})}} className={styles.textArea}/></div>
+           <h3>Product short Description</h3>
+           
+           <textarea onChange={(e)=>{setFormData({...formData,description:{...formData.description,short:e.target.value}})}} className={styles.textArea}/>
+
+           <h3>Product long Description</h3>
+           
+           <textarea onChange={(e)=>{setFormData({...formData,description:{...formData.description,long:e.target.value}})}} className={styles.textArea}/>
+           
+           </div>
             {error ? <p>Vérifiez les informations, il manque des données</p>: ''}
             {success ? <p>Produit ajouté</p>: ''}
             

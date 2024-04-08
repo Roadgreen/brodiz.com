@@ -16,7 +16,7 @@ interface ColorObject {
     price:number,
     notes:number,
     price_ID: string,
-    description: string,
+    description: {short:string,long:string},
     color: Array<ColorObject>,
     size:Array<string>,
     category: Array<string>,

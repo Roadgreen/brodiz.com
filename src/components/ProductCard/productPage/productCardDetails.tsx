@@ -16,7 +16,10 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
-  description: string,
+  description: {
+    short:string,
+    long:string
+},
   color: Array<ColorObject>,
   size:Array<string>,
   category: Array<string>,
@@ -162,7 +165,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
         <div className={styles.descriptionContainer}>
           <h1>{product.name}</h1>
           <h3>{product.price}€</h3>
-          <p className={styles.description}>{product.description}</p>
+          <p className={styles.description}>{product.description.short}</p>
           {product.custom.custom === true && product.custom.customType === "select" ? (<div className={styles.SelectDiv}><h3>{product.custom.customName}</h3><select onChange={(e)=>{setCusto(e.target.value)}} className={styles.Select}>{product.custom.customSelect.map((item,i)=>(
             <option key={i} value={item}>{item}</option>
           ))}</select></div>) : ''}

@@ -15,7 +15,10 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
-  description: string,
+  description: {
+    short:string,
+    long:string
+},
   color: Array<ColorObject>,
   size:Array<string>,
   category: Array<string>,
@@ -35,7 +38,10 @@ interface products {
   name: string,
   img: Array<string>,
   price:string,
-  description: string,
+  description: {
+    short:string,
+    long:string
+},
   color: string,
   size:Array<string>,
   category: Array<string>,

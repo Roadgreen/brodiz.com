@@ -55,7 +55,7 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
-  description: string,
+  description: {short:string,long:string},
   color: Array<ColorObject>,
   size:Array<string>,
   category: Array<string>,
@@ -235,7 +235,7 @@ export default function CustomProduct({ product }: { product: product }) {
         <div className={styles.descriptionContainer}>
           <h1>{product.name}</h1>
           <h3 className={styles.price}>{product.price}€</h3>
-          <p className={styles.description}>{product.description}</p>
+          <p className={styles.description}>{product.description.short}</p>
           <h3>Customisation:</h3>
 
       {/*Début du parcours de personnalisation*/}

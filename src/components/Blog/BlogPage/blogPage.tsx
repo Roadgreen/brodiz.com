@@ -56,6 +56,7 @@ const BlogArticle = () => {
         return (
             <div  className={styles.blogArticleContainer}>
    {articlesArray.map((x: any, i: number) => {
+    const urlImg = `${envAdress}${x.img}`;
                 return (
                   <div
                     className={styles.blogArticle}
@@ -63,7 +64,7 @@ const BlogArticle = () => {
                     onClick={()=>{handleClick(x.id)}}
                   >
                     <div className={styles.imgContainer}>
-                        <Image className={styles.img} src={`${envAdress}${x.img}`} fill alt=''/>
+                        <Image className={styles.img} src={urlImg} fill alt=''/>
                     </div>
                     <h4>{x.name}</h4>
                     <p className={styles.description}>{x.description}</p>

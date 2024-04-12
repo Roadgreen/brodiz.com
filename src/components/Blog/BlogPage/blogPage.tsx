@@ -42,7 +42,7 @@ useEffect(() => {
     };
 
     fetchData();
-  }, [allArticle, setArticlesArray]);
+  }, []);
 
   const handleClick = (e:string) => {
     console.log(e);

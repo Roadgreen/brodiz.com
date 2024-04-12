@@ -92,7 +92,7 @@ type BlogContext = {
           try{
             const result = await fetch(envAdress,myInit);
             const codeResponse = await result.json();
-console.log(codeResponse.articles);
+console.log(codeResponse.articles, 'consolelog all article dans le blogcontext');
 
 return codeResponse.articles
           }catch(err){

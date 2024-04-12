@@ -36,7 +36,7 @@ type BlogContext = {
   );
 
   export const BlogContextProvider = ({ children }: any) => {
-    const [env,setEnv] = useState<string>('dev');
+    const [env,setEnv] = useState<string>('');
     const [articles,setArticlesl] = useState<Object>({})
 
     useEffect(()=>{

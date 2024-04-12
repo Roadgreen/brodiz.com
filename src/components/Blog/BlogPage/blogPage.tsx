@@ -26,8 +26,6 @@ export default function BlogPage() {
 const {allArticle} = useGlobalContextBlog();
 
 useEffect(() => {
-  
-    
     if(typeof window !== undefined && typeof process.env.URLIMGBLOGDEV !== undefined && typeof process.env.URLIMGBLOGPROD !== undefined && window.location.hostname === 'localhost'){
        setEnvAdress(process.env.URLIMGBLOGDEV)
     }else{
@@ -36,7 +34,7 @@ useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await allArticle();
-        console.log(data);
+        console.log(data , 'ici le console log useEffect dans fethcdata ');
         setArticlesArray(data);
       } catch (error) {
         console.error('Erreur lors de la récupération des articles:', error);

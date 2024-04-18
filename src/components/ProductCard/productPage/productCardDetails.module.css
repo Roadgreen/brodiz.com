@@ -278,10 +278,14 @@
     justify-content: center;
     align-items: center;
   }
+  .descriptionContainer h3{
+    font-size: 1.5em;
+  }
   .description {
     display: flex;
     justify-content: center;
-    margin: 30px;
+    font-size: 1.3em;
+    margin: 20px;
   }
   .colors {
     display: flex;
@@ -289,12 +293,24 @@
     justify-content: center;
     align-items: center;
     width: 80%;
-    height: 80px;
+    height: 50px;
   }
-
+  .colorOptionSelected {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+    border: 3px rgb(0, 0, 0) solid;
+    border-radius: 30px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    -ms-border-radius: 30px;
+    -o-border-radius: 30px;
+  }
+  
   .color {
     width: 30px;
     height: 30px;
+    border: 1.5px solid rgba(128, 128, 128, 0.434);
     margin: 10px;
     border-radius: 20px;
     -webkit-border-radius: 20px;
@@ -304,6 +320,39 @@
   }
   .color:hover {
     cursor: pointer;
+  }
+  .sizeContainer {
+    display: flex;
+    width: 90%;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .sizeDiv {
+    display: flex;
+    width: 300px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .sizeDiv > * {
+  }
+  .sizeOption {
+    margin: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    width: 40px;
+    height: 40px;
+    border: 1px solid grey;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
   }
   .sizeOptionSelected {
     margin: 10px;
@@ -322,13 +371,19 @@
     -o-border-radius: 10px;
     color: aliceblue;
   }
+  .sizeOption:hover {
+    cursor: pointer;
+    background-color: black;
+    color: aliceblue;
+  }
   .buttonBuy {
-    width: 200px;
+    width: 250px;
     margin: 20px;
     color: aliceblue;
-    height: 30px;
+    height: 60px;
     border-radius: 20px;
     border: 0px;
+    font-size: 1.3em;
     background-color: rgb(0, 0, 0);
     -webkit-border-radius: 20px;
     -moz-border-radius: 20px;
@@ -341,7 +396,7 @@
     background-color: rgba(137, 137, 137, 0.625);
     width: 200px;
     margin: 20px;
-    height: 30px;
+    height: 60px;
     border-radius: 20px;
     border: 1px white solid;
     -webkit-border-radius: 20px;
@@ -353,5 +408,27 @@
     -moz-transition: 0.5s all;
     -ms-transition: 0.5s all;
     -o-transition: 0.5s all;
+  }
+  .Select{
+    width: 150px;
+    border: 1px solid gray;
+    border-radius: 10px;
+    height: 40px;
+    color: #000;
+    font-size: 1.3em;
+    border: 2px solid rgb(0, 0, 0);
+    background-color: white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+  .SelectDiv{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }

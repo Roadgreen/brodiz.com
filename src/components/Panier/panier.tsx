@@ -50,8 +50,8 @@ console.log(cartItem.length)
     const checkMap = (Cart:product[]) => (Cart.map((x:product) =>{
         console.log(x);
     return(
-    <div key={x.id} className={styles.Articles}><Image alt={x.img[0][1]} src={x.img[0][0]} height={150} width={150}/>
-    <div>
+    <div key={x.id} className={styles.Articles}><div className={styles.ImgContainer}><Image className={styles.Img} alt={x.img[0][1]} src={x.img[0][0]} fill/></div>
+    <div className={styles.description}>
         <h4>{x.name}</h4>
         <p>{x.category[0]}</p>
     <p>{x.color[0].name}</p>
@@ -59,7 +59,7 @@ console.log(cartItem.length)
     <div>
     <label>Quantité: </label>
 
-<select style={{width:50,height:20,fontSize:15}} onChange={e => handleChange(e.target.value,x.id)} name="quantity" id="quantity">
+<select className={styles.quantitySelection} onChange={e => handleChange(e.target.value,x.id)} name="quantity" id="quantity">
     <option value={x.quantity}>{x.quantity}</option>
     <option value={1}>1</option>
     <option value={2}>2</option>
@@ -71,9 +71,9 @@ console.log(cartItem.length)
 
     </div>
     </div>
-    <div><p>{x.price}€ </p></div>
-    <div onClick={e=>handleSup(x)}>
-        <RiDeleteBin5Line/>
+    <div className={styles.price}><p>{x.price}€ </p></div>
+    <div className={styles.sup} onClick={e=>handleSup(x)}>
+        <RiDeleteBin5Line size={'1.4em'}/>
     </div>
     </div>
     )}))

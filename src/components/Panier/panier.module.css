@@ -11,6 +11,14 @@
         width: 60%;
         height: 100%;
     }
+    .ImgContainer{
+        position: relative;
+        width: 150px;
+        height: 150px;
+    }
+    .Img{
+        object-fit: contain;
+    }
     .Container h2{
         margin-left: 20px;
     }
@@ -41,10 +49,10 @@
     }
 }
 
-@media screen and (max-width: 768px) {
+@media  (max-width: 768px) {
     .Container {
         display: flex;
-        margin-bottom: 20px;
+        justify-content: space-around;
         flex-direction: column;
         border-radius: 10px;
         border: 1px solid gray;
@@ -52,8 +60,25 @@
         -moz-border-radius: 10px;
         -ms-border-radius: 10px;
         -o-border-radius: 10px;
-        width: 80%;
+        width: 90%;
         height: 100%;
+    }
+    .ImgContainer{
+        position: relative;
+        width: 100px;
+        height: 100px;
+    }
+    .Img{
+        object-fit: contain;
+    }
+    .description{
+        display: flex;
+        width: 30%;
+        
+justify-content: center;
+align-items: center;
+text-align: center;
+        flex-direction: column;
     }
     .Container h2{
         margin-left: 20px;
@@ -63,25 +88,24 @@
         flex-direction: row;
         align-items: center;
         justify-content: space-around;
-        height: 170px;
+        height: 100%;
         margin-bottom: 15px;
     }
-    .Articles div:nth-child(3){
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .quantitySelection{
+        width: 70px;
+        background-color: rgb(255, 255, 255);
+        border: 1px solid black;
+        height: 30px;
+        font-size: 1em;
+        color: black;
+        text-align: center;
     }
-    .Articles div:nth-child(4){
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 20px;
+    .price{
+        font-size: 1.2em;
     }
-    .Articles div:nth-child(4):hover{
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        justify-content: center;
+    .sup{
+        
     }
+  
     
 }

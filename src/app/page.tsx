@@ -21,7 +21,7 @@ export default function Home() {
         sendPageview( {url: '',
         referrer: '',
         userAgent: '',
-        visitorId: '',
+        visitorId:'',
         userId: '',
         sessionId: '',
         timeOnPage: '',

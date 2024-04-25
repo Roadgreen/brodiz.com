@@ -54,7 +54,7 @@ export default function ProductDesc({ product }: { product: product }){
             </div>
            
             {
-                clic ? (<div className={styles.ContainerDesc}>{parse(product.description.long)} </div>) : ''
+                clic ? (<div className={styles.ContainerDesc} dangerouslySetInnerHTML={{ __html: product.description.long }} />) : ''
             }
         </div>
     )

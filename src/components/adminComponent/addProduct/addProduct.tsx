@@ -24,7 +24,7 @@ interface FormData {
   }
 }
 export default function AddProduct() {
-  const availableSizes = ['S','M','L','XL','XXL','Taille Unique'];
+  const availableSizes = ['S','M','L','XL','XXL','Taille Unique','3M','6M','12M','18M','24M','3A'];
   const availableCategory = ['Hoodies','Manga','Famille','Customisation','Cuisine','Pull','Tablier','Homme','Femme','Enfant','Chaussette']
   const {productAdd} = useGlobalContext();
   const [tags,setTags] = useState(['']);

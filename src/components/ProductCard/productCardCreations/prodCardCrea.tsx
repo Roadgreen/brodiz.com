@@ -110,7 +110,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
       case 1:
         filter = ['Homme','Femme','Enfant'];
         break;
-      case 3:
+      case 4:
         filter = ['Serviette','Peignoir'];
         break;
     }

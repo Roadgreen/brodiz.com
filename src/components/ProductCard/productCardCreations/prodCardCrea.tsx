@@ -56,8 +56,8 @@ export default function ProdCardCrea({ id }: { id: number }) {
           "Product"
         );
         const prod2: Array<product> = await productSearch({}, "Pull", "Product");
-        const prod3: Array<product> = await productSearch({}, "Bain", "Product");
-        const prod4: Array<product> = await productSearch({}, "Baby", "Product");
+        const prod3: Array<product> = await productSearch({}, "Baby", "Product");
+        const prod4: Array<product> = await productSearch({}, "Bain", "Product");
 
       
         setProductArray([prod1, prod2, prod3, prod4]);

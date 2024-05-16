@@ -33,7 +33,6 @@ interface UserChange {
     adress:Array<Object>,
     name: string,
     lastname: string
-    
 }
 interface UserConnect {
   email:string;
@@ -209,7 +208,10 @@ console.log(envAdress);
         setUserFind('register');
       } else if(result.code === 202){
         setUserFind('connect');
+      }else if(result.code === 203){
+        setUserFind('connectAdmin');
       }
+
       return result
     } else {
       throw new Error("Failed to fetch user.");

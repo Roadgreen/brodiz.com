@@ -8,13 +8,13 @@ import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
 
  function Connected(id:{id:string}){
   const {sendPageview,sendEvent} = useGlobalContextAnalytics();
-    const [user,setUser] = useState<any>({}); 
+    const [user,setUser] = useState<any>({});
     const [menu,setMenu] = useState(1);
     const router = useRouter();
 const {UserConnected} = useGlobalContextUser();
     useEffect(() => {
         const fetchData = async () => {
-            const userCon:any = async () => { 
+            const userCon:any = async () => {
               const newId = id.id;
                 const userCon:any = await UserConnected(newId);
                 console.log(userCon);
@@ -67,9 +67,8 @@ user_newsletter: user.newsletter || '',
         pageCategory: 'Espace_client',
       data:{}})
       }
-              
-      
-      }, [id,UserConnected,router,setUser,sendPageview,user]);
+
+      }, []);
 
       const handleDisconnect = ()=>{
         localStorage.removeItem('token');

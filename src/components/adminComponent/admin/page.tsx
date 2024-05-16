@@ -3,12 +3,12 @@ import React from 'react'
 import AddBlogPost from "@/components/adminComponent/addBlogPost/addBlogPost"
 
 import { useState } from 'react'
-import { AdminContextProvider } from '../Context/adminContext'
-import { useGlobalContextAdmin } from '../Context/adminContext'
+import { AdminContextProvider } from '../../../app/Context/adminContext'
+import { useGlobalContextAdmin } from '../../../app/Context/adminContext'
 import styles from './page.module.css'
 import AddProduct from '@/components/adminComponent/addProduct/addProduct'
 
-export default function Page() {
+export default function AdminPageHome() {
   const [pages,setPages] = useState(0);
 
   return (

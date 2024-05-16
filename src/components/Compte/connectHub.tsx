@@ -45,13 +45,14 @@ if(id !== undefined && id !== null){
     }
   
     if (!isValidEmail(email)) {
-      if (email === 'Admin@Admin.com') {
-        const finded = FindUser({ email: email, collection: 'Admin' });
-        // Test point: Admin user found
-      }
+      
       setValidateEmail(false);
       return; // Exit early if the email is invalid or it is the Admin user.
     }else{
+      if (email === 'Admin@Admin.com') {
+        const finded = await FindUser({ email: email, collection: 'Admin', });
+        // Test point: Admin user found
+      }
       setValidateEmail(true)
     }
   
@@ -61,10 +62,33 @@ if(id !== undefined && id !== null){
       case 'Wait':
         const finded: any = await FindUser({ email, collection: 'Client' });
         break;
-  
+        case 'connectAdmin':
+          const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
+          ({ code, id , user} = await connectAdmin); 
+          // Assign the values here, don't redeclare
+          switch (code) {
+            case 404:
+              // Test point: Code 404 handling
+              break;
+    
+            case 202:
+              // Test point: Code 202 handling
+              console.log(id);
+              await setUserData(user);
+              await localStorage.setItem("userId",id);
+              console.log(await userData)
+              router.push(`/account/${id}`);
+              break;
+    
+            default:
+              // Handle other codes here, if needed.
+              break;
+          }
+          break;
       case 'connect':
         const connect: any = await Login({ email, password, collection: 'Client' });
-        ({ code, id , user} = await connect); // Assign the values here, don't redeclare
+        ({ code, id , user} = await connect); 
+        // Assign the values here, don't redeclare
         switch (code) {
           case 404:
             // Test point: Code 404 handling

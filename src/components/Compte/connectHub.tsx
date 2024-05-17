@@ -4,9 +4,8 @@ import { useRouter } from 'next/navigation';
 import styles from './connectHub.module.css';
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
-import { getCookie } from '../Function/cookie';
 
-function ConnectHub() {
+function ConnectHub({Cookie}:{Cookie:any}) {
   const [validateEmail,setValidateEmail] = useState(true);
   const {sendEvent} = useGlobalContextAnalytics();
   const router = useRouter();
@@ -68,8 +67,7 @@ if(id !== undefined && id !== null){
             case 'connectAdmin':
               const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
               ({ code, id , user} = await connectAdmin);
-             const theme = await getCookie('SanAndreas');
-            if(user.cookies === theme){
+            if(user.cookies === Cookie){
               router.push(`/account/${id}`);
             }
             break;

@@ -53,6 +53,7 @@ if(id !== undefined && id !== null){
       if (email === 'Admin@Admin.com') {
         let code, id,user; 
         FindUser({ email: email, collection: 'Admin', }).then(async (finded) => {if(finded.code === 203){
+          console.log('dans le find user de ladmin')
           const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
           ({ code, id , user} = await connectAdmin);
         

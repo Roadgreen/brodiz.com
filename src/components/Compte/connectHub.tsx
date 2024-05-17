@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import styles from './connectHub.module.css';
 import { useGlobalContextUser } from '@/app/Context/UserAccountContext';
 import { useGlobalContextAnalytics } from '@/app/Context/analyticsContext';
-import { cookies } from 'next/headers'
+import { getCookie } from '../Function/cookie';
 
 function ConnectHub() {
   const [validateEmail,setValidateEmail] = useState(true);
@@ -64,12 +64,10 @@ if(id !== undefined && id !== null){
           case 'Wait':
             const finded: any = await FindUser({ email, collection: 'Client' });
             break;
-            case 'connectAdmin': 
-           
+            case 'connectAdmin':
               const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
               ({ code, id , user} = await connectAdmin);
-              const cookieStore = cookies()
-      const theme = cookieStore.get('SanAndreas');
+             const theme = await getCookie('SanAndreas');
             if(user.cookies === theme){
               router.push(`/account/${id}`);
             }

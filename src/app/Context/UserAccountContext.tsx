@@ -148,7 +148,7 @@ export default function UserContextProvider({ children }: any) {
       const cookieAdmin = cookies()
   const theme = cookieAdmin.get('SanAndreas')
   const user = await resData.user;
-
+console.log('dans le if 203 de login');
   if(theme === user.cookie){
     const token = resData.token;
     const id = await resData.id;

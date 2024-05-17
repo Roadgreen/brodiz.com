@@ -1,7 +1,6 @@
 "use client"
 import { promises } from "dns";
 import React,{ useContext, createContext, useState, Dispatch, SetStateAction, useEffect } from "react";
-import { cookies } from 'next/headers'
  
 type UserContext = {
   CreateAccount: (User: User) => void;
@@ -145,21 +144,16 @@ export default function UserContextProvider({ children }: any) {
      } else if(resData.code === 404){
       return {code: 404,id: '',user:{}}
      } else if(resData.code === 203){
-      const cookieAdmin = cookies()
-  const theme = cookieAdmin.get('SanAndreas')
+  
   const user = await resData.user;
 console.log('dans le if 203 de login');
-  if(theme === user.cookie){
     const token = resData.token;
     const id = await resData.id;
     const email = await user.email.toString();
     console.log(user);
 await localStorage.setItem("token",token);
-  return {code: 202,id: user._id,user};
-  }else {
-    return {code: 404,id: '',user:{}}
+  return {code: 203,id: user._id,user};
 
-  }
     
      }
     } catch(err){

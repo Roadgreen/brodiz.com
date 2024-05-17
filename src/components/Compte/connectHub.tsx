@@ -12,11 +12,12 @@ function ConnectHub() {
   const {userEmail,userData,userPswd,UserConnected,FindUser,userFind,Login,setUserData,setUserPswd,isNews,CreateAccount,setUserEmail} = useGlobalContextUser();
 
 useEffect(()=>{
+
   const id = localStorage.getItem('userId');
 console.log(id);
 if(id !== undefined && id !== null){
   const connected = UserConnected(id);
-  console.log(userFind)
+  console.log(userFind,'consoleloguserfind')
   console.log(connected);
   connected.then((res:any)=>{
     console.log(res.code)
@@ -51,16 +52,11 @@ if(id !== undefined && id !== null){
       return; // Exit early if the email is invalid or it is the Admin user.
     }else{
       if (email === 'Admin@Admin.com') {
-        let code, id,user; 
-        FindUser({ email: email, collection: 'Admin', }).then(async (finded) => {if(finded.code === 203){
-          console.log('dans le find user de ladmin')
-          const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
-          ({ code, id , user} = await connectAdmin);
+       const finded = await FindUser({ email: email, collection: 'Admin', })
+
+
         
-
-
-        }
-      })
+      
       } else {
         let code, id,user; // Declare the variables here to avoid redeclaration
 
@@ -68,7 +64,16 @@ if(id !== undefined && id !== null){
           case 'Wait':
             const finded: any = await FindUser({ email, collection: 'Client' });
             break;
-            
+            case 'connectAdmin': 
+           
+              const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
+              ({ code, id , user} = await connectAdmin);
+              const cookieStore = cookies()
+      const theme = cookieStore.get('SanAndreas');
+            if(user.cookies === theme){
+              router.push(`/account/${id}`);
+            }
+            break;
           case 'connect':
             const connect: any = await Login({ email, password, collection: 'Client' });
             ({ code, id , user} = await connect); 

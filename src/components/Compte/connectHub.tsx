@@ -1,3 +1,4 @@
+'use client'
 import { useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styles from './connectHub.module.css';

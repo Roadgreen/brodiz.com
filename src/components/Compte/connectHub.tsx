@@ -54,6 +54,13 @@ if(id !== undefined && id !== null){
       if (email === 'Admin@Admin.com') {
        const finded = await FindUser({ email: email, collection: 'Admin', })
         console.log(finded);
+        let code, id,user;
+        const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
+ ({ code, id , user} = await connectAdmin) 
+
+if(user.cookies === Cookie){
+  router.push(`/account/${id}`);
+  }
 
         
       
@@ -65,11 +72,7 @@ if(id !== undefined && id !== null){
             const finded: any = await FindUser({ email, collection: 'Client' });
             break;
             case 'connectAdmin':
-              const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
-              ({ code, id , user} = await connectAdmin);
-            if(user.cookies === Cookie){
-              router.push(`/account/${id}`);
-            }
+          
             break;
           case 'connect':
             const connect: any = await Login({ email, password, collection: 'Client' });

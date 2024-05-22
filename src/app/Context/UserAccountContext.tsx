@@ -135,8 +135,6 @@ export default function UserContextProvider({ children }: any) {
      if(resData.code === 202){
       const token = resData.token;
       const user = await resData.user;
-      const id = await resData.id;
-      const email = await user.email.toString();
       console.log(user);
       
   await localStorage.setItem("token",token);
@@ -148,8 +146,6 @@ export default function UserContextProvider({ children }: any) {
   const user = await resData.user;
 console.log('dans le if 203 de login');
     const token = resData.token;
-    const id = await resData.id;
-    const email = await user.email.toString();
     console.log(user);
 await localStorage.setItem("token",token);
   return {code: 203,id: user._id,user};

@@ -61,7 +61,7 @@ if(id !== undefined && id !== null){
 user.cookies === Cookie ?   router.push(`/account/${id}`) :   console.log('connecthub le routerpush ne ce fait pas.')
 
 
-  }
+  
 
         
       

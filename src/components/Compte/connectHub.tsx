@@ -53,7 +53,7 @@ if(id !== undefined && id !== null){
     }else{
       if (email === 'Admin@Admin.com') {
        const finded = await FindUser({ email: email, collection: 'Admin', })
-
+        console.log(finded);
 
         
       

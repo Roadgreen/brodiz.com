@@ -158,7 +158,7 @@ user.cookies === Cookie.value ?   router.push(`/account/${id}`) :   console.log(
           ) : (
             <>
               <div className={styles.InputContainer}>
-                <input  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" onChange={(e:any)=>{setUserPswd(e.target.value)}}  required />
+                <input type='password'  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" onChange={(e:any)=>{setUserPswd(e.target.value)}}  required />
                 <span className={styles.spanFoc}>Mdp</span>
               </div>
               <div onClick={()=>{}} className={styles.forgetMdp}><p>Mot de passe oublié ?</p></div>

@@ -57,7 +57,7 @@ if(id !== undefined && id !== null){
         let code, id,user;
         const connectAdmin: any = await Login({ email, password, collection: 'Admin' });
  ({ code, id , user} = await connectAdmin) 
- console.log('console connectHub , user.cookie, Cookie' ,'Ici user.cookie>', user.cookie ,'Ici le props>', Cookie)
+ console.log('console connectHub , user.cookie, Cookie' ,'Ici user.cookie>', user.cookie,user.cookie.typeOf(),'Ici le props>', Cookie, Cookie.typeOf())
 user.cookies === Cookie.value ?   router.push(`/account/${id}`) :   console.log('connecthub le routerpush ne ce fait pas.')
 
 

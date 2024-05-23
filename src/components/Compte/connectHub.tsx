@@ -72,9 +72,7 @@ user.cookies === Cookie.value ?   router.push(`/account/${id}`) :   console.log(
           case 'Wait':
             const finded: any = await FindUser({ email, collection: 'Client' });
             break;
-            case 'connectAdmin':
           
-            break;
           case 'connect':
             const connect: any = await Login({ email, password, collection: 'Client' });
             ({ code, id , user} = await connect); 

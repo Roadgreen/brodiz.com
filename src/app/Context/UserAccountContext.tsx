@@ -135,7 +135,7 @@ export default function UserContextProvider({ children }: any) {
      if(resData.code === 202){
       const token = resData.token;
       const user = await resData.user;
-      console.log(user);
+      console.log('console du login dans userAccountContext', user);
       
   await localStorage.setItem("token",token);
     return {code: 202,id: user._id,user};

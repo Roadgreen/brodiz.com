@@ -129,11 +129,13 @@ console.log(livPrice);
       adress.ville !== "" &&
       adress.pays !== ""
     ) {
-      const check: any = await AdressCheck(adress);
       console.log(adress);
-      console.log(check);
+     
       console.log(command);
+      const check: any = await AdressCheck(adress);
+      console.log(check);
       if (check && is_valid_email(userNotConnectInfo.email)) {
+        console.log('check et valid email ok dans livraison');
         const params: any = {
           method: "POST",
           mode: "no-cors",
@@ -142,6 +144,7 @@ console.log(livPrice);
           body: JSON.stringify(itemsForCheckout),
         };
         if (User) {
+          console.log('if user true dans livraison')
           //command a traiter
           const command = {
             userid: User.id,
@@ -155,7 +158,7 @@ console.log(livPrice);
           };
           await commandAdd(command);
         } else {
-          console.log(adress);
+          console.log(adress,'dans le else');
           const command = {
             userid: "",
             useremail: userNotConnectInfo.email,
@@ -237,43 +240,51 @@ console.log(livPrice);
               <div>
                 <input
                   placeholder="Prénom"
+                  autoComplete="on"
                   onChange={(e) =>
                     handleChangeUserInf(e.target.value, "prenom")
                   }
                 ></input>
                 <input
                   placeholder="Nom"
+                  autoComplete="on"
                   onChange={(e) => handleChangeUserInf(e.target.value, "nom")}
                 ></input>
               </div>
               <div>
                 <input
                   placeholder="Adresse postale"
+                  autoComplete="on"
                   onChange={(e) => handleChangeAdd(e.target.value, "adresse")}
                 ></input>
                 <input
                   placeholder="Ville"
+                  autoComplete="on"
                   onChange={(e) => handleChangeAdd(e.target.value, "ville")}
                 ></input>
               </div>
               <div>
                 <input
                   placeholder="Code postal"
+                  autoComplete="on"
                   onChange={(e) => handleChangeAdd(e.target.value, "post")}
                 ></input>
                 <input
                   placeholder="Pays"
+                  autoComplete="on"
                   onChange={(e) => handleChangeAdd(e.target.value, "pays")}
                 ></input>
               </div>
               <div>
                 <input
                   placeholder="Email"
+                  autoComplete="on"
                   style={emailOk ? { borderColor: "red" } : {}}
                   onChange={(e) => handleChangeUserInf(e.target.value, "email")}
                 ></input>
                 <input
                   placeholder="Numéro de téléphone(optionnel)"
+                  autoComplete="on"
                   onChange={(e) => handleChangeUserInf(e.target.value, "tel")}
                 ></input>
               </div>

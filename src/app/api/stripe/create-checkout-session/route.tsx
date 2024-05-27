@@ -37,7 +37,7 @@ export  async function POST(request:Request,response:Response){
                       shipping_rate_data: {
                         type: 'fixed_amount',
                         fixed_amount: {
-                          amount: 8.8,
+                          amount: 8,
                           currency: 'eur',
                         },
                         display_name: 'La poste - en boite au lettre',

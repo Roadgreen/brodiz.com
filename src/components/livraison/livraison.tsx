@@ -169,7 +169,8 @@ console.log(livPrice);
             livprice: 0,
             totalprice: tot,
           };
-          await commandAdd(command);
+       const result = await commandAdd(command);
+       console.log(result, 'ici le resultat de commandAdd')
         }
 
         const response: Response | void = await fetch(

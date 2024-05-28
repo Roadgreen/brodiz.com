@@ -147,6 +147,7 @@ console.log(livPrice);
           console.log('if user true dans livraison')
           //command a traiter
           const command = {
+            etat: 'en attente',
             userid: User.id,
             useremail: User.email,
             username: User.name,
@@ -160,6 +161,7 @@ console.log(livPrice);
         } else {
           console.log(adress,'dans le else');
           const command = {
+            etat:'en attente',
             userid: "",
             useremail: userNotConnectInfo.email,
             username: "",

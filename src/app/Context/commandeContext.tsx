@@ -8,7 +8,7 @@ commandAdd:(Command:Command) => Promise<"ok" | "non ok">,
 commandCheck:(UserCommandCheck:UserCommandCheck) =>  Promise<Array<Object>>
 }
 interface Command {
-  
+    etat: string,
     useremail: string,
     userid:string,
     adress: {
@@ -68,7 +68,7 @@ export const CommandeContext = createContext<CommandeContext>(
 
     console.log('on est dans commandeAdd function');
   const sendCommand = await  fetch(
-        process.env.FETCHCOMMANDSEARCH ||
+        /*process.env.FETCHCOMMANDSEARCH || */
           "http://server.brodiz.com/command/commandAdd",
         myInit
       );
@@ -76,7 +76,7 @@ export const CommandeContext = createContext<CommandeContext>(
       const data = await sendCommand.json();
       console.log(data);
       if(data.code === 202){
-        
+        localStorage.setItem('commandID',data.id);
         console.log('data.code is 202')
 return 'ok'
       } else if(data.code === 404){

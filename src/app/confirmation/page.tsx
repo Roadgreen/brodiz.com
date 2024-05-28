@@ -50,8 +50,13 @@ export default function Confirmation(){
             const response:Response | void = await fetch('/api/stripe/retrieve-stripe-session',params);
              const data = await response.json();
              console.log(data);
-             const command = {userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data , totalprice: 0  }
-
+             const commandID = await localStorage.getItem('commandID');
+             const command = {etat:'validé',userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data.shipping_cost , totalprice: data.total_product_price  }
+           const result =   await commandAdd(command);
+           if(result === 'ok'){
+            localStorage.removeItem('commandID');
+            localStorage.removeItem('cart');
+           }
           }
           stripeRetrieve(id);
        

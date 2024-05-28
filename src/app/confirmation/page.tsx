@@ -51,7 +51,7 @@ export default function Confirmation(){
              const data = await response.json();
              console.log(data);
              const commandID = await localStorage.getItem('commandID');
-             const command = {etat:'validé',userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data.shipping_cost , totalprice: data.total_product_price  }
+             const command = {id:commandID,etat:'validé',userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data.shipping_cost , totalprice: data.total_product_price  }
            const result =   await commandAdd(command);
            if(result === 'ok'){
             localStorage.removeItem('commandID');
@@ -65,7 +65,7 @@ export default function Confirmation(){
         if (query.get('canceled')) {
             setSucess(false);
         }
-    },[cartItem,UserConnected])
+    },[])
     return (<>
     {sucess && user? (<div>
         <div><h1>Merci!</h1></div>

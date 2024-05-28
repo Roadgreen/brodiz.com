@@ -19,12 +19,7 @@ export async function POST(request: Request) {
             const URL: any = session.url;
             console.log(session.shipping_cost, session.shipping_details, session.shipping_options);
 
-            // Extract the line items and calculate the total price of products
-            const lineItems = session.line_items?.data || [];
-            const totalProductPrice = lineItems.reduce((total, item) => {
-                const amount = item.amount_total || 0;
-                return total + amount;
-            }, 0);
+      
 
             const Head: any = {
                 "Access-Control-Allow-Origin": "*",
@@ -33,7 +28,7 @@ export async function POST(request: Request) {
 
             return NextResponse.json({
                 shipping_cost: session.shipping_cost?.amount_total,
-                total_product_price: totalProductPrice
+                total_product_price: session.amount_total ? session.amount_total / 100 : 0 
             }, Head);
         } catch (err: any) {
             console.log('err du fichier route.tsx', err.message);

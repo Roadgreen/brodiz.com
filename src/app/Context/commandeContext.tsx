@@ -69,7 +69,7 @@ export const CommandeContext = createContext<CommandeContext>(
     console.log('on est dans commandeAdd function');
   const sendCommand = await  fetch(
         process.env.FETCHCOMMANDSEARCH ||
-          "http://192.168.1.166:8080/command/commandAdd",
+          "http://server.brodiz.com/command/commandAdd",
         myInit
       );
 

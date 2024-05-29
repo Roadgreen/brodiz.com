@@ -80,8 +80,8 @@ Command.product = filteredProductArray;
 
     console.log('on est dans commandeAdd function');
   const sendCommand = await  fetch(
-        /*process.env.FETCHCOMMANDSEARCH || */
-          "http://localhost:8080/command/commandAdd",
+        process.env.FETCHCOMMANDSEARCH || 
+          "http://server.bodiz.com/command/commandAdd",
         myInit
       );
 

@@ -37,6 +37,7 @@ export default function LivraisonPart({ User }: LivraisonPartProps) {
   const [connected, setConnected] = useState(false);
   const [sameAdress, SetSameAdress] = useState(true);
 
+
   useEffect(() => {
     sendPageview({
       url: "",
@@ -145,6 +146,7 @@ console.log(livPrice);
         };
         if (User) {
           console.log('if user true dans livraison')
+          
           //command a traiter
           const command = {
             etat: 'en attente',

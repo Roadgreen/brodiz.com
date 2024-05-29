@@ -50,7 +50,7 @@ interface products {
   custom:Object
 }[]
 type CartContext = {
-  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>Promise<boolean>;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
+  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>Promise<boolean>;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>,cleanCart:()=>void;
 }
 
 
@@ -83,7 +83,9 @@ export  function CartContextProvider({children}:any) {
       }
     }
   }, []);
-
+const cleanCart = ()=>{
+  setCartItem([])
+}
   const addToCart = (productToAdd: product) => {
     console.log(productToAdd)
     const productToAddKey = `${productToAdd.id}-${productToAdd.color[0]}-${productToAdd.size[0]}`;
@@ -227,7 +229,7 @@ return quantity
  
 }
   return <CartContext.Provider value={{
-    addToCart,cartCheck,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart
+    addToCart,cartCheck,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart,cleanCart
   }}>{children}</CartContext.Provider>;
 }
 export const useGlobalContextCart = () => useContext(CartContext);

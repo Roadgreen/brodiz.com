@@ -56,6 +56,18 @@ export const CommandeContext = createContext<CommandeContext>(
     
     }
   const commandAdd = async (Command:Command) => {
+
+    // Fonction pour filtrer les propriétés d'un objet produit
+function filterProductData(product:any) {
+  return {
+      size: product.size,
+      custom: product.custom,
+      _id: product._id,
+      quantity: product.quantity
+  };
+}
+const filteredProductArray = Command.product.map(filterProductData);
+Command.product = filteredProductArray;
     console.log(Command);
     var myInit = {
         method: "POST",

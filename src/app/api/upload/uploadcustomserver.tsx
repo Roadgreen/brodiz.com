@@ -9,7 +9,7 @@ export default async function handleUploadImage(file: File): Promise<UploadImage
     const formData = new FormData();
     formData.append('image', file);
 
-    const response = await fetch('http://server.bordiz.com/uploadImg', {
+    const response = await fetch('https://server.bordiz.com/uploadImg', {
       method: 'POST',
       body: formData,
     });

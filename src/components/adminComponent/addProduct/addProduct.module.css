@@ -1,80 +1,107 @@
-.container{
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    
+    padding: 20px;
 }
-.ContainerAdd{
+
+.ContainerAdd {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    flex-direction: row;
-    width: 70%;
-    border-radius: 10px;
+    width: 90%;
+    max-width: 800px;
+    border-radius: 20px;
     margin-bottom: 20px;
     border: 1px solid rgba(128, 128, 128, 0.429);
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    padding: 20px;
+    background: #f9f9f9;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.ContainerAdd div{
-    display: flex;
-    flex-direction: column;
-}
-.ContainerAdd input{
-    margin: 5px;
-}
-.button{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 
-    background-color: aliceblue;
-    border: 1px solid gray;
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
-.button:hover{
-    cursor: pointer;
+.ContainerAdd div {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    color: aliceblue;
-    background-color: rgb(0, 0, 0);
-    border: 1px solid gray;
-    text-align: center;
-    width: 100px;
-    height: 30px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
-.textArea{
-    margin-top: 10px;
-}
-.list{
-    display: flex;
-    flex-direction: row;
     width: 100%;
-    height: 100%;
+    margin-bottom: 10px;
+}
+
+.ContainerAdd input,
+.ContainerAdd textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.ContainerAdd input:focus,
+.ContainerAdd textarea:focus {
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #007BFF;
+    border: none;
+    color: white;
+    width: 120px;
+    height: 40px;
+    border-radius: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+    margin: 10px 0;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: #0056b3;
+}
+
+.textArea {
+    margin-top: 10px;
+    height: 100px;
+    resize: none;
+}
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     font-size: small;
 }
-.list h4{
-    width: 100px;
-    height: 0px;
+
+.list h4,
+.list p {
+    width: auto;
+    margin: 5px;
+    padding: 5px 10px;
+    background-color: #007BFF;
+    color: white;
+    border-radius: 15px;
 }
-.list p{
-    width: 100px;
-    height: 0px;
+
+@media (max-width: 768px) {
+    .ContainerAdd {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .ContainerAdd input,
+    .ContainerAdd textarea {
+        padding: 8px;
+    }
+
+    .button {
+        width: 100px;
+        height: 35px;
+    }
 }

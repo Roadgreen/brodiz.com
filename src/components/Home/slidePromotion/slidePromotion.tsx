@@ -4,8 +4,10 @@ import Image from "next/image";
 import useParallax from "@/components/Function/parallax";
 import womenWhite from '@/productImg/Home/womensweat.jpg'
 import MenWhite from '@/productImg/Home/Mensweatchisrt.jpg'
+import { useRouter } from 'next/navigation'
 
 export default function SlidePromotion() {
+  const router = useRouter()
   const para = useRef<any>();
   const para2 = useRef<any>();
   const para3 = useRef<any>();
@@ -34,7 +36,7 @@ export default function SlidePromotion() {
         <Image className={styles.Img} src={womenWhite} fill alt="deux femmes avec sweatshirt"/>
       </div>
  <div className={styles.BigBentoVer}>
-        <h3>Collection Homme</h3>
+        <h3>Sweatshirt Bearded Man</h3>
         <Image className={styles.Img} src={MenWhite} fill alt="deux femmes avec sweatshirt"/>
       </div>
       <div className={styles.littleBentoHor}>

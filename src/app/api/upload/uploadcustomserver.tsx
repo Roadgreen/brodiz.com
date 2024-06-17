@@ -3,6 +3,10 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 export type UploadImageResponse = {
   imagePath: string;
 };
+export type DeleteImageResponse = {
+  success: boolean,
+  message:string
+};
 
 export default async function handleUploadImage(file: File): Promise<UploadImageResponse | { error: string }> {
   try {
@@ -27,3 +31,23 @@ export default async function handleUploadImage(file: File): Promise<UploadImage
   }
 }
 
+export  async function handleDeleteUploadImage(imagePath: string): Promise<DeleteImageResponse | { error: string }> {
+  try {
+    
+
+    const response = await fetch(`https://server.brodiz.com/deleteImage/${imagePath}}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      const responseData: DeleteImageResponse = await response.json();
+      return responseData;
+    } else {
+      const errorData = await response.json();
+      return { error: errorData.error || 'Erreur inconnue lors du delete image' };
+    }
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    return { error: 'Erreur lors de l\'upload.' };
+  }
+}

@@ -131,6 +131,13 @@ gap: 20px;
     z-index: 2;
     
 }
+.BigBentoVer h3{
+    font-size: large;
+    margin-left: 10px;
+    color: white;
+    z-index: 2;
+    
+}
 .BigBentoVer{
     display: flex;
     position: relative;

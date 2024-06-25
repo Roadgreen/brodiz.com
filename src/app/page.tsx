@@ -1,5 +1,5 @@
 "use client"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import styles from './page.module.css'
 import Slide from '@/components/slider/homeSlider/homeslider'
@@ -15,8 +15,11 @@ const product = {
 const products = [product,product,product,product]
 
 export default function Home() {
+  const [innerWidth,setInnerWidth] = useState<number>(0);
   const {sendPageview} = useGlobalContextAnalytics();
   useEffect(()=>{
+    console.log(window.innerWidth)
+    setInnerWidth(window.innerWidth)
         sendPageview( {url: '',
         referrer: '',
         userAgent: '',
@@ -37,7 +40,7 @@ export default function Home() {
     <main className={styles.main}>
      <Slide/>
 <SlidePromotion/>
-     <HomePersonnalisation/>
+     <HomePersonnalisation width={innerWidth}/>
    
     </main>
   )

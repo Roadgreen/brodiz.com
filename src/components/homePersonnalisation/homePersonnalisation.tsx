@@ -37,7 +37,9 @@ interface product {
   custom: Object;
 }
 // Here is your Slide compnent
-export default function HomePersonnalisation() {
+export default function HomePersonnalisation({width}:{width:number}) {
+
+
   const { addToCart } = useGlobalContextCart();
   const arrSize = ["XS", "S", "M", "L", "XL", "XXL"];
   const [chooseImg, setChooseImg] = useState<StaticImageData>(jaune);
@@ -94,6 +96,7 @@ export default function HomePersonnalisation() {
   }, [Logo, text, custoPosition]);
 
   useEffect(() => {
+    console.log(width);
     handlePrice();
     if (divMouve && divMouve.current) {
     
@@ -109,7 +112,7 @@ export default function HomePersonnalisation() {
         if (isDragging) {
           let max;
           if (custoPosition) {
-            max = 35;
+            max = 20;
           } else {
             max = 18;
           }
@@ -178,6 +181,7 @@ export default function HomePersonnalisation() {
         Logo_custo: chooseLogo,
         Text: text,
         TextSize: sliderPosition,
+        ScreenSize: width
       };
 
       sendEvent({
@@ -199,7 +203,8 @@ export default function HomePersonnalisation() {
     }
   };
 
-  const handleLogo = (i: any) => {
+  const handleLogo = (i: number) => {
+    console.log(i, 'numéro du logo');
     setChooseLogo(i);
     setLogo(true);
     handlePrice();
@@ -303,6 +308,9 @@ export default function HomePersonnalisation() {
               </div>
             ))}
           </div>
+          <div className={styles.containerCondi}>
+            <Link className={styles.conditions} href={'/'}>Veuillez noter que le produit final peut légèrement différer de l'image visualisée en ligne en raison de la personnalisation. Pour plus de détails, veuillez consulter nos Conditions Générales de Vente.</Link>
+          </div>
           {/*<div  className={`${styles.buttonBuy} ${fontOptions[2].className}`} onClick={()=>{handleBuy()}}>
         Acheter
     </div>*/}
@@ -404,13 +412,21 @@ export default function HomePersonnalisation() {
             </div>
           </div>
           <h4>Votre Texte</h4>
-          <textarea
-            maxLength={sliderPosition > 20 ? 10 : 15}
+         {width > 768 ? ( <textarea
+            maxLength={sliderPosition > 18 ? 10 : 15}
+            onChange={(e) => {
+              handleTextChange(e);
+            }}
+            className={styles.areaText}
+          />) : (
+            <textarea
+            maxLength={sliderPosition > 18 ? 5 : 13}
             onChange={(e) => {
               handleTextChange(e);
             }}
             className={styles.areaText}
           />
+          )}
           <h4>Taille</h4>
           <div className={styles.sliderContainer} ref={divMouve}>
             <div className={styles.sliderRail}></div>

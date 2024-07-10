@@ -309,7 +309,7 @@ export default function HomePersonnalisation({width}:{width:number}) {
             ))}
           </div>
           <div className={styles.containerCondi}>
-            <Link className={styles.conditions} href={`/`}>Veuillez noter que le produit final peut légèrement différer de l'image visualisée en ligne en raison de la personnalisation. Pour plus de détails, veuillez consulter nos Conditions Générales de Vente.</Link>
+            <Link className={styles.conditions} href={"/"}>Veuillez noter que le produit final peut légèrement différer de l'image visualisée en ligne en raison de la personnalisation. Pour plus de détails, veuillez consulter nos Conditions Générales de Vente.</Link>
           </div>
           {/*<div  className={`${styles.buttonBuy} ${fontOptions[2].className}`} onClick={()=>{handleBuy()}}>
         Acheter

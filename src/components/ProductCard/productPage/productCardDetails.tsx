@@ -63,7 +63,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
     sessionId: '',
     timeOnPage: new Date,
     screenResolution: '',
-    product: {id:product.id},
+    product: {product},
     pageCategory: 'Product',
     data: {
     }});
@@ -76,7 +76,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
     sendEvent({ url: '',
   eventName: 'click',
   sessionId:'',
-  data:{clickName : `Selection_image_${x}`,clickCategorie: 'Product',product:product.id}})
+  data:{clickName : `Selection_image_${x}`,clickCategorie: 'Product',product:{productId:product.id,productCat: product.category[0]}}})
     setImgSelection(x);
   };
   const handleClick = (info:{ name: string; color: string },size:{size:string}) => {
@@ -96,7 +96,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
       sendEvent({ url: '',
       eventName: 'click',
       sessionId:'',
-      data:{clickName : 'Changement_taille',clickCategorie: 'Product',product:product.id,product_size:size.size}})
+      data:{clickName : 'Changement_taille',clickCategorie: 'Product',product:{productId:product.id,productCat:product.category[0]},product_size:size.size}})
       setSizeSelection(size.size);
       // Update the sizeChangeCss array to add the "selected" class for the clicked size and remove it from others
       const newSizeChangeCss = product.size.map((x: any) =>

@@ -132,6 +132,22 @@ export default function ProductCardDetails({ product }: { product: product }) {
       console.error("Veuillez sélectionner une couleur et une taille.");
     }
   };
+  const handleMouseEnter = () => {
+    // Ajoute la classe "zoomed" lorsque la souris est sur l'image
+    const imgElement = document.querySelector(`.${styles.bigImg}`);
+    if (imgElement) {
+      imgElement.classList.add(styles.zoomed);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // Retire la classe "zoomed" lorsque la souris quitte l'image
+    const imgElement = document.querySelector(`.${styles.bigImg}`);
+    if (imgElement) {
+      imgElement.classList.remove(styles.zoomed);
+    }
+  };
+
   return (
     <div className={styles.Container}>
       <div className={styles.productContainer}>
@@ -156,6 +172,8 @@ export default function ProductCardDetails({ product }: { product: product }) {
                 src={product.img[imgSelection][0]}
                 alt={product.img[imgSelection][1]}
                 fill
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               />
             </div>
           </div>

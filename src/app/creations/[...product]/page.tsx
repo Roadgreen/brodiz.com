@@ -22,7 +22,7 @@ export default function ProductPage({
     useEffect(() => {
       console.log(selectedProduct, Object.keys(selectedProduct));
       async function searchProduct() {
-        if (selectedProduct.id.length === 0) {
+        if (!selectedProduct || !selectedProduct.id || selectedProduct.id.length === 0) {
           const product = await productSearch(
             { id: params.product[1] },
             params.product[0],

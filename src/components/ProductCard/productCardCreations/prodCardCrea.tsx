@@ -21,6 +21,8 @@ interface comments {
     name: string,
     img: Array<[string,string]>,
     price:number,
+    price_cost: number,
+    price_revenue:number,
     notes:number,
     price_ID: string,
     description: {short:string,long:string},

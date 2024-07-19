@@ -26,6 +26,8 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
+  price_cost: number,
+  price_revenue:number,
   description: {
     short:string,
     long:string
@@ -53,6 +55,8 @@ interface productToAdd {
   price:number,
   notes:number,
   price_ID:string,
+  price_cost: number,
+  price_revenue:number,
   description: {
     short:string,
     long:string
@@ -94,6 +98,8 @@ export const ProductContextProvider = ({ children }: any) => {
   price: 0,
   description: {short:'',long:''},
   price_ID:'',
+  price_cost: 0,
+  price_revenue:0,
   color: [],
   notes:0,
   size: [],
@@ -115,6 +121,8 @@ export const ProductContextProvider = ({ children }: any) => {
   price: 0,
   notes:0,
   price_ID:'',
+  price_cost: 0,
+  price_revenue:0,
   description: {short:'',long:''},
   color: [],
   size: [],

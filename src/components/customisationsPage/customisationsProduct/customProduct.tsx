@@ -54,6 +54,8 @@ interface product {
   img: Array<[string,string]>,
   price:number,
   notes:number,
+  price_cost: number,
+    price_revenue:number,
   price_ID: string,
   description: {short:string,long:string},
   color: Array<ColorObject>,

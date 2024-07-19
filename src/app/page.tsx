@@ -7,6 +7,7 @@ import HomePersonnalisation from '@/components/homePersonnalisation/homePersonna
 import ProductCard from '@/components/ProductCard/productCardHome/productcard'
 import SlidePromotion from '@/components/Home/slidePromotion/slidePromotion'
 import { useGlobalContextAnalytics } from './Context/analyticsContext'
+import SlideScroll from '@/components/Home/slide_scroll/slideScroll'
 const product = {
   image: '/img/producthero image/Ryukwomen.jpg',
   name: 'Ryuk Sweatshirt Death Note',
@@ -40,6 +41,7 @@ export default function Home() {
     <main className={styles.main}>
      <Slide/>
 <SlidePromotion/>
+<SlideScroll/>
      <HomePersonnalisation width={innerWidth}/>
    
     </main>

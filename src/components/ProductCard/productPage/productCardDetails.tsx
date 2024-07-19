@@ -16,6 +16,8 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
+  price_cost: number,
+  price_revenue:number,
   description: {
     short:string,
     long:string

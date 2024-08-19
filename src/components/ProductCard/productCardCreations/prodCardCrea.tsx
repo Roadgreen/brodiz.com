@@ -83,7 +83,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
     setSelectedCat(i);
   }
 
-  const handleClick = async (id: number, index: number, aed: string,filterProduct: Array<Array<Object>>) => {
+  const handleClick = async (id: number, index: number, aed: string,filterProduct: product[]) => {
     async function collectionName() {
       let collection = "";
       switch (id) {
@@ -100,7 +100,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
     }
 
     const collection = await collectionName();
-    console.log('ici le selected product L103' , filterProduct[id][index] , 'id', id, 'index',index, 'productarray', productArray )
+    console.log('ici le selected product L103' , 'id', id, 'index',index, 'productarray', productArray )
     setSelectedProduct(productArray[id][index]);
     console.log('routerpush : ', collection,aed );
     router.push(`/creations/${collection}/${aed}`);
@@ -132,7 +132,8 @@ export default function ProdCardCrea({ id }: { id: number }) {
     const filteredProducts = selectedCat !== ''
     ? productArray[id].filter((product: any) => product.category.includes(selectedCat))
     : productArray[id];
-    console.log(productArray[id], 'L133 cardcrea');
+    console.log(filteredProducts, 'L133 cardcrea');
+
     return filteredProducts.map((x: any, i: number) => {
       const colors = x.color;
       return (

@@ -3,7 +3,7 @@ import React from "react";
 import styles from "./customisationPage.module.css";
 import Image from "next/image";
 import femmeTablier from '@/productImg/Tablier/tablierfemme.jpg'
-import womendog from '../../../public/img/producthero image/womendog.jpg'
+import womendog from '../../../public/img/producthero/womendog.jpg'
 import { useRouter } from 'next/navigation'
 
 export default function CustomisationPage() {

@@ -1,0 +1,74 @@
+.Container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height:100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.containerTitle{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.containerTitle p{
+    color: red;
+    font-size: 1.5em;
+    rotate: -90deg;
+    width: 50px;
+}
+.containerTitle h2{
+    font-size: 4em;
+}
+.containerImg{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+    justify-content: center;
+   gap:     10px;
+    width: 80%;
+    margin: auto;
+    height: 100%;
+}
+.img{
+    
+    width: 220px;
+    height: 220px;
+    /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.322);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    transition: all 0.5s ease-in-out;
+
+}
+.img:hover{
+    cursor: pointer;
+  width: 250px;
+  height: 250px;
+  /*Fromhttps:;
+  //css.glass*/background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.322);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
+  transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+}

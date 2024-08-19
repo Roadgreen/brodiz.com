@@ -1,5 +1,11 @@
 @media (min-width:768px) {
     .Container{
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.484);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.101);
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -9,7 +15,6 @@
         float:right;
         margin-right: 10px;
         z-index: 3000;
-        border: 2px solid black;
         border-radius: 20px;
         height: 300px;
         width: 45px;
@@ -29,18 +34,23 @@
         position: relative;
         width: 30px;
         height: 30px;
+        border-radius: 20px;
         border: 2px solid rgba(255, 255, 255, 0);
         transition: all 1s ease-in-out;
     }
     .Container div:hover{
         cursor: pointer;
         position: relative;
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-        border: 2px solid rgba(0, 0, 0, 0.19);
+        box-shadow: rgba(0, 0, 0, 0.673) 0px 5px 15px;
         border-radius: 20px;
-        background-color: white;
-        width: 30px;
-        height: 30px;
+      /* From https://css.glass */
+background: rgba(255, 255, 255, 0.2);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.3);
+        width: 50px;
+        height: 50px;
         -webkit-border-radius: 20px;
         -moz-border-radius: 20px;
         -ms-border-radius: 20px;
@@ -90,15 +100,19 @@
 }
 @media (max-width:768px) {
     .Container{
+background: rgba(255, 255, 255, 0.2);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(5px);
+-webkit-backdrop-filter: blur(5px);
+border: 1px solid rgba(255, 255, 255, 0.066);
         display: flex;
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        background-color: rgb(255, 255, 255);
         position: sticky;
         z-index: 3000;
         margin: auto;
-        border: 2px solid black;
         border-radius: 20px;
         height: 50px;
         width: 350px;

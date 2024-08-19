@@ -58,11 +58,13 @@ export default function ProdCardCrea({ id }: { id: number }) {
           "Product"
         );
         const prod2: Array<product> = await productSearch({}, "Pull", "Product");
-        const prod3: Array<product> = await productSearch({}, "Baby", "Product");
-        const prod4: Array<product> = await productSearch({}, "Bain", "Product");
+        const prod3: Array<product> = await productSearch({}, "Tshirt", "Product");
+
+        const prod4: Array<product> = await productSearch({}, "Baby", "Product");
+        const prod5: Array<product> = await productSearch({}, "Bain", "Product");
 
       
-        setProductArray([prod1, prod2, prod3, prod4]);
+        setProductArray([prod1, prod2, prod3, prod4,prod5]);
         setIsLoading(false);
       };
       fetchProductData();
@@ -92,8 +94,10 @@ export default function ProdCardCrea({ id }: { id: number }) {
         case 1:
           return (collection = "Pull");
         case 2:
-          return (collection = "Baby");
-        case 3:
+          return (collection = "Tshirt");
+          case 3:
+            return (collection = "Baby");
+        case 4:
           return (collection = "Bain");
           
       }
@@ -115,6 +119,9 @@ export default function ProdCardCrea({ id }: { id: number }) {
       case 1:
         filter = ['Homme','Femme','Enfant'];
         break;
+        case 2:
+          filter = ['Homme','Femme','Enfant'];
+          break;
       case 4:
         filter = ['Serviette','Peignoir'];
         break;

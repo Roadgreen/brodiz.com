@@ -167,7 +167,7 @@ useEffect(()=>{
         envAdress = process.env.FETCHPRODUCTSEARCHPROD || '';
         urlImg = process.env.URLIMGPROD;
       }
-      console.log("try productsearch");
+      console.log("try productsearch",envAdress);
       var myInit = {
         method: "POST",
         headers: {

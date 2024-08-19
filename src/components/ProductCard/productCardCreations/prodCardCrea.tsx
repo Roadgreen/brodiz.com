@@ -87,14 +87,15 @@ export default function ProdCardCrea({ id }: { id: number }) {
     async function collectionName() {
       let collection = "";
       switch (id) {
-        case (id = 0):
+        case 0:
           return (collection = "Hoodies");
-        case (id = 1):
+        case 1:
           return (collection = "Pull");
-        case (id = 2):
+        case 2:
           return (collection = "Baby");
-        case (id = 3):
+        case 3:
           return (collection = "Bain");
+          
       }
     }
 

@@ -100,6 +100,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
     }
 
     const collection = await collectionName();
+    console.log('ici le selected product L103' , productArray[id][index] , 'id', id, 'index',index, 'productarray', productArray )
     setSelectedProduct(productArray[id][index]);
     console.log('routerpush : ', collection,aed );
     router.push(`/creations/${collection}/${aed}`);

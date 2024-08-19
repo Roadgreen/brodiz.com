@@ -137,7 +137,7 @@ export const ProductContextProvider = ({ children }: any) => {
     customInputPattern:'',
     customResult:''}
 });
-const [env,setEnv] = useState<string>('dev');
+const [env,setEnv] = useState<string>('');
 
 useEffect(()=>{
   if(window.location.hostname === 

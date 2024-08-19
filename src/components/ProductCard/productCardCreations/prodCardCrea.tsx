@@ -101,6 +101,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
 
     const collection = await collectionName();
     setSelectedProduct(productArray[id][index]);
+    console.log('routerpush : ', collection,aed );
     router.push(`/creations/${collection}/${aed}`);
   };
 
@@ -126,10 +127,11 @@ export default function ProdCardCrea({ id }: { id: number }) {
   }
 
   const cardProductMapping: any = () => {
+    console.log('selectedcat L129',selectedCat)
     const filteredProducts = selectedCat !== ''
     ? productArray[id].filter((product: any) => product.category.includes(selectedCat))
     : productArray[id];
-    console.log(productArray[id]);
+    console.log(productArray[id], 'L133 cardcrea');
     return filteredProducts.map((x: any, i: number) => {
       const colors = x.color;
       return (

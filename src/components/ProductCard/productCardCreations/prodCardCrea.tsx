@@ -50,7 +50,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
     useGlobalContext();
 
   useEffect(() => {
-    if (productArray.length !== 4) {
+    if (productArray.length !== 5) {
       const fetchProductData = async () => {
         const prod1: Array<product> = await productSearch(
           {},

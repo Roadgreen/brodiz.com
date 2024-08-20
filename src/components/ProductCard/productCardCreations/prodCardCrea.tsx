@@ -1,6 +1,6 @@
 import styles from "./prodCardCrea.module.css";
 import Image from "next/image";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect,useCallback } from "react";
 import { CartContext } from "../../../app/Context/cartContext";
 import { useRouter } from "next/navigation";
 import { useGlobalContext } from "@/app/Context/productStore";
@@ -49,38 +49,32 @@ export default function ProdCardCrea({ id }: { id: number }) {
   const { productSearch, productArray, setProductArray, setSelectedProduct } =
     useGlobalContext();
 
-  useEffect(() => {
-    if (productArray.length !== 4) {
-      const fetchProductData = async () => {
-        const prod1: Array<product> = await productSearch(
-          {},
-          "Hoodies",
-          "Product"
-        );
-        const prod2: Array<product> = await productSearch({}, "Pull", "Product");
-        const prod3: Array<product> = await productSearch({}, "Tshirt", "Product");
-
-        const prod4: Array<product> = await productSearch({}, "Baby", "Product");
-        const prod5: Array<product> = await productSearch({}, "Bain", "Product");
-
-      
-        setProductArray([prod1, prod2, prod3, prod4,prod5]);
-        setIsLoading(false);
-      };
-      fetchProductData();
-    } else {
+    const fetchProductData = useCallback(async () => {
+      const prod1: Array<product> = await productSearch({}, "Hoodies", "Product");
+      const prod2: Array<product> = await productSearch({}, "Pull", "Product");
+      const prod3: Array<product> = await productSearch({}, "Tshirt", "Product");
+      const prod4: Array<product> = await productSearch({}, "Baby", "Product");
+      const prod5: Array<product> = await productSearch({}, "Bain", "Product");
+  
+      setProductArray([prod1, prod2, prod3, prod4, prod5]);
       setIsLoading(false);
+    }, [productSearch, setProductArray]);
+  
+    useEffect(() => {
+      if (productArray.length === 0) {
+        fetchProductData();
+      } else {
+        setIsLoading(false);
+      }
+    }, [productArray.length, fetchProductData]);
+  
+    if (isLoading) {
+      return (
+        <div className={styles.loading}>
+          <div className={styles.loader}></div>
+        </div>
+      );
     }
-  }, [productSearch,productArray,setProductArray]);
-  console.log(productArray);
-  // If still loading, show loading message or spinner
-  if (isLoading) {
-    return (
-      <div className={styles.loading}>
-        <div className={styles.loader}></div>
-      </div>
-    );
-  }
   const handleCatChange = async (i:string)=>{
     setSelectedCat(i);
   }

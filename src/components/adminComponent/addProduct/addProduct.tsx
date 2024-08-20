@@ -25,9 +25,17 @@ interface FormData {
 }
 export default function AddProduct() {
   const availableSizes = ['S','M','L','XL','XXL','Taille Unique','3M','6M','12M','18M','24M','3A'];
-  const availableCategory = ['Hoodies','Manga','Famille','Customisation','Cuisine','Pull','Tablier','Homme','Femme','Enfant','Chaussette']
+  const availableCategory = ['Hoodies','Manga','Famille','Customisation','Cuisine','Pull','Tablier','Homme','Femme','Enfant','Chaussette','Tshirt']
   const {productAdd} = useGlobalContext();
-  const [tags,setTags] = useState(['']);
+  const [tags,setTags] = useState('');
+  const colorOptions = [
+    { color: '#F5F5DC', name: 'Beige' },
+    { color: '#008000', name: 'Vert' },
+    { color: '#FFFFFF', name: 'Blanc' },
+    { color: '#000000', name: 'Noir' },
+    { color: '#FFC0CB', name: 'Rose' },
+    { color: '#0000FF', name: 'Bleu' },
+  ];
   const [custom,setCustom] = useState(false);
   const [customChoice,setCustomChoice]= useState('');
   const [customName,setCustomName] = useState('');
@@ -177,6 +185,12 @@ const handleChangeCustomSelect = async (e:any) => {
     setCustomArray(dernierCaractere);
   
 };
+
+const handleColorSelection = (color: string, name: string) => {
+  const newColor: ColorObject = { color, name };
+  setFormData({ ...formData, color: [...formData.color, newColor] });
+};
+
 const handleChangeCustomInput = (e:any) => {
   const inputPattern = e.target.value;
   if(customName !== ''){
@@ -264,15 +278,31 @@ const handleChangeCustomInput = (e:any) => {
   
 
 </div>
-          <h3>Tag</h3>
-          <div className={styles.list}>
-          {formData.tag.map((e)=>(
-            <h4 key={e}>{e}</h4>
-          ))}
-          </div>
-       
-          <input type='text' onChange={(e)=>{setTags([e.target.value])}} />
-            <button onClick={(e)=>{e.preventDefault(), setFormData({...formData,tag:[ ...formData.tag , tags[0]]})}}>Ajouter</button>
+<h3>Tag</h3>
+<div className={styles.list}>
+  {formData.tag.map((e) => (
+    <h4 key={e}>{e}</h4>
+  ))}
+</div>
+
+<input
+  type='text'
+  value={tags} // Bind the input value to `tags`
+  onChange={(e) => setTags(e.target.value)} // Update `tags` as the input changes
+/>
+
+<button
+  onClick={(e) => {
+    e.preventDefault();
+    if (tags.trim() !== '') { // Check if there's something to add
+      setFormData({ ...formData, tag: [...formData.tag, tags.trim()] }); // Add the tag to the formData
+      setTags(''); // Clear the input after adding the tag
+    }
+  }}
+>
+  Ajouter
+</button>
+
            <h3>Size</h3>
            {availableSizes.map((size) => (
             <label key={size}>
@@ -297,18 +327,28 @@ const handleChangeCustomInput = (e:any) => {
               {cat}
             </label>
           ))}
-          <h3>Colors</h3>
-          <div className={styles.list}>
-          {formData.color.map((item,index)=>{
-            return(
-              <div key={index}>
-              <p>{item.color}</p>
-                        <p>{item.name}</p>
-                        </div>
-            )
-        
-          })}
+        <h3>Couleurs disponibles</h3>
+          <div className={styles.colorContainer}>
+            {colorOptions.map((color, index) => (
+              <div
+                key={index}
+                className={styles.colorCircle}
+                style={{ backgroundColor: color.color }}
+                onClick={() => handleColorSelection(color.color, color.name)}
+              ></div>
+            ))}
           </div>
+          
+          <h4>Couleurs sélectionnées</h4>
+          <div className={styles.list}>
+            {formData.color.map((item, index) => (
+              <div key={index}>
+                <p>{item.color}</p>
+                <p>{item.name}</p>
+              </div> 
+            ))}
+          </div>
+
           <div>
           <input type='text' onChange={(e)=>{setColors({...colors,color:e.target.value})}} placeholder='colorCss'/>
           <input type='text' onChange={(e)=>{setColors({...colors,name:e.target.value})}} placeholder='colorName'/>

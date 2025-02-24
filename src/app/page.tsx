@@ -44,7 +44,7 @@ export default function Home() {
 <SlidePromotion/>
 <SlideScroll/>
 <Slideguy/>
-     <HomePersonnalisation width={innerWidth}/>
+     
    
     </main>
   )

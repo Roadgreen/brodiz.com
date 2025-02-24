@@ -7,6 +7,10 @@ import meteorite from '../../../../public/img/producthero/meteorite1.svg'
 import meteorite2 from '../../../../public/img/producthero/meteorite2.svg'
 import meteorite3 from '../../../../public/img/producthero/meteorite3.svg'
 import meteorite4 from '../../../../public/img/producthero/metorite4.svg'
+import coqfr from '../../../../public/img/product/coqfr.png'
+import serpH from '../../../../public/img/product/serpH.png'
+import gryf from '../../../../public/img/product/GryfF.png'
+import Mand from '../../../../public/img/product/mand.png'
 import { CssVariable } from 'next/dist/compiled/@next/font';
 
 export default function SlideScroll() {
@@ -63,20 +67,20 @@ export default function SlideScroll() {
   return (
     <div className={styles.ContainerFirst} >
       <div className={styles.Container} ref={containerRef} style={{ backgroundColor }}>
-      <div className={styles.TitleDiv} style={{opacity:`${opacity}`,filter: `blur(${rotateY})`,color:'white'}}><h2 className={styles.Title}>TSHIRT PRINT</h2></div>
+      <div className={styles.TitleDiv} style={{opacity:`${opacity}`,filter: `blur(${rotateY})`,color:'white'}}><h2 className={styles.Title}>SWEAT SHIRT</h2></div>
       <div className={styles.ProductContainer}>
         <div className={styles.SliderContainer}>
           <div className={styles.list}>
-            <div style={{ ["--position" as CssVariable]: 1 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 2 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 3 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 4 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 5 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 6 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 7 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 8 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 9 }} className={styles.item}></div>
-          <div style={{ ["--position" as CssVariable]: 10 }} className={styles.item}></div>
+            <div style={{ ["--position" as CssVariable]: 1 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'} fill /></div>
+          <div style={{ ["--position" as CssVariable]: 2 }} className={styles.item}><Image src={serpH} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 3 }} className={styles.item}><Image src={gryf} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 4 }} className={styles.item}><Image src={Mand} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 5 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'}fill /></div>
+          <div style={{ ["--position" as CssVariable]: 6 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 7 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 8 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 9 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'} fill/></div>
+          <div style={{ ["--position" as CssVariable]: 10 }} className={styles.item}><Image src={coqfr} className={styles.productImg} alt={'image de produit'} fill/></div>
           </div>
 
         </div>

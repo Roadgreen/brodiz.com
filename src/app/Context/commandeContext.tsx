@@ -8,7 +8,7 @@ commandAdd:(Command:Command) => Promise<"ok" | "non ok">,
 commandCheck:(UserCommandCheck:UserCommandCheck) =>  Promise<Array<Object>>
 }
 interface Command {
-  
+    etat: string,
     useremail: string,
     userid:string,
     adress: {
@@ -56,6 +56,18 @@ export const CommandeContext = createContext<CommandeContext>(
     
     }
   const commandAdd = async (Command:Command) => {
+
+    // Fonction pour filtrer les propriétés d'un objet produit
+function filterProductData(product:any) {
+  return {
+      size: product.size,
+      custom: product.custom,
+      _id: product._id,
+      quantity: product.quantity
+  };
+}
+const filteredProductArray = Command.product.map(filterProductData);
+Command.product = filteredProductArray;
     console.log(Command);
     var myInit = {
         method: "POST",
@@ -68,15 +80,15 @@ export const CommandeContext = createContext<CommandeContext>(
 
     console.log('on est dans commandeAdd function');
   const sendCommand = await  fetch(
-        process.env.FETCHCOMMANDSEARCH ||
-          "http://192.168.1.166:8080/command/commandAdd",
+        process.env.FETCHCOMMANDSEARCH || 
+          "http://server.bodiz.com/command/commandAdd",
         myInit
       );
 
       const data = await sendCommand.json();
       console.log(data);
       if(data.code === 202){
-        
+        localStorage.setItem('commandID',data.id);
         console.log('data.code is 202')
 return 'ok'
       } else if(data.code === 404){

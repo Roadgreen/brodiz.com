@@ -1,11 +1,11 @@
 "use client"
 import { promises } from "dns";
 import React,{ useContext, createContext, useState, Dispatch, SetStateAction, useEffect } from "react";
-
+ 
 type UserContext = {
   CreateAccount: (User: User) => void;
   Login: (User: UserConnect) => void;
-  FindUser: (User: UserSearch) => void;
+  FindUser: (User: UserSearch) =>  Promise<{code:number,status:string}>;
   UserConnected:(id:string) => Promise<{user:Object, status: string,code:number}>;
   UserChanges:(User: UserChange) => Promise<{User: UserChange}>;
   isConnected: any;
@@ -135,14 +135,22 @@ export default function UserContextProvider({ children }: any) {
      if(resData.code === 202){
       const token = resData.token;
       const user = await resData.user;
-      const id = await resData.id;
-      const email = await user.email.toString();
-      console.log(user);
+      console.log('console du login dans userAccountContext', user);
       
   await localStorage.setItem("token",token);
     return {code: 202,id: user._id,user};
      } else if(resData.code === 404){
       return {code: 404,id: '',user:{}}
+     } else if(resData.code === 203){
+  
+  const user = await resData.user;
+console.log('dans le if 203 de login');
+    const token = resData.token;
+    console.log(user);
+await localStorage.setItem("token",token);
+  return {code: 203,id: user._id,user};
+
+    
      }
     } catch(err){
       console.log(err);

@@ -16,6 +16,8 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
+  price_cost: number,
+  price_revenue:number,
   description: {
     short:string,
     long:string
@@ -63,7 +65,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
     sessionId: '',
     timeOnPage: new Date,
     screenResolution: '',
-    product: {id:product.id},
+    product: {product},
     pageCategory: 'Product',
     data: {
     }});
@@ -76,7 +78,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
     sendEvent({ url: '',
   eventName: 'click',
   sessionId:'',
-  data:{clickName : `Selection_image_${x}`,clickCategorie: 'Product',product:product.id}})
+  data:{clickName : `Selection_image_${x}`,clickCategorie: 'Product',product:{productId:product.id,productCat: product.category[0]}}})
     setImgSelection(x);
   };
   const handleClick = (info:{ name: string; color: string },size:{size:string}) => {
@@ -96,7 +98,7 @@ export default function ProductCardDetails({ product }: { product: product }) {
       sendEvent({ url: '',
       eventName: 'click',
       sessionId:'',
-      data:{clickName : 'Changement_taille',clickCategorie: 'Product',product:product.id,product_size:size.size}})
+      data:{clickName : 'Changement_taille',clickCategorie: 'Product',product:{productId:product.id,productCat:product.category[0]},product_size:size.size}})
       setSizeSelection(size.size);
       // Update the sizeChangeCss array to add the "selected" class for the clicked size and remove it from others
       const newSizeChangeCss = product.size.map((x: any) =>
@@ -132,6 +134,22 @@ export default function ProductCardDetails({ product }: { product: product }) {
       console.error("Veuillez sélectionner une couleur et une taille.");
     }
   };
+  const handleMouseEnter = () => {
+    // Ajoute la classe "zoomed" lorsque la souris est sur l'image
+    const imgElement = document.querySelector(`.${styles.bigImg}`);
+    if (imgElement) {
+      imgElement.classList.add(styles.zoomed);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    // Retire la classe "zoomed" lorsque la souris quitte l'image
+    const imgElement = document.querySelector(`.${styles.bigImg}`);
+    if (imgElement) {
+      imgElement.classList.remove(styles.zoomed);
+    }
+  };
+
   return (
     <div className={styles.Container}>
       <div className={styles.productContainer}>
@@ -156,6 +174,8 @@ export default function ProductCardDetails({ product }: { product: product }) {
                 src={product.img[imgSelection][0]}
                 alt={product.img[imgSelection][1]}
                 fill
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
               />
             </div>
           </div>

@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 0px;
     width: 40%;
    
     background: rgb(170, 157, 163);
@@ -401,9 +401,28 @@ cursor: pointer;
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.388);
 }
+.conditions{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+    font-size: 0.3em;
+}
+.containerCondi{
+    display: flex;
+    height: 30px;
+    margin-bottom: 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 }
 @media screen and (max-width: 768px) {
- 
+    .conditions{
+        text-decoration: none;
+        list-style: none;
+        color: white;
+        font-size: 0.3em;
+        
+    }
     .slideContainer{
         display: flex;
         flex-direction: column;
@@ -445,10 +464,9 @@ cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    margin-bottom: 20px;
   
     
-    height: 300px;
+    height: 400px;
   
 
     width: 100%;

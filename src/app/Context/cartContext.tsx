@@ -15,6 +15,8 @@ interface product {
   price:number,
   notes:number,
   price_ID: string,
+  price_cost: number,
+  price_revenue:number,
   description: {
     short:string,
     long:string
@@ -50,7 +52,7 @@ interface products {
   custom:Object
 }[]
 type CartContext = {
-  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>Promise<boolean>;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>;
+  addToCart: (products: product) => void;cartCheck: () => number; addedToCart:boolean; removeFromCart: (products: product) => void; updatedCart: (products: product) => void; cartItem: product[]; totalPrice: (products: any) => void;price: any;AdressCheck:(a:adresse)=>Promise<boolean>;livPrice: number | undefined;tot: number;setAddedToCart:Dispatch<SetStateAction<boolean>>,cleanCart:()=>void;
 }
 
 
@@ -83,7 +85,9 @@ export  function CartContextProvider({children}:any) {
       }
     }
   }, []);
-
+const cleanCart = ()=>{
+  setCartItem([])
+}
   const addToCart = (productToAdd: product) => {
     console.log(productToAdd)
     const productToAddKey = `${productToAdd.id}-${productToAdd.color[0]}-${productToAdd.size[0]}`;
@@ -132,35 +136,41 @@ function removeAccents(str:string) {
   return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 }
 
-const AdressCheck = (a:adresse): Promise<boolean> => {
-  console.log(a)
+const AdressCheck = async (a: adresse): Promise<boolean> => {
+  console.log(a);
   const remoAccent = removeAccents(a.adresse);
-  const add = remoAccent.replace(/\s+/g, "+")
-  const url = `https://api-adresse.data.gouv.fr/search/?q=${add}&postcode=${a.post}`
-  
-  return new Promise((resolve, reject) => {
-    fetch(url)
-      .then((res: Response) => res.json())
-      .then((data: any) => {
-        console.log(data)
-        const features = data.features;
-console.log(features);
-        if (features && features.length === 0) {
-          // Aucune correspondance trouvée
-          resolve(false);
-        } else if (features && features.length > 1) {
-          // Une seule correspondance trouvée
-          const Add = features[0].properties;
-          setAdress({city:Add.city,postcode: Add.postcode,street:Add.street,housenumber:Add.housenumber});
-          resolve(true);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        reject(err);
+  const add = remoAccent.replace(/\s+/g, "+");
+  const url = `https://api-adresse.data.gouv.fr/search/?q=${add}&postcode=${a.post}`;
+
+  try {
+    const res = await fetch(url);
+    const data: any = await res.json();
+    console.log(data);
+    const features = data.features;
+
+    if (features && features.length === 0) {
+      // Aucune correspondance trouvée
+      console.log("adresse cartcontext aucune correspondance");
+      return false;
+    } else if (features && features.length >= 1) {
+      // Une seule correspondance trouvée
+      const Add = features[0].properties;
+      console.log("adresse correspondance trouvée");
+      setAdress({
+        city: Add.city,
+        postcode: Add.postcode,
+        street: Add.street,
+        housenumber: Add.housenumber,
       });
-  });
-}
+      return true;
+    }
+    return false;
+  } catch (err) {
+    console.log(err);
+    return false;
+  }
+};
+
 
 const AllPrice = () => {
   const formattedTot = (price + livPrice).toFixed(2);
@@ -221,7 +231,7 @@ return quantity
  
 }
   return <CartContext.Provider value={{
-    addToCart,cartCheck,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart
+    addToCart,cartCheck,removeFromCart,updatedCart,cartItem,totalPrice,price,AdressCheck,livPrice,tot,addedToCart,setAddedToCart,cleanCart
   }}>{children}</CartContext.Provider>;
 }
 export const useGlobalContextCart = () => useContext(CartContext);

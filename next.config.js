@@ -36,6 +36,12 @@ const nextConfig = {
             protocol: 'https',
             hostname: 'server.brodiz.com',
             port: '',
+            pathname: '/uploadImg',
+          },
+          {
+            protocol: 'https',
+            hostname: 'server.brodiz.com',
+            port: '',
             pathname: '/uploadImg/getBlogImage/**',
           },
         ],

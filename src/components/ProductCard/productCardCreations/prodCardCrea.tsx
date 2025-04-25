@@ -21,6 +21,8 @@ interface comments {
     name: string,
     img: Array<[string,string]>,
     price:number,
+    price_cost: number,
+    price_revenue:number,
     notes:number,
     price_ID: string,
     description: {short:string,long:string},
@@ -48,7 +50,7 @@ export default function ProdCardCrea({ id }: { id: number }) {
     useGlobalContext();
 
   useEffect(() => {
-    if (productArray.length !== 4) {
+    if (productArray.length !== 5) {
       const fetchProductData = async () => {
         const prod1: Array<product> = await productSearch(
           {},
@@ -56,18 +58,19 @@ export default function ProdCardCrea({ id }: { id: number }) {
           "Product"
         );
         const prod2: Array<product> = await productSearch({}, "Pull", "Product");
-        const prod3: Array<product> = await productSearch({}, "Baby", "Product");
-        const prod4: Array<product> = await productSearch({}, "Bain", "Product");
+        const prod3: Array<product> = await productSearch({}, "Tshirt", "Product");
+        const prod4: Array<product> = await productSearch({}, "Baby", "Product");
+        const prod5: Array<product> = await productSearch({}, "Bain", "Product");
 
       
-        setProductArray([prod1, prod2, prod3, prod4]);
+        setProductArray([prod1, prod2, prod3, prod4,prod5]);
         setIsLoading(false);
       };
       fetchProductData();
     } else {
       setIsLoading(false);
     }
-  }, [productSearch,productArray,setProductArray]);
+  }, [productArray.length, productSearch,setProductArray]);
   console.log(productArray);
   // If still loading, show loading message or spinner
   if (isLoading) {
@@ -81,23 +84,28 @@ export default function ProdCardCrea({ id }: { id: number }) {
     setSelectedCat(i);
   }
 
-  const handleClick = async (id: number, index: number, aed: string) => {
+  const handleClick = async (id: number, index: number, aed: string,filterProduct: product[]) => {
     async function collectionName() {
       let collection = "";
       switch (id) {
-        case (id = 0):
+        case 0:
           return (collection = "Hoodies");
-        case (id = 1):
+        case 1:
           return (collection = "Pull");
-        case (id = 2):
-          return (collection = "Baby");
-        case (id = 3):
+        case 2:
+          return (collection = "Tshirt");
+          case 3:
+            return (collection = "Baby");
+        case 4:
           return (collection = "Bain");
+          
       }
     }
 
     const collection = await collectionName();
-    setSelectedProduct(productArray[id][index]);
+    console.log('ici le selected product L103' , 'id', id, 'index',index, 'productarray', productArray )
+    setSelectedProduct(filterProduct[index]);
+    console.log('routerpush : ', collection,aed );
     router.push(`/creations/${collection}/${aed}`);
   };
 
@@ -110,6 +118,9 @@ export default function ProdCardCrea({ id }: { id: number }) {
       case 1:
         filter = ['Homme','Femme','Enfant'];
         break;
+        case 2:
+          filter = ['Homme','Femme','Enfant'];
+          break;
       case 4:
         filter = ['Serviette','Peignoir'];
         break;
@@ -123,17 +134,19 @@ export default function ProdCardCrea({ id }: { id: number }) {
   }
 
   const cardProductMapping: any = () => {
+    console.log('selectedcat L131',selectedCat)
     const filteredProducts = selectedCat !== ''
     ? productArray[id].filter((product: any) => product.category.includes(selectedCat))
     : productArray[id];
-    console.log(productArray[id]);
+    console.log(filteredProducts, 'L133 cardcrea');
+
     return filteredProducts.map((x: any, i: number) => {
       const colors = x.color;
       return (
         <div
           className={styles.cardContainer}
           key={i}
-          onClick={() => handleClick(id, i, x.id)}
+          onClick={() => handleClick(id, i, x.id,filteredProducts)}
         >
           <div className={styles.imgContainer}>
             <Image

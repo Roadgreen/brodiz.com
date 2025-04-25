@@ -1,5 +1,5 @@
 "use client"
-import styles from '.page.module.css'
+import styles from './page.module.css'
 import Link from 'next/link';
 import Stripe from 'stripe'
 import { useSearchParams } from 'next/navigation'
@@ -11,7 +11,7 @@ import { useGlobalContextUser } from '../Context/UserAccountContext';
 
 export default function Confirmation(){
     const [sucess,setSucess] = useState(false);
-    const {cartItem} = useGlobalContextCart();
+    const {cartItem,cleanCart} = useGlobalContextCart();
     const [user,setUser] = useState(true)
     const {commandAdd} = useGlobalContextCom();
     const {UserConnected} = useGlobalContextUser();
@@ -49,8 +49,19 @@ export default function Confirmation(){
               }
             const response:Response | void = await fetch('/api/stripe/retrieve-stripe-session',params);
              const data = await response.json();
-             const command = {userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data , totalprice: 0  }
-
+             console.log(data);
+             const commandID = await localStorage.getItem('commandID');
+             if(commandID){
+                const command = {id:commandID,etat:'validé',userid:'',useremail: '',username: '',userlastname: '',adress:{adresse:'',post:'',ville:'',pays:''},product:[],livprice:data.shipping_cost , totalprice: data.total_product_price  }
+                const result =   await commandAdd(command);
+                if(result === 'ok'){
+                    localStorage.removeItem('commandID');
+                    localStorage.removeItem('cart');
+                   cleanCart()
+                   }
+             }
+           
+          
           }
           stripeRetrieve(id);
        
@@ -59,17 +70,17 @@ export default function Confirmation(){
         if (query.get('canceled')) {
             setSucess(false);
         }
-    },[cartItem,UserConnected])
+    },[])
     return (<>
-    {sucess && user? (<div>
-        <div><h1>Merci!</h1></div>
+    {sucess && user? (<div className={styles.container}>
+        <div className={styles.containerOne}><h1>Merci!</h1></div>
 <div><p>Votre commande arrive bientôt.</p></div>
     </div>) : '' }
-    {sucess && !user ? (<div>
-        <div><h1>Merci!</h1></div>
-        <div><h3>Créez votre compte utilisateur pour suivre votre commande: </h3>
-        <Link href={'/account'}>Créer mon compte</Link>
-        </div>
+    {sucess && !user ? (<div className={styles.container}>
+        <div className={styles.containerOne}><h1>Merci!</h1> <h3>Créez votre compte utilisateur pour suivre votre commande et bénéficiez de </h3>
+        <h2>-10% sur votre prochaine article</h2>
+        <Link href={'/account'} className={styles.button}>Créer mon compte</Link></div>
+       
 
     </div>) : ''}
     </>

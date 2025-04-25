@@ -48,8 +48,10 @@ if(menu === 0){
             <div className={styles.buttonContainer}>
             <span onClick={()=>{setMenu(0),handleAnalytics(menu)}} className={menu === 0 ? styles.activeButton : styles.button}>Sweatshirt à capuche</span>
           <span onClick={()=>{setMenu(1),handleAnalytics(menu)}} className={menu === 1 ? styles.activeButton : styles.button}>Pull</span>
-          <span onClick={()=>{setMenu(2),handleAnalytics(menu)}} className={menu === 2 ? styles.activeButton : styles.button}>Accessoire enfant</span>
-          <span onClick={()=>{setMenu(3),handleAnalytics(menu)}} className={menu === 3 ? styles.activeButton : styles.button}>Accessoire de bain</span>
+          <span onClick={()=>{setMenu(2),handleAnalytics(menu)}} className={menu === 2 ? styles.activeButton : styles.button}>Tshirt</span>
+
+          <span onClick={()=>{setMenu(3),handleAnalytics(menu)}} className={menu === 3 ? styles.activeButton : styles.button}>Accessoire enfant</span>
+          <span onClick={()=>{setMenu(4),handleAnalytics(menu)}} className={menu === 4 ? styles.activeButton : styles.button}>Accessoire de bain</span>
             </div>
          {menu === 0 ?  <ProdCardCrea id={menu}/> : <></>}
          {menu === 1 ?  <ProdCardCrea id={menu}/> : <></>}

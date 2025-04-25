@@ -54,6 +54,8 @@ interface product {
   img: Array<[string,string]>,
   price:number,
   notes:number,
+  price_cost: number,
+    price_revenue:number,
   price_ID: string,
   description: {short:string,long:string},
   color: Array<ColorObject>,
@@ -245,7 +247,7 @@ export default function CustomProduct({ product }: { product: product }) {
    <div>
    <h4>Votre Logo:</h4>
    <p>Lorsque votre logo s&apos;affiche, ou si vous ne voulez pas de logo cliquez sur suivant</p>
- {uploadedImagePath !== null ? (<Image src={`http://localhost:8080/uploadImg/getImage/${uploadedImagePath}`} alt="Image de logo" width={50} height={50} />) : ''}
+ {uploadedImagePath !== null ? (<Image src={`https://server.brodiz.com/uploadImg/getImage/${uploadedImagePath}`} alt="Image de logo" width={50} height={50} />) : ''}
  {error !== null ? <p>{error}</p> : ''}
  <input id="file" className={styles.Input} type="file" onChange={handleUpload} />
  <label htmlFor="file" className={styles.labelInputImg}>
